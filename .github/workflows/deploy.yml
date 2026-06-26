@@ -28,19 +28,14 @@ jobs:
         with:
           node-version: 22
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v3
-        with:
-          version: 10
-
       - name: Install dependencies
-        run: pnpm install
+        run: npm install
 
       - name: Generate blog index
         run: node scripts/generate-index.cjs
 
       - name: Build Astro
-        run: pnpm build
+        run: npx astro build
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
