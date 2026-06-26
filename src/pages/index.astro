@@ -1,0 +1,135 @@
+---
+// src/pages/index.astro
+import { siteConfig } from '../utils/siteConfig';
+import '../styles/global.css';
+---
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{siteConfig.title} - Entrance | {siteConfig.title}</title>
+    <meta name="description" content={siteConfig.description} />
+    <meta property="og:title" content={`${siteConfig.title} - Entrance`} />
+    <meta property="og:description" content={siteConfig.description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <style>
+      .entrance-bg {
+        position: fixed;
+        inset: 0;
+        background:
+          radial-gradient(ellipse at 50% 0%, rgba(226, 168, 76, 0.06), transparent 70%),
+          radial-gradient(ellipse at 80% 50%, rgba(226, 168, 76, 0.04), transparent 50%),
+          var(--bg, #f7f5f0);
+        transition: 0.5s;
+      }
+      .dark .entrance-bg { opacity: 1; }
+    </style>
+  </head>
+  <body class="min-h-screen flex items-center justify-center overflow-hidden">
+    <div class="entrance-bg"></div>
+
+    <div class="relative z-10 text-center px-6 max-w-lg mx-auto">
+      <!-- Title -->
+      <h1 class="font-display text-4xl sm:text-5xl font-bold text-[var(--text-primary)] mb-4 tracking-wide reveal-target opacity-0 translate-y-4"
+          style="transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1)">
+        {siteConfig.title}
+      </h1>
+
+      <!-- Tagline -->
+      <p class="font-serif text-lg text-[var(--text-secondary)] mb-8 reveal-target opacity-0 translate-y-4"
+         style="transition: opacity 0.8s 0.15s cubic-bezier(0.16,1,0.3,1), transform 0.8s 0.15s cubic-bezier(0.16,1,0.3,1)">
+        一个不装成熟的个人空间
+      </p>
+
+      <!-- Enter -->
+      <a href="/home/"
+         class="inline-flex items-center gap-2 px-8 py-3 border-2 border-[var(--accent)] text-[var(--accent)] rounded-xl font-display text-base font-medium
+                hover:bg-[var(--accent)] hover:text-white transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)]
+                hover:scale-105 hover:shadow-lg hover:shadow-[var(--accent)]/25
+                reveal-target opacity-0 translate-y-4"
+         style="transition: opacity 0.8s 0.3s, transform 0.8s 0.3s cubic-bezier(0.16,1,0.3,1)">
+        Enter Room
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+        </svg>
+      </a>
+
+      <!-- Recent update -->
+      <p class="mt-8 text-xs text-[var(--text-muted)]/50 font-mono reveal-target opacity-0 translate-y-4"
+         style="transition: opacity 0.8s 0.45s">
+        最近更新：<span id="recent-date">加载中...</span>
+      </p>
+    </div>
+
+    <!-- Theme toggle -->
+    <button id="theme-toggle" class="fixed top-6 right-6 z-50 w-10 h-10 flex items-center justify-center rounded-xl border border-[var(--border)] bg-[var(--bg-elevated)]/80 backdrop-blur-sm text-[var(--text-secondary)] hover:text-[var(--accent)] hover:border-[var(--accent)] transition-all duration-300 reveal-target opacity-0"
+      style="transition: opacity 0.8s 0.5s" aria-label="切换主题">
+      <svg id="theme-sun" class="w-4 h-4 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+      </svg>
+      <svg id="theme-moon" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+      </svg>
+    </button>
+  </body>
+</html>
+
+<script>
+  // Theme toggle
+  function initTheme() {
+    const btn = document.getElementById('theme-toggle');
+    const sun = document.getElementById('theme-sun');
+    const moon = document.getElementById('theme-moon');
+    const html = document.documentElement;
+    function setTheme(isDark: boolean) {
+      if (isDark) {
+        html.classList.add('dark');
+        sun?.classList.remove('hidden');
+        moon?.classList.add('hidden');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        html.classList.remove('dark');
+        sun?.classList.add('hidden');
+        moon?.classList.remove('hidden');
+        localStorage.setItem('theme', 'light');
+      }
+    }
+    const saved = localStorage.getItem('theme');
+    if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      setTheme(true);
+    } else {
+      setTheme(false);
+    }
+    btn?.addEventListener('click', () => setTheme(!html.classList.contains('dark')));
+  }
+  initTheme();
+
+  // Reveal
+  setTimeout(() => {
+    document.querySelectorAll('.reveal-target').forEach(el => el.classList.add('is-visible'));
+  }, 100);
+
+  // Recent date
+  fetch('/blog/index.json')
+    .then(r => r.json())
+    .then(posts => {
+      if (posts.length > 0) {
+        const d = new Date(posts[0].date);
+        document.getElementById('recent-date')!.textContent =
+          `${d.getMonth()+1}月${d.getDate()}日 · ${posts[0].title}`;
+      }
+    })
+    .catch(() => {});
+</script>
+
+<style is:global>
+  .reveal-target.is-visible {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+</style>

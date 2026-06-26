@@ -1,0 +1,162 @@
+---
+// src/components/Header.astro
+import { siteConfig } from '../utils/siteConfig';
+
+const currentPath = Astro.url.pathname;
+const isHome = currentPath === '/home/' || currentPath === '/home';
+---
+
+<header class="sticky top-0 z-40 backdrop-blur-xl bg-[var(--bg)]/70 border-b border-[var(--border)]/40">
+  <nav class="max-w-5xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
+    <!-- Logo -->
+    <a href="/home/" class="flex items-center gap-2.5 font-bold group">
+      <span class="font-display text-lg text-[var(--text-primary)] tracking-wide group-hover:text-[var(--accent)] transition-colors duration-300">
+        {siteConfig.title}
+      </span>
+    </a>
+
+    <!-- Nav Links -->
+    <div class="hidden md:flex items-center gap-1">
+      {
+        [
+          { href: '/home/', label: '首页' },
+          { href: '/blog/', label: '文章' },
+          { href: '/archive/', label: '归档' },
+          { href: '/tags/', label: '标签' },
+          { href: '/tools/', label: '工具' },
+          { href: '/friends/', label: '友链' },
+          { href: '/guestbook/', label: '留言' },
+          { href: '/about/', label: '关于' },
+        ].map(item => {
+          const isActive = currentPath.startsWith(item.href);
+          return (
+            <a
+              href={item.href}
+              class={`px-3 py-1.5 text-sm rounded-md transition-all duration-300 font-serif ${
+                isActive
+                  ? 'text-[var(--accent)] bg-[rgba(226,168,76,0.08)]'
+                  : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg)]'
+              }`}
+            >
+              {item.label}
+            </a>
+          );
+        })
+      }
+    </div>
+
+    <!-- Mobile menu button / Theme toggle / Search / RSS -->
+    <div class="flex items-center gap-2">
+      <button
+        id="theme-toggle"
+        class="w-8 h-8 flex items-center justify-center rounded-lg text-[var(--text-secondary)] hover:text-[var(--accent)] hover:bg-[var(--bg)] transition-all duration-300"
+        aria-label="切换主题"
+      >
+        <!-- Sun icon (dark mode) -->
+        <svg id="theme-sun" class="w-4 h-4 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+        </svg>
+        <!-- Moon icon (light mode) -->
+        <svg id="theme-moon" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+        </svg>
+      </button>
+
+      <a href="/rss.xml" target="_blank" class="w-8 h-8 flex items-center justify-center rounded-lg text-[var(--text-secondary)] hover:text-[var(--accent)] hover:bg-[var(--bg)] transition-all duration-300" aria-label="RSS">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 5c7.18 0 13 5.82 13 13M6 11a7 7 0 017 7m-6 0a1 1 0 110-2 1 1 0 010 2z" />
+        </svg>
+      </a>
+
+      <!-- Mobile hamburger -->
+      <button id="mobile-menu-btn" class="md:hidden w-8 h-8 flex items-center justify-center rounded-lg text-[var(--text-secondary)] hover:text-[var(--accent)] transition-all" aria-label="菜单">
+        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="hidden md:hidden border-t border-[var(--border)]/40 bg-[var(--bg-elevated)]/95 backdrop-blur-xl">
+    <div class="px-4 py-3 flex flex-col gap-1">
+      {
+        [
+          { href: '/home/', label: '首页' },
+          { href: '/blog/', label: '文章' },
+          { href: '/archive/', label: '归档' },
+          { href: '/tags/', label: '标签' },
+          { href: '/tools/', label: '工具' },
+          { href: '/friends/', label: '友链' },
+          { href: '/guestbook/', label: '留言' },
+          { href: '/about/', label: '关于' },
+        ].map(item => {
+          const isActive = currentPath.startsWith(item.href);
+          return (
+            <a
+              href={item.href}
+              class={`py-2.5 px-3 text-sm rounded-md transition-all font-serif ${
+                isActive
+                  ? 'text-[var(--accent)] bg-[rgba(226,168,76,0.08)]'
+                  : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+              }`}
+            >
+              {item.label}
+            </a>
+          );
+        })
+      }
+    </div>
+  </div>
+</header>
+
+<script>
+  // Theme toggle
+  function initTheme() {
+    const btn = document.getElementById('theme-toggle');
+    const sun = document.getElementById('theme-sun');
+    const moon = document.getElementById('theme-moon');
+    const html = document.documentElement;
+
+    function setTheme(isDark: boolean) {
+      if (isDark) {
+        html.classList.add('dark');
+        sun?.classList.remove('hidden');
+        moon?.classList.add('hidden');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        html.classList.remove('dark');
+        sun?.classList.add('hidden');
+        moon?.classList.remove('hidden');
+        localStorage.setItem('theme', 'light');
+      }
+    }
+
+    const saved = localStorage.getItem('theme');
+    if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      setTheme(true);
+    } else {
+      setTheme(false);
+    }
+
+    btn?.addEventListener('click', () => {
+      setTheme(!html.classList.contains('dark'));
+    });
+  }
+
+  // Mobile menu
+  function initMobileMenu() {
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    btn?.addEventListener('click', () => {
+      menu?.classList.toggle('hidden');
+    });
+  }
+
+  document.addEventListener('astro:page-load', () => {
+    initTheme();
+    initMobileMenu();
+  });
+  initTheme();
+  initMobileMenu();
+</script>

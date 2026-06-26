@@ -1,0 +1,73 @@
+[
+  {
+    "slug": "hello-world",
+    "title": "你好，世界",
+    "description": "第一篇博客文章，记录博客搭建的过程和一些想法。",
+    "date": "2026-06-26",
+    "category": "随笔",
+    "tags": [
+      "开始",
+      "博客"
+    ]
+  },
+  {
+    "slug": "astro-blog-01",
+    "title": "Astro 博客搭建 #1：为什么选 Astro",
+    "description": "对比 Hexo、Hugo、Next.js，为什么我最终选了 Astro 搭建个人博客。选型思路和踩坑记录。",
+    "date": "2026-06-25",
+    "category": "技术",
+    "tags": [
+      "Astro",
+      "博客",
+      "框架"
+    ]
+  },
+  {
+    "slug": "vscode-productivity",
+    "title": "VS Code 效率指南：让你的开发速度翻倍",
+    "description": "从快捷键到插件配置，一份面向日常开发的 VS Code 实用技巧合集。",
+    "date": "2026-06-24",
+    "category": "工具",
+    "tags": [
+      "VS Code",
+      "效率",
+      "编辑器"
+    ]
+  },
+  {
+    "slug": "git-tips",
+    "title": "Git 实用技巧：日常开发中的救命操作",
+    "description": "整理一些日常开发中最常用的 Git 技巧，从撤销操作到分支管理，帮你少走弯路。",
+    "date": "2026-06-23",
+    "category": "技术",
+    "tags": [
+      "Git",
+      "版本控制",
+      "工具"
+    ]
+  },
+  {
+    "slug": "dev-tools-2025",
+    "title": "2025 年我的开发工具箱",
+    "description": "分享我日常使用的开发工具，从终端到编辑器，提升开发效率的实用选择。",
+    "date": "2026-06-22",
+    "category": "工具",
+    "tags": [
+      "工具",
+      "终端",
+      "效率"
+    ]
+  },
+  {
+    "slug": "ai-coding-tools",
+    "title": "AI 辅助编程实战：工具选择与使用技巧",
+    "description": "2026 年 AI 编程工具横评与实战经验，从 Copilot 到 Claude Code，找到最适合你的 AI 编程搭档。",
+    "date": "2026-06-21",
+    "category": "技术",
+    "tags": [
+      "AI",
+      "工具",
+      "效率"
+    ]
+  }
+]

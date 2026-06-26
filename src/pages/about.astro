@@ -1,0 +1,38 @@
+---
+// src/pages/about.astro
+import Layout from '../layouts/Layout.astro';
+import { siteConfig } from '../utils/siteConfig';
+---
+
+<Layout title="关于">
+  <div class="max-w-3xl mx-auto px-6 py-12">
+    <div class="mb-10">
+      <h1 class="font-display text-2xl font-bold text-[var(--text-primary)] mb-2">关于</h1>
+    </div>
+
+    <div class="prose">
+      <h2>{siteConfig.title}</h2>
+      <p>
+        {siteConfig.bio}
+      </p>
+      <p>
+        这里是 <strong>{siteConfig.author}</strong> 的个人博客。记录技术探索、开发心得和生活感悟。
+      </p>
+      <p>
+        技术栈偏好：TypeScript、React、Astro、Node.js、Python。<br/>
+        感兴趣的方向：AI 工具、前端工程化、开源项目。
+      </p>
+      <h3>联系方式</h3>
+      <ul>
+        <li><a href="https://github.com/xxxdkubi">GitHub</a></li>
+        <li><a href="/guestbook/">留言板</a></li>
+        <li>RSS：<code>/rss.xml</code></li>
+      </ul>
+      <h3>关于本站</h3>
+      <p>
+        本站使用 <a href="https://astro.build">Astro</a> 构建，部署于 <a href="https://pages.github.com">GitHub Pages</a>。
+        主题风格：暗色禅意，极简优雅。
+      </p>
+    </div>
+  </div>
+</Layout>

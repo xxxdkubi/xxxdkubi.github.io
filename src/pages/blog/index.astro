@@ -1,0 +1,57 @@
+---
+// src/pages/blog/index.astro
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="文章">
+  <div class="max-w-4xl mx-auto px-6 py-12">
+    <div class="mb-10">
+      <h1 class="font-display text-2xl font-bold text-[var(--text-primary)] mb-2">文章</h1>
+      <p class="text-sm text-[var(--text-muted)] font-serif">记录技术探索与修行感悟</p>
+    </div>
+
+    <div id="blog-list" class="space-y-4">
+      <div class="text-center py-12 text-sm text-[var(--text-muted)]/50 font-serif">加载中...</div>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  document.addEventListener('astro:page-load', async () => {
+    const container = document.getElementById('blog-list');
+    if (!container) return;
+    try {
+      const resp = await fetch('/blog/index.json');
+      const posts = await resp.json();
+      if (posts.length === 0) {
+        container.innerHTML = '<div class="text-center py-12 text-sm text-[var(--text-muted)]/50 font-serif">暂无文章</div>';
+        return;
+      }
+      container.innerHTML = posts.map((post: any, i: number) => `
+        <a href="/blog/${post.slug}/" class="block group card-flat p-6 reveal-target opacity-0 translate-y-4"
+           style="transition: opacity 0.7s ${i * 0.05}s cubic-bezier(0.16,1,0.3,1), transform 0.7s ${i * 0.05}s cubic-bezier(0.16,1,0.3,1)">
+          <div class="flex items-center gap-3 mb-2 flex-wrap">
+            ${post.category ? `<span class="text-[11px] font-mono text-[var(--accent)] bg-[rgba(226,168,76,0.08)] px-2 py-0.5 rounded-full">${post.category}</span>` : ''}
+            <time class="text-xs font-mono text-[var(--text-muted)]/60">${post.date}</time>
+          </div>
+          <h2 class="font-display text-lg font-bold text-[var(--text-primary)] group-hover:text-[var(--accent)] transition-colors duration-200 leading-snug">
+            ${post.title}
+          </h2>
+          <p class="mt-2 text-sm text-[var(--text-secondary)] line-clamp-2 leading-relaxed">
+            ${post.description || ''}
+          </p>
+          ${post.tags && post.tags.length > 0 ? `
+            <div class="flex flex-wrap gap-1.5 mt-3">
+              ${post.tags.map((t: string) => `<span class="text-[11px] text-[var(--text-muted)] bg-[var(--bg)] px-2 py-0.5 rounded-full font-serif">${t}</span>`).join('')}
+            </div>
+          ` : ''}
+        </a>
+      `).join('');
+      setTimeout(() => {
+        container.querySelectorAll('.reveal-target').forEach(el => el.classList.add('is-visible'));
+      }, 100);
+    } catch {
+      container.innerHTML = '<div class="text-center py-12 text-sm text-[var(--text-muted)]/50 font-serif">加载失败</div>';
+    }
+  });
+</script>
