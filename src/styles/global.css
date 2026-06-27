@@ -33,10 +33,10 @@
 
   --color-dark-card: #1e2218;
 
-  --font-display: 'Noto Serif SC', 'Source Han Serif SC', 'STSong', 'SimSun', serif;
-  --font-sans: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
-  --font-serif: 'Noto Serif SC', 'STSong', 'SimSun', serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  --font-display: 'PingFang SC', 'Hiragino Sans GB', 'Noto Sans SC', 'Microsoft YaHei', serif;
+  --font-sans: 'PingFang SC', 'Hiragino Sans GB', 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
+  --font-serif: 'PingFang SC', 'Hiragino Sans GB', 'Noto Serif SC', 'STSong', 'SimSun', serif;
+  --font-mono: 'SF Mono', 'Cascadia Code', 'Consolas', 'Courier New', monospace;
 }
 
 /* Light mode (default) */
@@ -137,11 +137,19 @@ body {
   transform: translateY(20px);
   transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
               transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: revealFallback 2.5s ease forwards;
 }
 
 .reveal-target.is-visible {
   opacity: 1;
   transform: translateY(0);
+  animation: none;
+}
+
+/* fallback: JS 加载慢时也能自动显示 */
+@keyframes revealFallback {
+  0%, 90% {}
+  100% { opacity: 1; transform: translateY(0); }
 }
 
 /* Music Player */
