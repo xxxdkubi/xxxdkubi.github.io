@@ -1,18 +1,18 @@
 ---
-// src/components/VideoBackground.astro — 视频壁纸背景：播放 2 秒后渐隐为静态底图
+// src/components/VideoBackground.astro — 视频壁纸背景：静态底图即时显示，视频延迟加载播放 2 秒后渐隐
 ---
 <div id="video-bg-container" class="video-bg-container">
-  <!-- 静态底图始终在底部 -->
+  <!-- 静态底图始终在底部，立即展示 -->
   <div class="video-bg-wallpaper"></div>
-  <!-- 视频层：2 秒后 fadeOut -->
+  <!-- 视频层：懒加载，播放 2 秒后 fadeOut -->
   <video
     id="bg-video"
-    src="/bg-video.mp4"
+    preload="none"
     muted
     playsinline
     class="video-bg-video"
   ></video>
-  <!-- 深色遮罩保证文字可读 -->
+  <!-- 深色遮罩保证文字可读：加深 -->
   <div class="video-bg-overlay"></div>
 </div>
 
@@ -37,34 +37,41 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }
+
+  .video-bg-video.is-loaded {
     opacity: 1;
-    transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .video-bg-video.is-fading {
     opacity: 0;
+    transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  /* 暗色遮罩：保持设计一致性 */
+  /* 暗色遮罩：加深保证文字清晰可读 */
   .video-bg-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(20, 25, 16, 0.52);
-    backdrop-filter: blur(3px);
-    -webkit-backdrop-filter: blur(3px);
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
   }
 
   /* light mode overlay */
   :root:not(.dark) .video-bg-overlay {
-    background: rgba(247, 245, 240, 0.55);
+    background: rgba(0, 0, 0, 0.40);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
   }
 
   /* ===== 毛玻璃卡片效果 ===== */
   .glass-card {
     background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(12px) saturate(120%);
-    -webkit-backdrop-filter: blur(12px) saturate(120%);
-    border: 1px solid rgba(255, 255, 255, 0.10);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 0.875rem;
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     position: relative;
@@ -72,8 +79,8 @@
   }
 
   .dark .glass-card {
-    background: rgba(30, 34, 24, 0.45);
-    border-color: rgba(255, 255, 255, 0.06);
+    background: rgba(20, 20, 18, 0.55);
+    border-color: rgba(255, 255, 255, 0.08);
   }
 
   /* 鼠标跟随光晕 */
@@ -85,13 +92,13 @@
     pointer-events: none;
     border-radius: inherit;
     background: radial-gradient(
-      500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-      rgba(175, 200, 235, 0.10) 0%,
-      rgba(140, 170, 210, 0.04) 30%,
+      400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      rgba(200, 220, 250, 0.12) 0%,
+      rgba(160, 190, 225, 0.05) 30%,
       transparent 70%
     );
     opacity: 0;
-    transition: opacity 0.25s ease;
+    transition: opacity 0.2s ease;
   }
 
   .glass-card:hover::before {
@@ -99,51 +106,83 @@
   }
 
   .glass-card:hover {
-    background: rgba(255, 255, 255, 0.12);
-    border-color: rgba(175, 200, 235, 0.20);
+    background: rgba(255, 255, 255, 0.14);
+    border-color: rgba(180, 210, 245, 0.25);
     box-shadow:
-      0 8px 32px rgba(0, 0, 0, 0.25),
-      inset 0 0 0 1px rgba(175, 200, 235, 0.05);
+      0 8px 32px rgba(0, 0, 0, 0.30),
+      inset 0 0 0 1px rgba(180, 210, 245, 0.08);
+    transform: translateY(-1px);
   }
 
   .dark .glass-card:hover {
-    background: rgba(30, 34, 24, 0.55);
-    border-color: rgba(175, 200, 235, 0.18);
+    background: rgba(25, 25, 22, 0.65);
+    border-color: rgba(180, 210, 245, 0.20);
     box-shadow:
-      0 8px 32px rgba(0, 0, 0, 0.35),
-      inset 0 0 0 1px rgba(175, 200, 235, 0.04);
-  }
-
-  /* ===== 鼠标跟踪 JS（全局注入一次） ===== */
-  .glass-tracker-ready .glass-card {
-    /* JS 会设置 --mouse-x/--mouse-y */;
+      0 8px 32px rgba(0, 0, 0, 0.40),
+      inset 0 0 0 1px rgba(180, 210, 245, 0.05);
   }
 </style>
 
 <script>
-  // 视频自动播放 + 2 秒渐隐
-  const video = document.getElementById('bg-video') as HTMLVideoElement | null;
-  if (video) {
-    video.play().catch(() => {});
-    setTimeout(() => {
-      video.classList.add('is-fading');
-    }, 2000);
+  // 页面加载完成后才延迟加载视频，不阻塞首屏
+  function initVideo() {
+    const video = document.getElementById('bg-video') as HTMLVideoElement | null;
+    if (!video) return;
+
+    // 首次 visit? 等 wallpaper 展示后再 load 视频
+    const hasPlayed = sessionStorage.getItem('bg-video-played');
+
+    video.src = '/bg-video.mp4';
+
+    // canplay 后自动播，2 秒渐隐
+    video.addEventListener('canplay', () => {
+      if (hasPlayed) {
+        // 之前播放过，直接跳过
+        video.style.display = 'none';
+        return;
+      }
+      video.classList.add('is-loaded');
+      video.play().catch(() => {});
+      setTimeout(() => {
+        video.classList.add('is-fading');
+        sessionStorage.setItem('bg-video-played', '1');
+      }, 2000);
+    });
+
+    // 如果 canplay 没触发（已缓存/网络快），直接播
+    video.addEventListener('loadeddata', () => {
+      if (video.readyState >= 3 && !hasPlayed) {
+        video.classList.add('is-loaded');
+        video.play().catch(() => {});
+        setTimeout(() => {
+          video.classList.add('is-fading');
+          sessionStorage.setItem('bg-video-played', '1');
+        }, 2000);
+      }
+    });
   }
 
-  // 毛玻璃鼠标跟踪
+  // 用 requestIdleCallback 延迟初始化，不抢首屏
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(initVideo);
+  } else {
+    setTimeout(initVideo, 200);
+  }
+
+  // ===== 毛玻璃鼠标跟踪 =====
   function initGlassTracking() {
     document.addEventListener('mousemove', (e: MouseEvent) => {
       const cards = document.querySelectorAll('.glass-card');
       cards.forEach((card) => {
         const rect = (card as HTMLElement).getBoundingClientRect();
-        // 鼠标在卡片附近 100px 范围内才更新
         const cx = e.clientX;
         const cy = e.clientY;
+        // 鼠标在卡片附近 80px 范围内才更新
         const isNear =
-          cx >= rect.left - 100 &&
-          cx <= rect.right + 100 &&
-          cy >= rect.top - 100 &&
-          cy <= rect.bottom + 100;
+          cx >= rect.left - 80 &&
+          cx <= rect.right + 80 &&
+          cy >= rect.top - 80 &&
+          cy <= rect.bottom + 80;
         if (isNear) {
           const x = ((cx - rect.left) / rect.width) * 100;
           const y = ((cy - rect.top) / rect.height) * 100;
