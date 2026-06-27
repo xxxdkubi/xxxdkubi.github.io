@@ -1,0 +1,839 @@
+<!DOCTYPE html><html lang="zh-CN" class="dark"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="所有文章列表"><meta name="google-site-verification" content="nF43Ycr0M27ASMgp4dtsTYJa9xfQ2mO9lyB1aWs2iYs"><meta name="robots" content="index, follow"><meta name="theme-color" content="#070A13"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.svg"><link rel="canonical" href="https://xxxdkubi.github.io/blog/"><link rel="alternate" type="application/rss+xml" title="墨迹博客 RSS" href="https://xxxdkubi.github.io/rss.xml"><meta property="og:image" content="https://xxxdkubi.github.io/hero/og-default.png"><meta property="og:title" content="文章"><meta property="og:description" content="所有文章列表"><meta property="og:type" content="website"><meta property="og:url" content="https://xxxdkubi.github.io/blog/"><meta property="og:site_name" content="墨迹博客"><meta property="og:locale" content="zh_CN"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="文章"><meta name="twitter:description" content="所有文章列表"><meta name="twitter:image" content="https://xxxdkubi.github.io/hero/og-default.png"><meta name="twitter:site" content="@moku_blog"><meta name="author" content="又逢雨季"><title>文章 | 墨迹博客</title><script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        "name": "墨迹博客",
+        "description": "一个关于技术、设计与生活的博客",
+        "url": "https://xxxdkubi.github.io/",
+        "author": { "@type": "Person", "name": "又逢雨季" },
+        "inLanguage": "zh-CN"
+      }
+    </script><script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "墨迹博客",
+        "url": "https://xxxdkubi.github.io/",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://xxxdkubi.github.io/?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    </script><script>
+      // 物理锁死深色模式 + ClientRouter 导航后修复 page-entrance class
+      function syncPageEntrance() {
+        if (!document.body) return;
+        const onEntrance = location.pathname === '/blog/' || location.pathname === '/';
+        document.body.classList.toggle('page-entrance', onEntrance);
+        if (!onEntrance) {
+          const gv = document.getElementById('global-bg-video');
+          if (gv) gv.play().catch(() => {});
+        }
+      }
+      document.addEventListener('astro:after-swap', () => {
+        document.documentElement.classList.add('dark');
+        document.documentElement.style.setProperty('background-color', 'transparent', 'important');
+        document.documentElement.style.setProperty('color', '#F5F5F4', 'important');
+        syncPageEntrance();
+      });
+      document.documentElement.classList.add('dark');
+      if (document.body) syncPageEntrance();
+      // 清除旧版 ThemePicker 残留在 localStorage 的暖色
+      try { localStorage.removeItem('accent_color'); } catch (_) {}
+    </script><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.CAqDO0tx.js"></script><link rel="stylesheet" href="/_astro/BaseLayout.DnMAC6HO.css"></head> <body class="min-h-screen flex flex-col"> <div class="global-bg-layer" aria-hidden="true"> <img id="global-bg-poster" class="global-bg-video" src="/maple.jpg" alt=""> <video id="global-bg-video" class="global-bg-video" poster="/maple.jpg" preload="metadata" loop muted playsinline style="display:none"></video> </div> <div id="reading-progress" class="fixed top-0 left-0 h-[3px] z-[100] w-0 transition-[width] duration-100 ease-out bg-accent dark:bg-dark-accent" style="display:none"></div> <script>
+  document.addEventListener('astro:page-load', () => {
+    const bar = document.getElementById('reading-progress');
+    if (!bar) return;
+
+    // 清理旧监听器
+    if (window.__rpHandler) {
+      window.removeEventListener('scroll', window.__rpHandler);
+    }
+
+    const prose = document.querySelector('.prose');
+    if (!prose) {
+      bar.style.display = 'none';
+      bar.style.width = '0%';
+      return;
+    }
+
+    bar.style.display = 'block';
+
+    window.__rpHandler = function () {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? Math.min(scrollTop / docHeight * 100, 100) : 0;
+      bar.style.width = progress + '%';
+    };
+
+    window.addEventListener('scroll', window.__rpHandler, { passive: true });
+    window.__rpHandler();
+  });
+</script> <header class="sticky top-0 z-50 w-full px-4 md:px-8"> <div class="header-glass max-w-6xl mx-auto rounded-3xl backdrop-blur-[20px] border border-white/[0.06]"> <nav class="px-4 h-14 flex items-center justify-between md:px-6"> <a href="/" class="logo-text text-xl font-semibold text-text hover:text-[#c8d6e8] transition-all duration-500" style="font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;">墨迹</a> <div class="hidden md:flex items-center gap-1 rounded-full border border-white/[0.06] bg-white/[0.04] p-1"> <a href="/" class="rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors text-text-secondary hover:bg-white/10 hover:text-text"> 首页  </a><a href="/blog/" class="rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors bg-white/10 text-text"> 文章  </a><a href="/archive/" class="rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors text-text-secondary hover:bg-white/10 hover:text-text"> 归档  </a><a href="/tags/" class="rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors text-text-secondary hover:bg-white/10 hover:text-text"> 标签  </a><a href="/tools/" class="rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors text-text-secondary hover:bg-white/10 hover:text-text"> 工具  </a><a href="https://ekegukeku64-blip.github.io/tech-daily/" class="rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors text-text-secondary hover:bg-white/10 hover:text-text" target="_blank" rel="noopener"> 日报 <svg class="inline w-3 h-3 ml-0.5 -mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path> </svg> </a><a href="/friends/" class="rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors text-text-secondary hover:bg-white/10 hover:text-text"> 友链  </a><a href="/guestbook/" class="rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors text-text-secondary hover:bg-white/10 hover:text-text"> 留言  </a><a href="/about/" class="rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors text-text-secondary hover:bg-white/10 hover:text-text"> 关于  </a> </div> <!-- Right side: search + mobile menu --> <div class="flex items-center gap-1"> <div class="relative"> <button id="search-toggle" class="p-2 rounded-lg text-text-muted hover:text-text hover:bg-surface-alt dark:text-dark-text-muted dark:hover:text-dark-text dark:hover:bg-dark-surface-alt transition-colors" aria-label="搜索"> <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path> </svg> </button> </div> <!-- Search Modal --> <div id="search-modal" class="fixed inset-0 z-[100] hidden"> <!-- Backdrop --> <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" id="search-backdrop"></div> <!-- Search Panel --> <div class="relative max-w-2xl mx-auto mt-[15vh] px-4"> <div class="bg-surface dark:bg-dark-surface rounded-xl shadow-2xl border border-border dark:border-dark-border overflow-hidden"> <!-- Search Input --> <div class="flex items-center px-4 border-b border-border dark:border-dark-border"> <svg class="w-5 h-5 text-text-muted dark:text-dark-text-muted flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path> </svg> <input type="text" id="search-input" placeholder="搜索文章..." class="w-full px-3 py-4 bg-transparent text-text dark:text-dark-text placeholder:text-text-muted dark:placeholder:text-dark-text-muted focus:outline-none"> <kbd class="hidden sm:inline-block px-2 py-0.5 text-xs text-text-muted dark:text-dark-text-muted bg-surface-alt dark:bg-dark-surface-alt rounded">ESC</kbd> </div> <!-- Results --> <div id="search-results" class="max-h-[60vh] overflow-y-auto p-2"> <div class="px-4 py-8 text-center text-text-muted dark:text-dark-text-muted">
+输入关键词开始搜索
+</div> </div> <!-- Footer --> <div class="px-4 py-2 border-t border-border dark:border-dark-border text-xs text-text-muted dark:text-dark-text-muted flex items-center justify-between"> <span>由 Pagefind 提供搜索</span> <div class="flex items-center gap-2"> <kbd class="px-1.5 py-0.5 bg-surface-alt dark:bg-dark-surface-alt rounded">↑↓</kbd> <span>导航</span> <kbd class="px-1.5 py-0.5 bg-surface-alt dark:bg-dark-surface-alt rounded">↵</kbd> <span>打开</span> </div> </div> </div> </div> </div> <script>
+  let pagefind;
+
+  async function initSearch() {
+    if (!pagefind) {
+      try {
+        pagefind = await import('/blog/pagefind/pagefind.js');
+        await pagefind.options({ languages: ['zh'] });
+      } catch (e) {
+        console.warn('Pagefind not available in dev mode');
+      }
+    }
+  }
+
+  function openSearch() {
+    const modal = document.getElementById('search-modal');
+    modal.classList.remove('hidden');
+    document.getElementById('search-input').focus();
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeSearch() {
+    const modal = document.getElementById('search-modal');
+    modal.classList.add('hidden');
+    document.getElementById('search-input').value = '';
+    document.getElementById('search-results').innerHTML = '<div class="px-4 py-8 text-center text-text-muted dark:text-dark-text-muted">输入关键词开始搜索</div>';
+    document.body.style.overflow = '';
+  }
+
+  function renderResults(results) {
+    const container = document.getElementById('search-results');
+    if (!results || results.length === 0) {
+      container.innerHTML = '<div class="px-4 py-8 text-center text-text-muted dark:text-dark-text-muted">没有找到相关文章</div>';
+      return;
+    }
+
+    container.innerHTML = results.map((result, i) => `
+      <a href="${result.url}" class="block px-4 py-3 rounded-lg hover:bg-surface-alt dark:hover:bg-dark-surface-alt transition-colors ${i === 0 ? 'bg-surface-alt dark:bg-dark-surface-alt' : ''}">
+        <div class="font-medium text-text dark:text-dark-text">${result.meta?.title || '无标题'}</div>
+        <div class="text-sm text-text-muted dark:text-dark-text-muted mt-1 line-clamp-2">${result.excerpt}</div>
+        ${result.meta?.tags ? `<div class="flex flex-wrap gap-1 mt-2">${result.meta.tags.split(',').map(tag => `<span class="text-xs px-2 py-0.5 rounded-full bg-accent/10 dark:bg-dark-accent/10 text-accent dark:text-dark-accent">${tag.trim()}</span>`).join('')}</div>` : ''}
+      </a>
+    `).join('');
+  }
+
+  // Initialize
+  document.addEventListener('astro:page-load', () => {
+    const toggle = document.getElementById('search-toggle');
+    const backdrop = document.getElementById('search-backdrop');
+    const input = document.getElementById('search-input');
+    let debounceTimer;
+
+    toggle?.addEventListener('click', () => {
+      initSearch();
+      openSearch();
+    });
+
+    backdrop?.addEventListener('click', closeSearch);
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault();
+        initSearch();
+        openSearch();
+      }
+      if (e.key === 'Escape') {
+        closeSearch();
+      }
+    });
+
+    // Search input
+    input?.addEventListener('input', (e) => {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(async () => {
+        const query = e.target.value.trim();
+        if (!pagefind || !query) {
+          document.getElementById('search-results').innerHTML = query
+            ? '<div class="px-4 py-8 text-center text-text-muted dark:text-dark-text-muted">搜索未就绪，请刷新页面</div>'
+            : '<div class="px-4 py-8 text-center text-text-muted dark:text-dark-text-muted">输入关键词开始搜索</div>';
+          return;
+        }
+        const search = await pagefind.debouncedSearch(query);
+        if (search) {
+          const results = await Promise.all(search.results.slice(0, 10).map(r => r.data()));
+          renderResults(results);
+        }
+      }, 200);
+    });
+
+    // Keyboard navigation
+    input?.addEventListener('keydown', (e) => {
+      const container = document.getElementById('search-results');
+      const links = container.querySelectorAll('a');
+      const current = container.querySelector('a.bg-surface-alt, a.dark\\:bg-dark-surface-alt');
+      let index = Array.from(links).indexOf(current);
+
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        index = Math.min(index + 1, links.length - 1);
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        index = Math.max(index - 1, 0);
+      } else if (e.key === 'Enter' && current) {
+        e.preventDefault();
+        current.click();
+        return;
+      } else {
+        return;
+      }
+
+      links.forEach(l => l.classList.remove('bg-surface-alt', 'dark:bg-dark-surface-alt'));
+      if (links[index]) {
+        links[index].classList.add('bg-surface-alt', 'dark:bg-dark-surface-alt');
+        links[index].scrollIntoView({ block: 'nearest' });
+      }
+    });
+  });
+</script> <a href="/rss.xml" class="p-2 rounded-lg text-text-secondary hover:text-accent hover:bg-white/5 transition-colors" aria-label="RSS 订阅" target="_blank"> <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M6 5c7.18 0 13 5.82 13 13M6 11a7 7 0 017 7m-6 0a1 1 0 11-2 0 1 1 0 012 0z"></path> </svg> </a> <!-- Mobile menu button --> <button id="mobile-menu-toggle" class="md:hidden p-2 rounded-lg text-text-secondary hover:text-text hover:bg-white/5 transition-colors" aria-label="菜单"> <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path class="menu-line menu-line-1" stroke-linecap="round" stroke-linejoin="round" d="M4 6h16"></path> <path class="menu-line menu-line-2" stroke-linecap="round" stroke-linejoin="round" d="M4 12h16"></path> <path class="menu-line menu-line-3" stroke-linecap="round" stroke-linejoin="round" d="M4 18h16"></path> </svg> </button> </div> </nav> <!-- Mobile menu --> <div id="mobile-menu" class="md:hidden border-t border-white/5 bg-[rgba(15,23,42,0.92)] backdrop-blur-xl rounded-b-2xl"> <div class="px-6 py-4 flex flex-col gap-1"> <a href="/" class="px-4 py-2.5 rounded-lg text-sm font-medium transition-colors text-text-secondary hover:text-text hover:bg-white/5"> 首页  </a><a href="/blog/" class="px-4 py-2.5 rounded-lg text-sm font-medium transition-colors text-accent"> 文章  </a><a href="/archive/" class="px-4 py-2.5 rounded-lg text-sm font-medium transition-colors text-text-secondary hover:text-text hover:bg-white/5"> 归档  </a><a href="/tags/" class="px-4 py-2.5 rounded-lg text-sm font-medium transition-colors text-text-secondary hover:text-text hover:bg-white/5"> 标签  </a><a href="/tools/" class="px-4 py-2.5 rounded-lg text-sm font-medium transition-colors text-text-secondary hover:text-text hover:bg-white/5"> 工具  </a><a href="https://ekegukeku64-blip.github.io/tech-daily/" class="px-4 py-2.5 rounded-lg text-sm font-medium transition-colors text-text-secondary hover:text-text hover:bg-white/5" target="_blank" rel="noopener"> 日报 <svg class="inline w-3 h-3 ml-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path> </svg> </a><a href="/friends/" class="px-4 py-2.5 rounded-lg text-sm font-medium transition-colors text-text-secondary hover:text-text hover:bg-white/5"> 友链  </a><a href="/guestbook/" class="px-4 py-2.5 rounded-lg text-sm font-medium transition-colors text-text-secondary hover:text-text hover:bg-white/5"> 留言  </a><a href="/about/" class="px-4 py-2.5 rounded-lg text-sm font-medium transition-colors text-text-secondary hover:text-text hover:bg-white/5"> 关于  </a> <a href="/rss.xml" class="px-4 py-2.5 rounded-lg text-sm font-medium transition-colors text-text-secondary hover:text-text hover:bg-white/5 flex items-center gap-2" target="_blank"> <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M6 5c7.18 0 13 5.82 13 13M6 11a7 7 0 017 7m-6 0a1 1 0 11-2 0 1 1 0 012 0z"></path> </svg>
+RSS 订阅
+</a> </div> </div> </div> </header> <script>(function(){const base = "/blog/";
+
+  const ACTIVE = 'rounded-full px-3.5 py-1.5 text-sm font-medium transition-all duration-400 bg-white/10 text-text';
+  const INACTIVE = 'rounded-full px-3.5 py-1.5 text-sm font-medium transition-all duration-400 text-text-secondary hover:bg-white/10 hover:text-text';
+
+  function updateActiveNav() {
+    const p = window.location.pathname;
+    document.querySelectorAll('nav a[href]').forEach(a => {
+      const href = a.getAttribute('href');
+      if (!href || href === base + '_astro/' || !href.startsWith(base)) return;
+      const active = href === base ? p === href : p.startsWith(href);
+      a.className = active ? ACTIVE : INACTIVE;
+    });
+  }
+
+  document.addEventListener('astro:page-load', () => {
+    updateActiveNav();
+
+    const toggle = document.getElementById('mobile-menu-toggle');
+    const menu = document.getElementById('mobile-menu');
+    // Close mobile menu on navigation
+    menu?.classList.remove('mobile-menu-open');
+    toggle?.classList.remove('menu-open');
+    toggle?.addEventListener('click', () => {
+      menu?.classList.toggle('mobile-menu-open');
+      toggle.classList.toggle('menu-open');
+    });
+
+    // Header 滚动隐藏/显示
+    const header = document.querySelector('header');
+    if (header && !window.__headerScroll) {
+      window.__headerScroll = true;
+      let lastY = 0;
+      let ticking = false;
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          requestAnimationFrame(() => {
+            const y = window.scrollY;
+            if (y > 20) {
+              header.classList.add('header-scrolled');
+            } else {
+              header.classList.remove('header-scrolled');
+            }
+            if (y > 80 && y > lastY) {
+              header.classList.add('header-hidden');
+            } else {
+              header.classList.remove('header-hidden');
+            }
+            lastY = y;
+            ticking = false;
+          });
+          ticking = true;
+        }
+      });
+    }
+  });
+})();</script> <main class="flex-1">  <div class="max-w-5xl mx-auto px-6 py-16"> <div class="mb-8 ink-reveal"> <span class="inline-block px-3 py-1 text-xs font-sans tracking-widest text-accent dark:text-dark-accent border border-accent/30 dark:border-dark-accent/30 mb-4">ARTICLES</span> <h1 class="font-display text-4xl font-bold text-text dark:text-dark-text mb-3">所有文章</h1> <p class="text-text-muted dark:text-dark-text-muted font-serif">共 55 篇文章</p> </div> <!-- Search --> <div class="mb-8 ink-reveal ink-reveal-delay-1"> <div class="relative group/search"> <div class="absolute -inset-1 bg-gradient-to-r from-accent/0 via-accent/10 to-accent/0 dark:from-dark-accent/0 dark:via-dark-accent/10 dark:to-dark-accent/0 rounded-2xl opacity-0 group-focus-within/search:opacity-100 transition-opacity duration-500 blur-sm"></div> <div class="relative"> <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-text-muted dark:text-dark-text-muted group-focus-within/search:text-accent dark:group-focus-within/search:text-dark-accent transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg> <input type="text" id="search-input" class="w-full bg-surface-alt dark:bg-dark-surface-alt border border-border/40 dark:border-dark-border/40 rounded-xl pl-11 pr-4 py-3 text-sm text-text dark:text-dark-text focus:outline-none focus:border-accent/60 dark:focus:border-dark-accent/60 focus:ring-2 focus:ring-accent/10 dark:focus:ring-dark-accent/10 transition-all" placeholder="搜索文章标题、描述..."> </div> </div> <p id="search-count" class="mt-3 text-xs text-accent dark:text-dark-accent font-serif hidden"></p> </div> <!-- Category filter --> <div class="flex flex-wrap gap-2 mb-10 ink-reveal ink-reveal-delay-2"> <a href="/blog" class="seal seal-solid">全部</a> <a href="/category/成长记录/" class="seal hover:bg-accent hover:text-white dark:hover:bg-dark-accent dark:hover:text-dark-surface transition-all hover:shadow-md hover:shadow-accent/10 dark:hover:shadow-dark-accent/10"> 成长记录 </a><a href="/category/技术/" class="seal hover:bg-accent hover:text-white dark:hover:bg-dark-accent dark:hover:text-dark-surface transition-all hover:shadow-md hover:shadow-accent/10 dark:hover:shadow-dark-accent/10"> 技术 </a><a href="/category/技术日报/" class="seal hover:bg-accent hover:text-white dark:hover:bg-dark-accent dark:hover:text-dark-surface transition-all hover:shadow-md hover:shadow-accent/10 dark:hover:shadow-dark-accent/10"> 技术日报 </a><a href="/category/工具/" class="seal hover:bg-accent hover:text-white dark:hover:bg-dark-accent dark:hover:text-dark-surface transition-all hover:shadow-md hover:shadow-accent/10 dark:hover:shadow-dark-accent/10"> 工具 </a><a href="/category/随笔/" class="seal hover:bg-accent hover:text-white dark:hover:bg-dark-accent dark:hover:text-dark-surface transition-all hover:shadow-md hover:shadow-accent/10 dark:hover:shadow-dark-accent/10"> 随笔 </a> </div> <!-- Posts + Sidebar --> <div class="flex flex-col md:flex-row gap-10"> <div class="flex-1 min-w-0"> <div id="posts-grid"> <div class="category-section mb-14" data-category="成长记录"> <div class="flex items-center gap-3 mb-6 ink-reveal" data-category-header="成长记录"> <span class="text-accent dark:text-dark-accent"><svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg></span> <h2 class="font-display text-xl font-bold text-text dark:text-dark-text">成长记录</h2> <span class="text-xs text-text-muted dark:text-dark-text-muted font-sans bg-surface-alt dark:bg-dark-surface-alt px-2.5 py-0.5 rounded-full"> 12 篇
+</span> </div> <div class="grid grid-cols-1 md:grid-cols-2 gap-8"> <div class="ink-reveal ink-reveal-delay-1" data-title="成长记录 #12：技术人的周二" data-desc="一个大专生的成长日记，记录每一天的思考和变化。" data-tags="成长,日常"> <div class="card-tilt-wrapper reveal-target blur-reveal"> <article class="card card-tilt group relative overflow-hidden"> <a href="/blog/growth-012/" class="block p-5"> <div class="flex items-center gap-2 text-xs mb-2.5"> <span class="seal">成长记录</span> <time datetime="2026-06-02T00:00:00.000Z" class="font-mono text-[11px] text-text-secondary">2026年6月2日</time> <span class="text-text-secondary/40">·</span> <span class="text-text-secondary">1 分钟</span> </div> <h3 class="font-display font-bold text-[1.05rem] leading-snug mb-2 text-text group-hover:text-accent transition-colors duration-200"> 成长记录 #12：技术人的周二 </h3> <p class="text-sm text-text-secondary line-clamp-2 leading-relaxed"> 一个大专生的成长日记，记录每一天的思考和变化。 </p> <div class="flex flex-wrap gap-1.5 mt-3"> <span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#成长 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#日常 </span> </div>  </a> </article> </div> <script type="module">function d(e){const t=e.querySelector(".card-tilt");t&&(e.addEventListener("mousemove",r=>{const s=e.getBoundingClientRect(),o=(r.clientX-s.left)/s.width,l=(r.clientY-s.top)/s.height,y=(l-.5)*2*1.5,i=(o-.5)*-2*1.5,n=(o-.5)*-12,c=(l-.5)*-12+6;t.style.setProperty("--tilt-x",`${i}deg`),t.style.setProperty("--tilt-y",`${y}deg`),t.style.setProperty("--tilt-shadow-x",`${n}px`),t.style.setProperty("--tilt-shadow-y",`${c}px`),t.style.setProperty("--spotlight-x",`${o*100}%`),t.style.setProperty("--spotlight-y",`${l*100}%`)}),e.addEventListener("mouseleave",()=>{t.style.setProperty("--tilt-x","0deg"),t.style.setProperty("--tilt-y","0deg"),t.style.setProperty("--tilt-shadow-x","0px"),t.style.setProperty("--tilt-shadow-y","6px"),t.style.setProperty("--spotlight-x","50%"),t.style.setProperty("--spotlight-y","50%")}))}document.querySelectorAll(".card-tilt-wrapper").forEach(d);</script> </div><div class="ink-reveal ink-reveal-delay-2" data-title="成长记录 #11：代码改了一行，心情好了一天" data-desc="一个大专生的成长日记，记录每一天的思考和变化。" data-tags="成长,日常"> <div class="card-tilt-wrapper reveal-target blur-reveal"> <article class="card card-tilt group relative overflow-hidden"> <a href="/blog/growth-011/" class="block p-5"> <div class="flex items-center gap-2 text-xs mb-2.5"> <span class="seal">成长记录</span> <time datetime="2026-05-31T00:00:00.000Z" class="font-mono text-[11px] text-text-secondary">2026年5月31日</time> <span class="text-text-secondary/40">·</span> <span class="text-text-secondary">1 分钟</span> </div> <h3 class="font-display font-bold text-[1.05rem] leading-snug mb-2 text-text group-hover:text-accent transition-colors duration-200"> 成长记录 #11：代码改了一行，心情好了一天 </h3> <p class="text-sm text-text-secondary line-clamp-2 leading-relaxed"> 一个大专生的成长日记，记录每一天的思考和变化。 </p> <div class="flex flex-wrap gap-1.5 mt-3"> <span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#成长 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#日常 </span> </div>  </a> </article> </div>  </div><div class="ink-reveal ink-reveal-delay-3" data-title="成长记录 #9：学不动的时候怎么办" data-desc="有段时间什么都不想学，什么都不想做。后来我发现这不是懒，是另一种信号。" data-tags="成长,倦怠,心理健康"> <div class="card-tilt-wrapper reveal-target blur-reveal"> <article class="card card-tilt group relative overflow-hidden"> <a href="/blog/growth-009/" class="block p-5"> <div class="flex items-center gap-2 text-xs mb-2.5"> <span class="seal">成长记录</span> <time datetime="2026-05-30T00:00:00.000Z" class="font-mono text-[11px] text-text-secondary">2026年5月30日</time> <span class="text-text-secondary/40">·</span> <span class="text-text-secondary">2 分钟</span> </div> <h3 class="font-display font-bold text-[1.05rem] leading-snug mb-2 text-text group-hover:text-accent transition-colors duration-200"> 成长记录 #9：学不动的时候怎么办 </h3> <p class="text-sm text-text-secondary line-clamp-2 leading-relaxed"> 有段时间什么都不想学，什么都不想做。后来我发现这不是懒，是另一种信号。 </p> <div class="flex flex-wrap gap-1.5 mt-3"> <span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#成长 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#倦怠 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#心理健康 </span> </div>  </a> </article> </div>  </div><div class="ink-reveal ink-reveal-delay-4" data-title="成长记录 #10：一个月了" data-desc="博客上线一个月。没火，没赚到大钱，但我收获了一些更值钱的东西。" data-tags="成长,复盘,一个月"> <div class="card-tilt-wrapper reveal-target blur-reveal"> <article class="card card-tilt group relative overflow-hidden"> <a href="/blog/growth-010/" class="block p-5"> <div class="flex items-center gap-2 text-xs mb-2.5"> <span class="seal">成长记录</span> <time datetime="2026-05-30T00:00:00.000Z" class="font-mono text-[11px] text-text-secondary">2026年5月30日</time> <span class="text-text-secondary/40">·</span> <span class="text-text-secondary">2 分钟</span> </div> <h3 class="font-display font-bold text-[1.05rem] leading-snug mb-2 text-text group-hover:text-accent transition-colors duration-200"> 成长记录 #10：一个月了 </h3> <p class="text-sm text-text-secondary line-clamp-2 leading-relaxed"> 博客上线一个月。没火，没赚到大钱，但我收获了一些更值钱的东西。 </p> <div class="flex flex-wrap gap-1.5 mt-3"> <span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#成长 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#复盘 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#一个月 </span> </div>  </a> </article> </div>  </div><div class="ink-reveal ink-reveal-delay-1" data-title="成长记录 #7：凌晨三点的代码" data-desc="熬夜写代码到底是勤奋还是自我感动？我想了很久。" data-tags="成长,效率,反思"> <div class="card-tilt-wrapper reveal-target blur-reveal"> <article class="card card-tilt group relative overflow-hidden"> <a href="/blog/growth-007/" class="block p-5"> <div class="flex items-center gap-2 text-xs mb-2.5"> <span class="seal">成长记录</span> <time datetime="2026-05-29T00:00:00.000Z" class="font-mono text-[11px] text-text-secondary">2026年5月29日</time> <span class="text-text-secondary/40">·</span> <span class="text-text-secondary">2 分钟</span> </div> <h3 class="font-display font-bold text-[1.05rem] leading-snug mb-2 text-text group-hover:text-accent transition-colors duration-200"> 成长记录 #7：凌晨三点的代码 </h3> <p class="text-sm text-text-secondary line-clamp-2 leading-relaxed"> 熬夜写代码到底是勤奋还是自我感动？我想了很久。 </p> <div class="flex flex-wrap gap-1.5 mt-3"> <span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#成长 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#效率 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#反思 </span> </div>  </a> </article> </div>  </div><div class="ink-reveal ink-reveal-delay-2" data-title="成长记录 #8：第一次收到反馈" data-desc="有人在闲鱼上问我&quot;这个真的能用吗&quot;，我突然觉得事情在起变化。" data-tags="成长,闲鱼,反馈"> <div class="card-tilt-wrapper reveal-target blur-reveal"> <article class="card card-tilt group relative overflow-hidden"> <a href="/blog/growth-008/" class="block p-5"> <div class="flex items-center gap-2 text-xs mb-2.5"> <span class="seal">成长记录</span> <time datetime="2026-05-29T00:00:00.000Z" class="font-mono text-[11px] text-text-secondary">2026年5月29日</time> <span class="text-text-secondary/40">·</span> <span class="text-text-secondary">2 分钟</span> </div> <h3 class="font-display font-bold text-[1.05rem] leading-snug mb-2 text-text group-hover:text-accent transition-colors duration-200"> 成长记录 #8：第一次收到反馈 </h3> <p class="text-sm text-text-secondary line-clamp-2 leading-relaxed"> 有人在闲鱼上问我&quot;这个真的能用吗&quot;，我突然觉得事情在起变化。 </p> <div class="flex flex-wrap gap-1.5 mt-3"> <span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#成长 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#闲鱼 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#反馈 </span> </div>  </a> </article> </div>  </div><div class="ink-reveal ink-reveal-delay-3" data-title="成长记录 #5：闲鱼上架第一天" data-desc="在闲鱼上卖 ai 服务，从零开始，一天下来学到的东西比一个月都多。" data-tags="成长,闲鱼,ai,实践"> <div class="card-tilt-wrapper reveal-target blur-reveal"> <article class="card card-tilt group relative overflow-hidden"> <a href="/blog/growth-005/" class="block p-5"> <div class="flex items-center gap-2 text-xs mb-2.5"> <span class="seal">成长记录</span> <time datetime="2026-05-28T00:00:00.000Z" class="font-mono text-[11px] text-text-secondary">2026年5月28日</time> <span class="text-text-secondary/40">·</span> <span class="text-text-secondary">2 分钟</span> </div> <h3 class="font-display font-bold text-[1.05rem] leading-snug mb-2 text-text group-hover:text-accent transition-colors duration-200"> 成长记录 #5：闲鱼上架第一天 </h3> <p class="text-sm text-text-secondary line-clamp-2 leading-relaxed"> 在闲鱼上卖 AI 服务，从零开始，一天下来学到的东西比一个月都多。 </p> <div class="flex flex-wrap gap-1.5 mt-3"> <span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#成长 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#闲鱼 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#AI </span> </div>  </a> </article> </div>  </div><div class="ink-reveal ink-reveal-delay-4" data-title="成长记录 #6：被朋友问住了" data-desc="朋友问我&quot;你到底在搞什么&quot;，我一时答不上来。" data-tags="成长,方向,自白"> <div class="card-tilt-wrapper reveal-target blur-reveal"> <article class="card card-tilt group relative overflow-hidden"> <a href="/blog/growth-006/" class="block p-5"> <div class="flex items-center gap-2 text-xs mb-2.5"> <span class="seal">成长记录</span> <time datetime="2026-05-28T00:00:00.000Z" class="font-mono text-[11px] text-text-secondary">2026年5月28日</time> <span class="text-text-secondary/40">·</span> <span class="text-text-secondary">2 分钟</span> </div> <h3 class="font-display font-bold text-[1.05rem] leading-snug mb-2 text-text group-hover:text-accent transition-colors duration-200"> 成长记录 #6：被朋友问住了 </h3> <p class="text-sm text-text-secondary line-clamp-2 leading-relaxed"> 朋友问我&quot;你到底在搞什么&quot;，我一时答不上来。 </p> <div class="flex flex-wrap gap-1.5 mt-3"> <span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#成长 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#方向 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#自白 </span> </div>  </a> </article> </div>  </div><div class="ink-reveal ink-reveal-delay-1" data-title="成长记录 #4：一次社死的面试" data-desc="人生第一次面试，紧张到脑子空白，但也没那么可怕。" data-tags="成长,面试,自白"> <div class="card-tilt-wrapper reveal-target blur-reveal"> <article class="card card-tilt group relative overflow-hidden"> <a href="/blog/growth-004/" class="block p-5"> <div class="flex items-center gap-2 text-xs mb-2.5"> <span class="seal">成长记录</span> <time datetime="2026-05-27T00:00:00.000Z" class="font-mono text-[11px] text-text-secondary">2026年5月27日</time> <span class="text-text-secondary/40">·</span> <span class="text-text-secondary">2 分钟</span> </div> <h3 class="font-display font-bold text-[1.05rem] leading-snug mb-2 text-text group-hover:text-accent transition-colors duration-200"> 成长记录 #4：一次社死的面试 </h3> <p class="text-sm text-text-secondary line-clamp-2 leading-relaxed"> 人生第一次面试，紧张到脑子空白，但也没那么可怕。 </p> <div class="flex flex-wrap gap-1.5 mt-3"> <span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#成长 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#面试 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#自白 </span> </div>  </a> </article> </div>  </div><div class="ink-reveal ink-reveal-delay-2" data-title="成长记录 #2：ai 不会替你成长" data-desc="用 ai 写代码半年的体感 — 它是工具，不是拐杖。" data-tags="成长,ai,自白"> <div class="card-tilt-wrapper reveal-target blur-reveal"> <article class="card card-tilt group relative overflow-hidden"> <a href="/blog/growth-002/" class="block p-5"> <div class="flex items-center gap-2 text-xs mb-2.5"> <span class="seal">成长记录</span> <time datetime="2026-05-26T00:00:00.000Z" class="font-mono text-[11px] text-text-secondary">2026年5月26日</time> <span class="text-text-secondary/40">·</span> <span class="text-text-secondary">2 分钟</span> </div> <h3 class="font-display font-bold text-[1.05rem] leading-snug mb-2 text-text group-hover:text-accent transition-colors duration-200"> 成长记录 #2：AI 不会替你成长 </h3> <p class="text-sm text-text-secondary line-clamp-2 leading-relaxed"> 用 AI 写代码半年的体感 — 它是工具，不是拐杖。 </p> <div class="flex flex-wrap gap-1.5 mt-3"> <span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#成长 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#AI </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#自白 </span> </div>  </a> </article> </div>  </div><div class="ink-reveal ink-reveal-delay-3" data-title="成长记录 #3：关于「半途而废」这件事" data-desc="放弃过很多东西，但这次我想聊聊为什么有些放弃不全是坏事。" data-tags="成长,坚持,自白"> <div class="card-tilt-wrapper reveal-target blur-reveal"> <article class="card card-tilt group relative overflow-hidden"> <a href="/blog/growth-003/" class="block p-5"> <div class="flex items-center gap-2 text-xs mb-2.5"> <span class="seal">成长记录</span> <time datetime="2026-05-26T00:00:00.000Z" class="font-mono text-[11px] text-text-secondary">2026年5月26日</time> <span class="text-text-secondary/40">·</span> <span class="text-text-secondary">3 分钟</span> </div> <h3 class="font-display font-bold text-[1.05rem] leading-snug mb-2 text-text group-hover:text-accent transition-colors duration-200"> 成长记录 #3：关于「半途而废」这件事 </h3> <p class="text-sm text-text-secondary line-clamp-2 leading-relaxed"> 放弃过很多东西，但这次我想聊聊为什么有些放弃不全是坏事。 </p> <div class="flex flex-wrap gap-1.5 mt-3"> <span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#成长 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#坚持 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#自白 </span> </div>  </a> </article> </div>  </div><div class="ink-reveal ink-reveal-delay-4" data-title="成长记录 #1：我为什么开始写博客" data-desc="一个大专生的自白 — 迷茫、后悔、和一点点不甘心。" data-tags="成长,自白,开始"> <div class="card-tilt-wrapper reveal-target blur-reveal"> <article class="card card-tilt group relative overflow-hidden"> <a href="/blog/growth-001/" class="block p-5"> <div class="flex items-center gap-2 text-xs mb-2.5"> <span class="seal">成长记录</span> <time datetime="2026-05-25T00:00:00.000Z" class="font-mono text-[11px] text-text-secondary">2026年5月25日</time> <span class="text-text-secondary/40">·</span> <span class="text-text-secondary">2 分钟</span> </div> <h3 class="font-display font-bold text-[1.05rem] leading-snug mb-2 text-text group-hover:text-accent transition-colors duration-200"> 成长记录 #1：我为什么开始写博客 </h3> <p class="text-sm text-text-secondary line-clamp-2 leading-relaxed"> 一个大专生的自白 — 迷茫、后悔、和一点点不甘心。 </p> <div class="flex flex-wrap gap-1.5 mt-3"> <span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#成长 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#自白 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#开始 </span> </div>  </a> </article> </div>  </div> </div> </div><div class="category-section mb-14" data-category="技术"> <div class="flex items-center gap-3 mb-6 ink-reveal" data-category-header="技术"> <span class="text-accent dark:text-dark-accent"><svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg></span> <h2 class="font-display text-xl font-bold text-text dark:text-dark-text">技术</h2> <span class="text-xs text-text-muted dark:text-dark-text-muted font-sans bg-surface-alt dark:bg-dark-surface-alt px-2.5 py-0.5 rounded-full"> 11 篇
+</span> </div> <div class="grid grid-cols-1 md:grid-cols-2 gap-8"> <div class="ink-reveal ink-reveal-delay-1" data-title="astro 博客搭建 #1：为什么选 astro" data-desc="对比 hexo、hugo、next.js，为什么我最终选了 astro 搭建个人博客。选型思路和踩坑记录。" data-tags="astro,博客,前端,教程"> <div class="card-tilt-wrapper reveal-target blur-reveal"> <article class="card card-tilt group relative overflow-hidden"> <a href="/blog/astro-blog-01/" class="block p-5"> <div class="flex items-center gap-2 text-xs mb-2.5"> <span class="seal">技术</span> <time datetime="2026-05-26T00:00:00.000Z" class="font-mono text-[11px] text-text-secondary">2026年5月26日</time> <span class="text-text-secondary/40">·</span> <span class="text-text-secondary">3 分钟</span> </div> <h3 class="font-display font-bold text-[1.05rem] leading-snug mb-2 text-text group-hover:text-accent transition-colors duration-200"> Astro 博客搭建 #1：为什么选 Astro </h3> <p class="text-sm text-text-secondary line-clamp-2 leading-relaxed"> 对比 Hexo、Hugo、Next.js，为什么我最终选了 Astro 搭建个人博客。选型思路和踩坑记录。 </p> <div class="flex flex-wrap gap-1.5 mt-3"> <span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#Astro </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#博客 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#前端 </span> </div>  </a> </article> </div>  </div><div class="ink-reveal ink-reveal-delay-2" data-title="astro 博客搭建 #2：项目结构与内容配置" data-desc="手把手搭建 astro 博客 — 目录结构、内容集合、markdown 配置、路由规则。" data-tags="astro,博客,前端,教程"> <div class="card-tilt-wrapper reveal-target blur-reveal"> <article class="card card-tilt group relative overflow-hidden"> <a href="/blog/astro-blog-02/" class="block p-5"> <div class="flex items-center gap-2 text-xs mb-2.5"> <span class="seal">技术</span> <time datetime="2026-05-26T00:00:00.000Z" class="font-mono text-[11px] text-text-secondary">2026年5月26日</time> <span class="text-text-secondary/40">·</span> <span class="text-text-secondary">3 分钟</span> </div> <h3 class="font-display font-bold text-[1.05rem] leading-snug mb-2 text-text group-hover:text-accent transition-colors duration-200"> Astro 博客搭建 #2：项目结构与内容配置 </h3> <p class="text-sm text-text-secondary line-clamp-2 leading-relaxed"> 手把手搭建 Astro 博客 — 目录结构、内容集合、Markdown 配置、路由规则。 </p> <div class="flex flex-wrap gap-1.5 mt-3"> <span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#Astro </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#博客 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#前端 </span> </div>  </a> </article> </div>  </div><div class="ink-reveal ink-reveal-delay-3" data-title="astro 博客搭建 #3：样式系统与组件设计" data-desc="用 tailwind css 打造个人博客的视觉风格 — 设计系统、主题切换、组件拆分实战。" data-tags="astro,css,前端,设计"> <div class="card-tilt-wrapper reveal-target blur-reveal"> <article class="card card-tilt group relative overflow-hidden"> <a href="/blog/astro-blog-03/" class="block p-5"> <div class="flex items-center gap-2 text-xs mb-2.5"> <span class="seal">技术</span> <time datetime="2026-05-26T00:00:00.000Z" class="font-mono text-[11px] text-text-secondary">2026年5月26日</time> <span class="text-text-secondary/40">·</span> <span class="text-text-secondary">2 分钟</span> </div> <h3 class="font-display font-bold text-[1.05rem] leading-snug mb-2 text-text group-hover:text-accent transition-colors duration-200"> Astro 博客搭建 #3：样式系统与组件设计 </h3> <p class="text-sm text-text-secondary line-clamp-2 leading-relaxed"> 用 Tailwind CSS 打造个人博客的视觉风格 — 设计系统、主题切换、组件拆分实战。 </p> <div class="flex flex-wrap gap-1.5 mt-3"> <span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#Astro </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#CSS </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#前端 </span> </div>  </a> </article> </div>  </div><div class="ink-reveal ink-reveal-delay-4" data-title="ai 辅助编程实战：工具选择与使用技巧" data-desc="2026 年 ai 编程工具横评与实战经验，从 copilot 到 claude code，找到最适合你的 ai 编程搭档。" data-tags="ai,工具,效率,编程语言"> <div class="card-tilt-wrapper reveal-target blur-reveal"> <article class="card card-tilt group relative overflow-hidden"> <a href="/blog/ai-coding-tools/" class="block p-5"> <div class="flex items-center gap-2 text-xs mb-2.5"> <span class="seal">技术</span> <time datetime="2026-05-23T00:00:00.000Z" class="font-mono text-[11px] text-text-secondary">2026年5月23日</time> <span class="text-text-secondary/40">·</span> <span class="text-text-secondary">3 分钟</span> </div> <h3 class="font-display font-bold text-[1.05rem] leading-snug mb-2 text-text group-hover:text-accent transition-colors duration-200"> AI 辅助编程实战：工具选择与使用技巧 </h3> <p class="text-sm text-text-secondary line-clamp-2 leading-relaxed"> 2026 年 AI 编程工具横评与实战经验，从 Copilot 到 Claude Code，找到最适合你的 AI 编程搭档。 </p> <div class="flex flex-wrap gap-1.5 mt-3"> <span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#AI </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#工具 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#效率 </span> </div>  </a> </article> </div>  </div><div class="ink-reveal ink-reveal-delay-1" data-title="astro 5 到 6：内容层、服务端岛屿与更多" data-desc="梳理 astro 5 到 6 的核心更新，包括 content layer、server islands、svg 组件等重要特性。" data-tags="astro,前端,框架,性能"> <div class="card-tilt-wrapper reveal-target blur-reveal"> <article class="card card-tilt group relative overflow-hidden"> <a href="/blog/astro-5-features/" class="block p-5"> <div class="flex items-center gap-2 text-xs mb-2.5"> <span class="seal">技术</span> <time datetime="2026-05-23T00:00:00.000Z" class="font-mono text-[11px] text-text-secondary">2026年5月23日</time> <span class="text-text-secondary/40">·</span> <span class="text-text-secondary">3 分钟</span> </div> <h3 class="font-display font-bold text-[1.05rem] leading-snug mb-2 text-text group-hover:text-accent transition-colors duration-200"> Astro 5 到 6：内容层、服务端岛屿与更多 </h3> <p class="text-sm text-text-secondary line-clamp-2 leading-relaxed"> 梳理 Astro 5 到 6 的核心更新，包括 Content Layer、Server Islands、SVG 组件等重要特性。 </p> <div class="flex flex-wrap gap-1.5 mt-3"> <span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#Astro </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#前端 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#框架 </span> </div>  </a> </article> </div>  </div><div class="ink-reveal ink-reveal-delay-2" data-title="调试的艺术：从新手到高手的进阶之路" data-desc="系统化的调试方法论，让你不再对着报错信息发呆。" data-tags="调试,效率,教程,编程语言"> <div class="card-tilt-wrapper reveal-target blur-reveal"> <article class="card card-tilt group relative overflow-hidden"> <a href="/blog/debugging-masterclass/" class="block p-5"> <div class="flex items-center gap-2 text-xs mb-2.5"> <span class="seal">技术</span> <time datetime="2026-05-23T00:00:00.000Z" class="font-mono text-[11px] text-text-secondary">2026年5月23日</time> <span class="text-text-secondary/40">·</span> <span class="text-text-secondary">3 分钟</span> </div> <h3 class="font-display font-bold text-[1.05rem] leading-snug mb-2 text-text group-hover:text-accent transition-colors duration-200"> 调试的艺术：从新手到高手的进阶之路 </h3> <p class="text-sm text-text-secondary line-clamp-2 leading-relaxed"> 系统化的调试方法论，让你不再对着报错信息发呆。 </p> <div class="flex flex-wrap gap-1.5 mt-3"> <span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#调试 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#效率 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#教程 </span> </div>  </a> </article> </div>  </div><div class="ink-reveal ink-reveal-delay-3" data-title="2025 前端设计趋势：开发者值得关注的方向" data-desc="从玻璃拟态到滚动驱动动画，梳理 2025 年最值得关注的前端设计趋势和 css 新特性。" data-tags="前端,css,设计,趋势"> <div class="card-tilt-wrapper reveal-target blur-reveal"> <article class="card card-tilt group relative overflow-hidden"> <a href="/blog/frontend-design-trends-2025/" class="block p-5"> <div class="flex items-center gap-2 text-xs mb-2.5"> <span class="seal">技术</span> <time datetime="2026-05-22T00:00:00.000Z" class="font-mono text-[11px] text-text-secondary">2026年5月22日</time> <span class="text-text-secondary/40">·</span> <span class="text-text-secondary">2 分钟</span> </div> <h3 class="font-display font-bold text-[1.05rem] leading-snug mb-2 text-text group-hover:text-accent transition-colors duration-200"> 2025 前端设计趋势：开发者值得关注的方向 </h3> <p class="text-sm text-text-secondary line-clamp-2 leading-relaxed"> 从玻璃拟态到滚动驱动动画，梳理 2025 年最值得关注的前端设计趋势和 CSS 新特性。 </p> <div class="flex flex-wrap gap-1.5 mt-3"> <span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#前端 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#CSS </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#设计 </span> </div>  </a> </article> </div>  </div><div class="ink-reveal ink-reveal-delay-4" data-title="2025 年，为什么你应该学 rust" data-desc="从所有权到 webassembly，聊聊 rust 的核心理念、应用场景和入门路径。" data-tags="rust,编程语言,系统编程,webassembly"> <div class="card-tilt-wrapper reveal-target blur-reveal"> <article class="card card-tilt group relative overflow-hidden"> <a href="/blog/rust-guide-2025/" class="block p-5"> <div class="flex items-center gap-2 text-xs mb-2.5"> <span class="seal">技术</span> <time datetime="2026-05-21T00:00:00.000Z" class="font-mono text-[11px] text-text-secondary">2026年5月21日</time> <span class="text-text-secondary/40">·</span> <span class="text-text-secondary">3 分钟</span> </div> <h3 class="font-display font-bold text-[1.05rem] leading-snug mb-2 text-text group-hover:text-accent transition-colors duration-200"> 2025 年，为什么你应该学 Rust </h3> <p class="text-sm text-text-secondary line-clamp-2 leading-relaxed"> 从所有权到 WebAssembly，聊聊 Rust 的核心理念、应用场景和入门路径。 </p> <div class="flex flex-wrap gap-1.5 mt-3"> <span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#Rust </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#编程语言 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#系统编程 </span> </div>  </a> </article> </div>  </div><div class="ink-reveal ink-reveal-delay-1" data-title="git 实用技巧：日常开发中的救命操作" data-desc="整理一些日常开发中最常用的 git 技巧，从撤销操作到分支管理，帮你少走弯路。" data-tags="git,工具,效率,教程"> <div class="card-tilt-wrapper reveal-target blur-reveal"> <article class="card card-tilt group relative overflow-hidden"> <a href="/blog/git-tips/" class="block p-5"> <div class="flex items-center gap-2 text-xs mb-2.5"> <span class="seal">技术</span> <time datetime="2026-05-20T00:00:00.000Z" class="font-mono text-[11px] text-text-secondary">2026年5月20日</time> <span class="text-text-secondary/40">·</span> <span class="text-text-secondary">3 分钟</span> </div> <h3 class="font-display font-bold text-[1.05rem] leading-snug mb-2 text-text group-hover:text-accent transition-colors duration-200"> Git 实用技巧：日常开发中的救命操作 </h3> <p class="text-sm text-text-secondary line-clamp-2 leading-relaxed"> 整理一些日常开发中最常用的 Git 技巧，从撤销操作到分支管理，帮你少走弯路。 </p> <div class="flex flex-wrap gap-1.5 mt-3"> <span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#Git </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#工具 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#效率 </span> </div>  </a> </article> </div>  </div><div class="ink-reveal ink-reveal-delay-2" data-title="markdown 写作指南" data-desc="一篇关于如何使用 markdown 进行高效写作的实用指南。" data-tags="markdown,写作,教程"> <div class="card-tilt-wrapper reveal-target blur-reveal"> <article class="card card-tilt group relative overflow-hidden"> <a href="/blog/markdown-guide/" class="block p-5"> <div class="flex items-center gap-2 text-xs mb-2.5"> <span class="seal">技术</span> <time datetime="2026-05-20T00:00:00.000Z" class="font-mono text-[11px] text-text-secondary">2026年5月20日</time> <span class="text-text-secondary/40">·</span> <span class="text-text-secondary">1 分钟</span> </div> <h3 class="font-display font-bold text-[1.05rem] leading-snug mb-2 text-text group-hover:text-accent transition-colors duration-200"> Markdown 写作指南 </h3> <p class="text-sm text-text-secondary line-clamp-2 leading-relaxed"> 一篇关于如何使用 Markdown 进行高效写作的实用指南。 </p> <div class="flex flex-wrap gap-1.5 mt-3"> <span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#Markdown </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#写作 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#教程 </span> </div>  </a> </article> </div>  </div><div class="ink-reveal ink-reveal-delay-3" data-title="web 性能优化实践" data-desc="分享一些实用的 web 性能优化技巧，帮助你的网站加载更快。" data-tags="性能,web,前端,优化"> <div class="card-tilt-wrapper reveal-target blur-reveal"> <article class="card card-tilt group relative overflow-hidden"> <a href="/blog/web-performance/" class="block p-5"> <div class="flex items-center gap-2 text-xs mb-2.5"> <span class="seal">技术</span> <time datetime="2026-05-18T00:00:00.000Z" class="font-mono text-[11px] text-text-secondary">2026年5月18日</time> <span class="text-text-secondary/40">·</span> <span class="text-text-secondary">1 分钟</span> </div> <h3 class="font-display font-bold text-[1.05rem] leading-snug mb-2 text-text group-hover:text-accent transition-colors duration-200"> Web 性能优化实践 </h3> <p class="text-sm text-text-secondary line-clamp-2 leading-relaxed"> 分享一些实用的 Web 性能优化技巧，帮助你的网站加载更快。 </p> <div class="flex flex-wrap gap-1.5 mt-3"> <span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#性能 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#Web </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#前端 </span> </div>  </a> </article> </div>  </div> </div> </div><div class="category-section mb-14" data-category="技术日报"> <div class="flex items-center gap-3 mb-6 ink-reveal" data-category-header="技术日报"> <span class="text-accent dark:text-dark-accent"><svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg></span> <h2 class="font-display text-xl font-bold text-text dark:text-dark-text">技术日报</h2> <span class="text-xs text-text-muted dark:text-dark-text-muted font-sans bg-surface-alt dark:bg-dark-surface-alt px-2.5 py-0.5 rounded-full"> 29 篇
+</span> </div> <div class="grid grid-cols-1 md:grid-cols-2 gap-8"> <div class="ink-reveal ink-reveal-delay-1" data-title="github 每日精选 2026-06-27" data-desc="今天 github 上最火的开源项目，从 ai 工具到系统编程，每日精选不容错过。" data-tags="github,开源,每日精选,技术"> <div class="card-tilt-wrapper reveal-target blur-reveal"> <article class="card card-tilt group relative overflow-hidden"> <a href="/blog/daily-2026-06-27/" class="block p-5"> <div class="flex items-center gap-2 text-xs mb-2.5"> <span class="seal">技术日报</span> <time datetime="2026-06-27T00:00:00.000Z" class="font-mono text-[11px] text-text-secondary">2026年6月27日</time> <span class="text-text-secondary/40">·</span> <span class="text-text-secondary">2 分钟</span> </div> <h3 class="font-display font-bold text-[1.05rem] leading-snug mb-2 text-text group-hover:text-accent transition-colors duration-200"> GitHub 每日精选 2026-06-27 </h3> <p class="text-sm text-text-secondary line-clamp-2 leading-relaxed"> 今天 GitHub 上最火的开源项目，从 AI 工具到系统编程，每日精选不容错过。 </p> <div class="flex flex-wrap gap-1.5 mt-3"> <span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#GitHub </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#开源 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#每日精选 </span> </div>  </a> </article> </div>  </div><div class="ink-reveal ink-reveal-delay-2" data-title="github 每日精选 2026-06-26" data-desc="今天 github 上最火的开源项目，从 ai 工具到系统编程，每日精选不容错过。" data-tags="github,开源,每日精选,技术"> <div class="card-tilt-wrapper reveal-target blur-reveal"> <article class="card card-tilt group relative overflow-hidden"> <a href="/blog/daily-2026-06-26/" class="block p-5"> <div class="flex items-center gap-2 text-xs mb-2.5"> <span class="seal">技术日报</span> <time datetime="2026-06-26T00:00:00.000Z" class="font-mono text-[11px] text-text-secondary">2026年6月26日</time> <span class="text-text-secondary/40">·</span> <span class="text-text-secondary">2 分钟</span> </div> <h3 class="font-display font-bold text-[1.05rem] leading-snug mb-2 text-text group-hover:text-accent transition-colors duration-200"> GitHub 每日精选 2026-06-26 </h3> <p class="text-sm text-text-secondary line-clamp-2 leading-relaxed"> 今天 GitHub 上最火的开源项目，从 AI 工具到系统编程，每日精选不容错过。 </p> <div class="flex flex-wrap gap-1.5 mt-3"> <span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#GitHub </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#开源 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#每日精选 </span> </div>  </a> </article> </div>  </div><div class="ink-reveal ink-reveal-delay-3" data-title="github 每日精选 2026-06-25" data-desc="今天 github 上最火的开源项目，从 ai 工具到系统编程，每日精选不容错过。" data-tags="github,开源,每日精选,技术"> <div class="card-tilt-wrapper reveal-target blur-reveal"> <article class="card card-tilt group relative overflow-hidden"> <a href="/blog/daily-2026-06-25/" class="block p-5"> <div class="flex items-center gap-2 text-xs mb-2.5"> <span class="seal">技术日报</span> <time datetime="2026-06-25T00:00:00.000Z" class="font-mono text-[11px] text-text-secondary">2026年6月25日</time> <span class="text-text-secondary/40">·</span> <span class="text-text-secondary">2 分钟</span> </div> <h3 class="font-display font-bold text-[1.05rem] leading-snug mb-2 text-text group-hover:text-accent transition-colors duration-200"> GitHub 每日精选 2026-06-25 </h3> <p class="text-sm text-text-secondary line-clamp-2 leading-relaxed"> 今天 GitHub 上最火的开源项目，从 AI 工具到系统编程，每日精选不容错过。 </p> <div class="flex flex-wrap gap-1.5 mt-3"> <span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#GitHub </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#开源 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#每日精选 </span> </div>  </a> </article> </div>  </div><div class="ink-reveal ink-reveal-delay-4" data-title="github 每日精选 2026-06-24" data-desc="今天 github 上最火的开源项目，从 ai 工具到系统编程，每日精选不容错过。" data-tags="github,开源,每日精选,技术"> <div class="card-tilt-wrapper reveal-target blur-reveal"> <article class="card card-tilt group relative overflow-hidden"> <a href="/blog/daily-2026-06-24/" class="block p-5"> <div class="flex items-center gap-2 text-xs mb-2.5"> <span class="seal">技术日报</span> <time datetime="2026-06-24T00:00:00.000Z" class="font-mono text-[11px] text-text-secondary">2026年6月24日</time> <span class="text-text-secondary/40">·</span> <span class="text-text-secondary">2 分钟</span> </div> <h3 class="font-display font-bold text-[1.05rem] leading-snug mb-2 text-text group-hover:text-accent transition-colors duration-200"> GitHub 每日精选 2026-06-24 </h3> <p class="text-sm text-text-secondary line-clamp-2 leading-relaxed"> 今天 GitHub 上最火的开源项目，从 AI 工具到系统编程，每日精选不容错过。 </p> <div class="flex flex-wrap gap-1.5 mt-3"> <span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#GitHub </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#开源 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#每日精选 </span> </div>  </a> </article> </div>  </div><div class="ink-reveal ink-reveal-delay-1" data-title="github 每日精选 2026-06-23" data-desc="今天 github 上最火的开源项目，从 ai 工具到系统编程，每日精选不容错过。" data-tags="github,开源,每日精选,技术"> <div class="card-tilt-wrapper reveal-target blur-reveal"> <article class="card card-tilt group relative overflow-hidden"> <a href="/blog/daily-2026-06-23/" class="block p-5"> <div class="flex items-center gap-2 text-xs mb-2.5"> <span class="seal">技术日报</span> <time datetime="2026-06-23T00:00:00.000Z" class="font-mono text-[11px] text-text-secondary">2026年6月23日</time> <span class="text-text-secondary/40">·</span> <span class="text-text-secondary">2 分钟</span> </div> <h3 class="font-display font-bold text-[1.05rem] leading-snug mb-2 text-text group-hover:text-accent transition-colors duration-200"> GitHub 每日精选 2026-06-23 </h3> <p class="text-sm text-text-secondary line-clamp-2 leading-relaxed"> 今天 GitHub 上最火的开源项目，从 AI 工具到系统编程，每日精选不容错过。 </p> <div class="flex flex-wrap gap-1.5 mt-3"> <span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#GitHub </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#开源 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#每日精选 </span> </div>  </a> </article> </div>  </div><div class="ink-reveal ink-reveal-delay-2" data-title="github 每日精选 2026-06-22" data-desc="今天 github 上最火的开源项目，从 ai 工具到系统编程，每日精选不容错过。" data-tags="github,开源,每日精选,技术"> <div class="card-tilt-wrapper reveal-target blur-reveal"> <article class="card card-tilt group relative overflow-hidden"> <a href="/blog/daily-2026-06-22/" class="block p-5"> <div class="flex items-center gap-2 text-xs mb-2.5"> <span class="seal">技术日报</span> <time datetime="2026-06-22T00:00:00.000Z" class="font-mono text-[11px] text-text-secondary">2026年6月22日</time> <span class="text-text-secondary/40">·</span> <span class="text-text-secondary">1 分钟</span> </div> <h3 class="font-display font-bold text-[1.05rem] leading-snug mb-2 text-text group-hover:text-accent transition-colors duration-200"> GitHub 每日精选 2026-06-22 </h3> <p class="text-sm text-text-secondary line-clamp-2 leading-relaxed"> 今天 GitHub 上最火的开源项目，从 AI 工具到系统编程，每日精选不容错过。 </p> <div class="flex flex-wrap gap-1.5 mt-3"> <span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#GitHub </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#开源 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#每日精选 </span> </div>  </a> </article> </div>  </div><div class="ink-reveal ink-reveal-delay-3" data-title="github 每日精选 2026-06-21" data-desc="今天 github 上最火的开源项目，从 ai 工具到系统编程，每日精选不容错过。" data-tags="github,开源,每日精选,技术"> <div class="card-tilt-wrapper reveal-target blur-reveal"> <article class="card card-tilt group relative overflow-hidden"> <a href="/blog/daily-2026-06-21/" class="block p-5"> <div class="flex items-center gap-2 text-xs mb-2.5"> <span class="seal">技术日报</span> <time datetime="2026-06-21T00:00:00.000Z" class="font-mono text-[11px] text-text-secondary">2026年6月21日</time> <span class="text-text-secondary/40">·</span> <span class="text-text-secondary">2 分钟</span> </div> <h3 class="font-display font-bold text-[1.05rem] leading-snug mb-2 text-text group-hover:text-accent transition-colors duration-200"> GitHub 每日精选 2026-06-21 </h3> <p class="text-sm text-text-secondary line-clamp-2 leading-relaxed"> 今天 GitHub 上最火的开源项目，从 AI 工具到系统编程，每日精选不容错过。 </p> <div class="flex flex-wrap gap-1.5 mt-3"> <span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#GitHub </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#开源 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#每日精选 </span> </div>  </a> </article> </div>  </div><div class="ink-reveal ink-reveal-delay-4" data-title="github 每日精选 2026-06-20" data-desc="今天 github 上最火的开源项目，从 ai 工具到系统编程，每日精选不容错过。" data-tags="github,开源,每日精选,技术"> <div class="card-tilt-wrapper reveal-target blur-reveal"> <article class="card card-tilt group relative overflow-hidden"> <a href="/blog/daily-2026-06-20/" class="block p-5"> <div class="flex items-center gap-2 text-xs mb-2.5"> <span class="seal">技术日报</span> <time datetime="2026-06-20T00:00:00.000Z" class="font-mono text-[11px] text-text-secondary">2026年6月20日</time> <span class="text-text-secondary/40">·</span> <span class="text-text-secondary">3 分钟</span> </div> <h3 class="font-display font-bold text-[1.05rem] leading-snug mb-2 text-text group-hover:text-accent transition-colors duration-200"> GitHub 每日精选 2026-06-20 </h3> <p class="text-sm text-text-secondary line-clamp-2 leading-relaxed"> 今天 GitHub 上最火的开源项目，从 AI 工具到系统编程，每日精选不容错过。 </p> <div class="flex flex-wrap gap-1.5 mt-3"> <span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#GitHub </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#开源 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#每日精选 </span> </div>  </a> </article> </div>  </div><div class="ink-reveal ink-reveal-delay-1" data-title="github 每日精选 2026-06-19" data-desc="今天 github 上最火的开源项目，从 ai 工具到系统编程，每日精选不容错过。" data-tags="github,开源,每日精选,技术"> <div class="card-tilt-wrapper reveal-target blur-reveal"> <article class="card card-tilt group relative overflow-hidden"> <a href="/blog/daily-2026-06-19/" class="block p-5"> <div class="flex items-center gap-2 text-xs mb-2.5"> <span class="seal">技术日报</span> <time datetime="2026-06-19T00:00:00.000Z" class="font-mono text-[11px] text-text-secondary">2026年6月19日</time> <span class="text-text-secondary/40">·</span> <span class="text-text-secondary">2 分钟</span> </div> <h3 class="font-display font-bold text-[1.05rem] leading-snug mb-2 text-text group-hover:text-accent transition-colors duration-200"> GitHub 每日精选 2026-06-19 </h3> <p class="text-sm text-text-secondary line-clamp-2 leading-relaxed"> 今天 GitHub 上最火的开源项目，从 AI 工具到系统编程，每日精选不容错过。 </p> <div class="flex flex-wrap gap-1.5 mt-3"> <span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#GitHub </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#开源 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#每日精选 </span> </div>  </a> </article> </div>  </div><div class="ink-reveal ink-reveal-delay-2" data-title="github 每日精选 2026-06-18" data-desc="今天 github 上最火的开源项目，从 ai 工具到系统编程，每日精选不容错过。" data-tags="github,开源,每日精选,技术"> <div class="card-tilt-wrapper reveal-target blur-reveal"> <article class="card card-tilt group relative overflow-hidden"> <a href="/blog/daily-2026-06-18/" class="block p-5"> <div class="flex items-center gap-2 text-xs mb-2.5"> <span class="seal">技术日报</span> <time datetime="2026-06-18T00:00:00.000Z" class="font-mono text-[11px] text-text-secondary">2026年6月18日</time> <span class="text-text-secondary/40">·</span> <span class="text-text-secondary">2 分钟</span> </div> <h3 class="font-display font-bold text-[1.05rem] leading-snug mb-2 text-text group-hover:text-accent transition-colors duration-200"> GitHub 每日精选 2026-06-18 </h3> <p class="text-sm text-text-secondary line-clamp-2 leading-relaxed"> 今天 GitHub 上最火的开源项目，从 AI 工具到系统编程，每日精选不容错过。 </p> <div class="flex flex-wrap gap-1.5 mt-3"> <span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#GitHub </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#开源 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#每日精选 </span> </div>  </a> </article> </div>  </div><div class="ink-reveal ink-reveal-delay-3" data-title="github 每日精选 2026-06-17" data-desc="今天 github 上最火的开源项目，从 ai 工具到系统编程，每日精选不容错过。" data-tags="github,开源,每日精选,技术"> <div class="card-tilt-wrapper reveal-target blur-reveal"> <article class="card card-tilt group relative overflow-hidden"> <a href="/blog/daily-2026-06-17/" class="block p-5"> <div class="flex items-center gap-2 text-xs mb-2.5"> <span class="seal">技术日报</span> <time datetime="2026-06-17T00:00:00.000Z" class="font-mono text-[11px] text-text-secondary">2026年6月17日</time> <span class="text-text-secondary/40">·</span> <span class="text-text-secondary">2 分钟</span> </div> <h3 class="font-display font-bold text-[1.05rem] leading-snug mb-2 text-text group-hover:text-accent transition-colors duration-200"> GitHub 每日精选 2026-06-17 </h3> <p class="text-sm text-text-secondary line-clamp-2 leading-relaxed"> 今天 GitHub 上最火的开源项目，从 AI 工具到系统编程，每日精选不容错过。 </p> <div class="flex flex-wrap gap-1.5 mt-3"> <span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#GitHub </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#开源 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#每日精选 </span> </div>  </a> </article> </div>  </div><div class="ink-reveal ink-reveal-delay-4" data-title="github 每日精选 2026-06-16" data-desc="今天 github 上最火的开源项目，从 ai 工具到系统编程，每日精选不容错过。" data-tags="github,开源,每日精选,技术"> <div class="card-tilt-wrapper reveal-target blur-reveal"> <article class="card card-tilt group relative overflow-hidden"> <a href="/blog/daily-2026-06-16/" class="block p-5"> <div class="flex items-center gap-2 text-xs mb-2.5"> <span class="seal">技术日报</span> <time datetime="2026-06-16T00:00:00.000Z" class="font-mono text-[11px] text-text-secondary">2026年6月16日</time> <span class="text-text-secondary/40">·</span> <span class="text-text-secondary">2 分钟</span> </div> <h3 class="font-display font-bold text-[1.05rem] leading-snug mb-2 text-text group-hover:text-accent transition-colors duration-200"> GitHub 每日精选 2026-06-16 </h3> <p class="text-sm text-text-secondary line-clamp-2 leading-relaxed"> 今天 GitHub 上最火的开源项目，从 AI 工具到系统编程，每日精选不容错过。 </p> <div class="flex flex-wrap gap-1.5 mt-3"> <span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#GitHub </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#开源 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#每日精选 </span> </div>  </a> </article> </div>  </div><div class="ink-reveal ink-reveal-delay-1" data-title="github 每日精选 2026-06-15" data-desc="今天 github 上最火的开源项目，从 ai 工具到系统编程，每日精选不容错过。" data-tags="github,开源,每日精选,技术"> <div class="card-tilt-wrapper reveal-target blur-reveal"> <article class="card card-tilt group relative overflow-hidden"> <a href="/blog/daily-2026-06-15/" class="block p-5"> <div class="flex items-center gap-2 text-xs mb-2.5"> <span class="seal">技术日报</span> <time datetime="2026-06-15T00:00:00.000Z" class="font-mono text-[11px] text-text-secondary">2026年6月15日</time> <span class="text-text-secondary/40">·</span> <span class="text-text-secondary">1 分钟</span> </div> <h3 class="font-display font-bold text-[1.05rem] leading-snug mb-2 text-text group-hover:text-accent transition-colors duration-200"> GitHub 每日精选 2026-06-15 </h3> <p class="text-sm text-text-secondary line-clamp-2 leading-relaxed"> 今天 GitHub 上最火的开源项目，从 AI 工具到系统编程，每日精选不容错过。 </p> <div class="flex flex-wrap gap-1.5 mt-3"> <span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#GitHub </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#开源 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#每日精选 </span> </div>  </a> </article> </div>  </div><div class="ink-reveal ink-reveal-delay-2" data-title="github 每日精选 2026-06-14" data-desc="今天 github 上最火的开源项目，从 ai 工具到系统编程，每日精选不容错过。" data-tags="github,开源,每日精选,技术"> <div class="card-tilt-wrapper reveal-target blur-reveal"> <article class="card card-tilt group relative overflow-hidden"> <a href="/blog/daily-2026-06-14/" class="block p-5"> <div class="flex items-center gap-2 text-xs mb-2.5"> <span class="seal">技术日报</span> <time datetime="2026-06-14T00:00:00.000Z" class="font-mono text-[11px] text-text-secondary">2026年6月14日</time> <span class="text-text-secondary/40">·</span> <span class="text-text-secondary">2 分钟</span> </div> <h3 class="font-display font-bold text-[1.05rem] leading-snug mb-2 text-text group-hover:text-accent transition-colors duration-200"> GitHub 每日精选 2026-06-14 </h3> <p class="text-sm text-text-secondary line-clamp-2 leading-relaxed"> 今天 GitHub 上最火的开源项目，从 AI 工具到系统编程，每日精选不容错过。 </p> <div class="flex flex-wrap gap-1.5 mt-3"> <span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#GitHub </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#开源 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#每日精选 </span> </div>  </a> </article> </div>  </div><div class="ink-reveal ink-reveal-delay-3" data-title="github 每日精选 2026-06-13" data-desc="今天 github 上最火的开源项目，从 ai 工具到系统编程，每日精选不容错过。" data-tags="github,开源,每日精选,技术"> <div class="card-tilt-wrapper reveal-target blur-reveal"> <article class="card card-tilt group relative overflow-hidden"> <a href="/blog/daily-2026-06-13/" class="block p-5"> <div class="flex items-center gap-2 text-xs mb-2.5"> <span class="seal">技术日报</span> <time datetime="2026-06-13T00:00:00.000Z" class="font-mono text-[11px] text-text-secondary">2026年6月13日</time> <span class="text-text-secondary/40">·</span> <span class="text-text-secondary">1 分钟</span> </div> <h3 class="font-display font-bold text-[1.05rem] leading-snug mb-2 text-text group-hover:text-accent transition-colors duration-200"> GitHub 每日精选 2026-06-13 </h3> <p class="text-sm text-text-secondary line-clamp-2 leading-relaxed"> 今天 GitHub 上最火的开源项目，从 AI 工具到系统编程，每日精选不容错过。 </p> <div class="flex flex-wrap gap-1.5 mt-3"> <span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#GitHub </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#开源 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#每日精选 </span> </div>  </a> </article> </div>  </div><div class="ink-reveal ink-reveal-delay-4" data-title="github 每日精选 2026-06-12" data-desc="今天 github 上最火的开源项目，从 ai 工具到系统编程，每日精选不容错过。" data-tags="github,开源,每日精选,技术"> <div class="card-tilt-wrapper reveal-target blur-reveal"> <article class="card card-tilt group relative overflow-hidden"> <a href="/blog/daily-2026-06-12/" class="block p-5"> <div class="flex items-center gap-2 text-xs mb-2.5"> <span class="seal">技术日报</span> <time datetime="2026-06-12T00:00:00.000Z" class="font-mono text-[11px] text-text-secondary">2026年6月12日</time> <span class="text-text-secondary/40">·</span> <span class="text-text-secondary">1 分钟</span> </div> <h3 class="font-display font-bold text-[1.05rem] leading-snug mb-2 text-text group-hover:text-accent transition-colors duration-200"> GitHub 每日精选 2026-06-12 </h3> <p class="text-sm text-text-secondary line-clamp-2 leading-relaxed"> 今天 GitHub 上最火的开源项目，从 AI 工具到系统编程，每日精选不容错过。 </p> <div class="flex flex-wrap gap-1.5 mt-3"> <span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#GitHub </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#开源 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#每日精选 </span> </div>  </a> </article> </div>  </div><div class="ink-reveal ink-reveal-delay-1" data-title="github 每日精选 2026-06-11" data-desc="今天 github 上最火的开源项目，从 ai 工具到系统编程，每日精选不容错过。" data-tags="github,开源,每日精选,技术"> <div class="card-tilt-wrapper reveal-target blur-reveal"> <article class="card card-tilt group relative overflow-hidden"> <a href="/blog/daily-2026-06-11/" class="block p-5"> <div class="flex items-center gap-2 text-xs mb-2.5"> <span class="seal">技术日报</span> <time datetime="2026-06-11T00:00:00.000Z" class="font-mono text-[11px] text-text-secondary">2026年6月11日</time> <span class="text-text-secondary/40">·</span> <span class="text-text-secondary">2 分钟</span> </div> <h3 class="font-display font-bold text-[1.05rem] leading-snug mb-2 text-text group-hover:text-accent transition-colors duration-200"> GitHub 每日精选 2026-06-11 </h3> <p class="text-sm text-text-secondary line-clamp-2 leading-relaxed"> 今天 GitHub 上最火的开源项目，从 AI 工具到系统编程，每日精选不容错过。 </p> <div class="flex flex-wrap gap-1.5 mt-3"> <span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#GitHub </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#开源 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#每日精选 </span> </div>  </a> </article> </div>  </div><div class="ink-reveal ink-reveal-delay-2" data-title="github 每日精选 2026-06-09" data-desc="今天 github 上最火的开源项目，从 ai 工具到系统编程，每日精选不容错过。" data-tags="github,开源,每日精选,技术"> <div class="card-tilt-wrapper reveal-target blur-reveal"> <article class="card card-tilt group relative overflow-hidden"> <a href="/blog/daily-2026-06-09/" class="block p-5"> <div class="flex items-center gap-2 text-xs mb-2.5"> <span class="seal">技术日报</span> <time datetime="2026-06-09T00:00:00.000Z" class="font-mono text-[11px] text-text-secondary">2026年6月9日</time> <span class="text-text-secondary/40">·</span> <span class="text-text-secondary">2 分钟</span> </div> <h3 class="font-display font-bold text-[1.05rem] leading-snug mb-2 text-text group-hover:text-accent transition-colors duration-200"> GitHub 每日精选 2026-06-09 </h3> <p class="text-sm text-text-secondary line-clamp-2 leading-relaxed"> 今天 GitHub 上最火的开源项目，从 AI 工具到系统编程，每日精选不容错过。 </p> <div class="flex flex-wrap gap-1.5 mt-3"> <span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#GitHub </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#开源 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#每日精选 </span> </div>  </a> </article> </div>  </div><div class="ink-reveal ink-reveal-delay-3" data-title="github 每日精选 2026-06-08" data-desc="今天 github 上最火的开源项目，从 ai 工具到系统编程，每日精选不容错过。" data-tags="github,开源,每日精选,技术"> <div class="card-tilt-wrapper reveal-target blur-reveal"> <article class="card card-tilt group relative overflow-hidden"> <a href="/blog/daily-2026-06-08/" class="block p-5"> <div class="flex items-center gap-2 text-xs mb-2.5"> <span class="seal">技术日报</span> <time datetime="2026-06-08T00:00:00.000Z" class="font-mono text-[11px] text-text-secondary">2026年6月8日</time> <span class="text-text-secondary/40">·</span> <span class="text-text-secondary">2 分钟</span> </div> <h3 class="font-display font-bold text-[1.05rem] leading-snug mb-2 text-text group-hover:text-accent transition-colors duration-200"> GitHub 每日精选 2026-06-08 </h3> <p class="text-sm text-text-secondary line-clamp-2 leading-relaxed"> 今天 GitHub 上最火的开源项目，从 AI 工具到系统编程，每日精选不容错过。 </p> <div class="flex flex-wrap gap-1.5 mt-3"> <span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#GitHub </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#开源 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#每日精选 </span> </div>  </a> </article> </div>  </div><div class="ink-reveal ink-reveal-delay-4" data-title="github 每日精选 2026-06-07" data-desc="今天 github 上最火的开源项目，从 ai 工具到系统编程，每日精选不容错过。" data-tags="github,开源,每日精选,技术"> <div class="card-tilt-wrapper reveal-target blur-reveal"> <article class="card card-tilt group relative overflow-hidden"> <a href="/blog/daily-2026-06-07/" class="block p-5"> <div class="flex items-center gap-2 text-xs mb-2.5"> <span class="seal">技术日报</span> <time datetime="2026-06-07T00:00:00.000Z" class="font-mono text-[11px] text-text-secondary">2026年6月7日</time> <span class="text-text-secondary/40">·</span> <span class="text-text-secondary">1 分钟</span> </div> <h3 class="font-display font-bold text-[1.05rem] leading-snug mb-2 text-text group-hover:text-accent transition-colors duration-200"> GitHub 每日精选 2026-06-07 </h3> <p class="text-sm text-text-secondary line-clamp-2 leading-relaxed"> 今天 GitHub 上最火的开源项目，从 AI 工具到系统编程，每日精选不容错过。 </p> <div class="flex flex-wrap gap-1.5 mt-3"> <span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#GitHub </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#开源 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#每日精选 </span> </div>  </a> </article> </div>  </div><div class="ink-reveal ink-reveal-delay-1" data-title="github 每日精选 2026-06-06" data-desc="今天 github 上最火的开源项目，从 ai 工具到系统编程，每日精选不容错过。" data-tags="github,开源,每日精选,技术"> <div class="card-tilt-wrapper reveal-target blur-reveal"> <article class="card card-tilt group relative overflow-hidden"> <a href="/blog/daily-2026-06-06/" class="block p-5"> <div class="flex items-center gap-2 text-xs mb-2.5"> <span class="seal">技术日报</span> <time datetime="2026-06-06T00:00:00.000Z" class="font-mono text-[11px] text-text-secondary">2026年6月6日</time> <span class="text-text-secondary/40">·</span> <span class="text-text-secondary">2 分钟</span> </div> <h3 class="font-display font-bold text-[1.05rem] leading-snug mb-2 text-text group-hover:text-accent transition-colors duration-200"> GitHub 每日精选 2026-06-06 </h3> <p class="text-sm text-text-secondary line-clamp-2 leading-relaxed"> 今天 GitHub 上最火的开源项目，从 AI 工具到系统编程，每日精选不容错过。 </p> <div class="flex flex-wrap gap-1.5 mt-3"> <span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#GitHub </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#开源 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#每日精选 </span> </div>  </a> </article> </div>  </div><div class="ink-reveal ink-reveal-delay-2" data-title="github 每日精选 2026-06-05" data-desc="今天 github 上最火的开源项目，从 ai 工具到系统编程，每日精选不容错过。" data-tags="github,开源,每日精选,技术"> <div class="card-tilt-wrapper reveal-target blur-reveal"> <article class="card card-tilt group relative overflow-hidden"> <a href="/blog/daily-2026-06-05/" class="block p-5"> <div class="flex items-center gap-2 text-xs mb-2.5"> <span class="seal">技术日报</span> <time datetime="2026-06-05T00:00:00.000Z" class="font-mono text-[11px] text-text-secondary">2026年6月5日</time> <span class="text-text-secondary/40">·</span> <span class="text-text-secondary">1 分钟</span> </div> <h3 class="font-display font-bold text-[1.05rem] leading-snug mb-2 text-text group-hover:text-accent transition-colors duration-200"> GitHub 每日精选 2026-06-05 </h3> <p class="text-sm text-text-secondary line-clamp-2 leading-relaxed"> 今天 GitHub 上最火的开源项目，从 AI 工具到系统编程，每日精选不容错过。 </p> <div class="flex flex-wrap gap-1.5 mt-3"> <span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#GitHub </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#开源 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#每日精选 </span> </div>  </a> </article> </div>  </div><div class="ink-reveal ink-reveal-delay-3" data-title="github 每日精选 2026-06-04" data-desc="今天 github 上最火的开源项目，从 ai 工具到系统编程，每日精选不容错过。" data-tags="github,开源,每日精选,技术"> <div class="card-tilt-wrapper reveal-target blur-reveal"> <article class="card card-tilt group relative overflow-hidden"> <a href="/blog/daily-2026-06-04/" class="block p-5"> <div class="flex items-center gap-2 text-xs mb-2.5"> <span class="seal">技术日报</span> <time datetime="2026-06-04T00:00:00.000Z" class="font-mono text-[11px] text-text-secondary">2026年6月4日</time> <span class="text-text-secondary/40">·</span> <span class="text-text-secondary">1 分钟</span> </div> <h3 class="font-display font-bold text-[1.05rem] leading-snug mb-2 text-text group-hover:text-accent transition-colors duration-200"> GitHub 每日精选 2026-06-04 </h3> <p class="text-sm text-text-secondary line-clamp-2 leading-relaxed"> 今天 GitHub 上最火的开源项目，从 AI 工具到系统编程，每日精选不容错过。 </p> <div class="flex flex-wrap gap-1.5 mt-3"> <span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#GitHub </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#开源 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#每日精选 </span> </div>  </a> </article> </div>  </div><div class="ink-reveal ink-reveal-delay-4" data-title="github 每日精选 2026-06-03" data-desc="今天 github 上最火的开源项目，从 ai 工具到系统编程，每日精选不容错过。" data-tags="github,开源,每日精选,技术"> <div class="card-tilt-wrapper reveal-target blur-reveal"> <article class="card card-tilt group relative overflow-hidden"> <a href="/blog/daily-2026-06-03/" class="block p-5"> <div class="flex items-center gap-2 text-xs mb-2.5"> <span class="seal">技术日报</span> <time datetime="2026-06-03T00:00:00.000Z" class="font-mono text-[11px] text-text-secondary">2026年6月3日</time> <span class="text-text-secondary/40">·</span> <span class="text-text-secondary">2 分钟</span> </div> <h3 class="font-display font-bold text-[1.05rem] leading-snug mb-2 text-text group-hover:text-accent transition-colors duration-200"> GitHub 每日精选 2026-06-03 </h3> <p class="text-sm text-text-secondary line-clamp-2 leading-relaxed"> 今天 GitHub 上最火的开源项目，从 AI 工具到系统编程，每日精选不容错过。 </p> <div class="flex flex-wrap gap-1.5 mt-3"> <span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#GitHub </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#开源 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#每日精选 </span> </div>  </a> </article> </div>  </div><div class="ink-reveal ink-reveal-delay-1" data-title="github 每日精选 2026-06-02" data-desc="今天 github 上最火的开源项目，从 ai 工具到系统编程，每日精选不容错过。" data-tags="github,开源,每日精选,技术"> <div class="card-tilt-wrapper reveal-target blur-reveal"> <article class="card card-tilt group relative overflow-hidden"> <a href="/blog/daily-2026-06-02/" class="block p-5"> <div class="flex items-center gap-2 text-xs mb-2.5"> <span class="seal">技术日报</span> <time datetime="2026-06-02T00:00:00.000Z" class="font-mono text-[11px] text-text-secondary">2026年6月2日</time> <span class="text-text-secondary/40">·</span> <span class="text-text-secondary">1 分钟</span> </div> <h3 class="font-display font-bold text-[1.05rem] leading-snug mb-2 text-text group-hover:text-accent transition-colors duration-200"> GitHub 每日精选 2026-06-02 </h3> <p class="text-sm text-text-secondary line-clamp-2 leading-relaxed"> 今天 GitHub 上最火的开源项目，从 AI 工具到系统编程，每日精选不容错过。 </p> <div class="flex flex-wrap gap-1.5 mt-3"> <span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#GitHub </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#开源 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#每日精选 </span> </div>  </a> </article> </div>  </div><div class="ink-reveal ink-reveal-delay-2" data-title="github 每日精选 2026-06-01" data-desc="今天 github 上最火的开源项目，从 ai 工具到系统编程，每日精选不容错过。" data-tags="github,开源,每日精选,技术"> <div class="card-tilt-wrapper reveal-target blur-reveal"> <article class="card card-tilt group relative overflow-hidden"> <a href="/blog/daily-2026-06-01/" class="block p-5"> <div class="flex items-center gap-2 text-xs mb-2.5"> <span class="seal">技术日报</span> <time datetime="2026-06-01T00:00:00.000Z" class="font-mono text-[11px] text-text-secondary">2026年6月1日</time> <span class="text-text-secondary/40">·</span> <span class="text-text-secondary">2 分钟</span> </div> <h3 class="font-display font-bold text-[1.05rem] leading-snug mb-2 text-text group-hover:text-accent transition-colors duration-200"> GitHub 每日精选 2026-06-01 </h3> <p class="text-sm text-text-secondary line-clamp-2 leading-relaxed"> 今天 GitHub 上最火的开源项目，从 AI 工具到系统编程，每日精选不容错过。 </p> <div class="flex flex-wrap gap-1.5 mt-3"> <span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#GitHub </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#开源 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#每日精选 </span> </div>  </a> </article> </div>  </div><div class="ink-reveal ink-reveal-delay-3" data-title="github 每日精选 2026-05-31" data-desc="今天 github 上最火的开源项目，从 ai 工具到系统编程，每日精选不容错过。" data-tags="github,开源,每日精选,技术"> <div class="card-tilt-wrapper reveal-target blur-reveal"> <article class="card card-tilt group relative overflow-hidden"> <a href="/blog/daily-2026-05-31/" class="block p-5"> <div class="flex items-center gap-2 text-xs mb-2.5"> <span class="seal">技术日报</span> <time datetime="2026-05-31T00:00:00.000Z" class="font-mono text-[11px] text-text-secondary">2026年5月31日</time> <span class="text-text-secondary/40">·</span> <span class="text-text-secondary">1 分钟</span> </div> <h3 class="font-display font-bold text-[1.05rem] leading-snug mb-2 text-text group-hover:text-accent transition-colors duration-200"> GitHub 每日精选 2026-05-31 </h3> <p class="text-sm text-text-secondary line-clamp-2 leading-relaxed"> 今天 GitHub 上最火的开源项目，从 AI 工具到系统编程，每日精选不容错过。 </p> <div class="flex flex-wrap gap-1.5 mt-3"> <span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#GitHub </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#开源 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#每日精选 </span> </div>  </a> </article> </div>  </div><div class="ink-reveal ink-reveal-delay-4" data-title="github 每日精选 2026-05-30" data-desc="今天 github 上最火的开源项目，从 ai 工具到系统编程，每日精选不容错过。" data-tags="github,开源,每日精选,技术"> <div class="card-tilt-wrapper reveal-target blur-reveal"> <article class="card card-tilt group relative overflow-hidden"> <a href="/blog/daily-2026-05-30/" class="block p-5"> <div class="flex items-center gap-2 text-xs mb-2.5"> <span class="seal">技术日报</span> <time datetime="2026-05-30T00:00:00.000Z" class="font-mono text-[11px] text-text-secondary">2026年5月30日</time> <span class="text-text-secondary/40">·</span> <span class="text-text-secondary">2 分钟</span> </div> <h3 class="font-display font-bold text-[1.05rem] leading-snug mb-2 text-text group-hover:text-accent transition-colors duration-200"> GitHub 每日精选 2026-05-30 </h3> <p class="text-sm text-text-secondary line-clamp-2 leading-relaxed"> 今天 GitHub 上最火的开源项目，从 AI 工具到系统编程，每日精选不容错过。 </p> <div class="flex flex-wrap gap-1.5 mt-3"> <span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#GitHub </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#开源 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#每日精选 </span> </div>  </a> </article> </div>  </div><div class="ink-reveal ink-reveal-delay-1" data-title="github 每日精选 2026-05-29" data-desc="今天 github 上最火的开源项目，从 ai 工具到系统编程，每日精选不容错过。" data-tags="github,开源,每日精选,技术"> <div class="card-tilt-wrapper reveal-target blur-reveal"> <article class="card card-tilt group relative overflow-hidden"> <a href="/blog/daily-2026-05-29/" class="block p-5"> <div class="flex items-center gap-2 text-xs mb-2.5"> <span class="seal">技术日报</span> <time datetime="2026-05-29T00:00:00.000Z" class="font-mono text-[11px] text-text-secondary">2026年5月29日</time> <span class="text-text-secondary/40">·</span> <span class="text-text-secondary">2 分钟</span> </div> <h3 class="font-display font-bold text-[1.05rem] leading-snug mb-2 text-text group-hover:text-accent transition-colors duration-200"> GitHub 每日精选 2026-05-29 </h3> <p class="text-sm text-text-secondary line-clamp-2 leading-relaxed"> 今天 GitHub 上最火的开源项目，从 AI 工具到系统编程，每日精选不容错过。 </p> <div class="flex flex-wrap gap-1.5 mt-3"> <span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#GitHub </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#开源 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#每日精选 </span> </div>  </a> </article> </div>  </div> </div> </div><div class="category-section mb-14" data-category="工具"> <div class="flex items-center gap-3 mb-6 ink-reveal" data-category-header="工具"> <span class="text-accent dark:text-dark-accent"><svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg></span> <h2 class="font-display text-xl font-bold text-text dark:text-dark-text">工具</h2> <span class="text-xs text-text-muted dark:text-dark-text-muted font-sans bg-surface-alt dark:bg-dark-surface-alt px-2.5 py-0.5 rounded-full"> 2 篇
+</span> </div> <div class="grid grid-cols-1 md:grid-cols-2 gap-8"> <div class="ink-reveal ink-reveal-delay-1" data-title="vs code 效率指南：让你的开发速度翻倍" data-desc="从快捷键到插件配置，一份面向日常开发的 vs code 实用技巧合集。" data-tags="vs code,效率,工具,前端"> <div class="card-tilt-wrapper reveal-target blur-reveal"> <article class="card card-tilt group relative overflow-hidden"> <a href="/blog/vscode-productivity/" class="block p-5"> <div class="flex items-center gap-2 text-xs mb-2.5"> <span class="seal">工具</span> <time datetime="2026-05-23T00:00:00.000Z" class="font-mono text-[11px] text-text-secondary">2026年5月23日</time> <span class="text-text-secondary/40">·</span> <span class="text-text-secondary">3 分钟</span> </div> <h3 class="font-display font-bold text-[1.05rem] leading-snug mb-2 text-text group-hover:text-accent transition-colors duration-200"> VS Code 效率指南：让你的开发速度翻倍 </h3> <p class="text-sm text-text-secondary line-clamp-2 leading-relaxed"> 从快捷键到插件配置，一份面向日常开发的 VS Code 实用技巧合集。 </p> <div class="flex flex-wrap gap-1.5 mt-3"> <span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#VS Code </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#效率 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#工具 </span> </div>  </a> </article> </div>  </div><div class="ink-reveal ink-reveal-delay-2" data-title="2025 年我的开发工具箱" data-desc="分享我日常使用的开发工具，从终端到编辑器，提升开发效率的实用选择。" data-tags="工具,效率,终端,vs code"> <div class="card-tilt-wrapper reveal-target blur-reveal"> <article class="card card-tilt group relative overflow-hidden"> <a href="/blog/dev-tools-2025/" class="block p-5"> <div class="flex items-center gap-2 text-xs mb-2.5"> <span class="seal">工具</span> <time datetime="2026-05-19T00:00:00.000Z" class="font-mono text-[11px] text-text-secondary">2026年5月19日</time> <span class="text-text-secondary/40">·</span> <span class="text-text-secondary">2 分钟</span> </div> <h3 class="font-display font-bold text-[1.05rem] leading-snug mb-2 text-text group-hover:text-accent transition-colors duration-200"> 2025 年我的开发工具箱 </h3> <p class="text-sm text-text-secondary line-clamp-2 leading-relaxed"> 分享我日常使用的开发工具，从终端到编辑器，提升开发效率的实用选择。 </p> <div class="flex flex-wrap gap-1.5 mt-3"> <span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#工具 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#效率 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#终端 </span> </div>  </a> </article> </div>  </div> </div> </div><div class="category-section mb-14" data-category="随笔"> <div class="flex items-center gap-3 mb-6 ink-reveal" data-category-header="随笔"> <span class="text-accent dark:text-dark-accent"><svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg></span> <h2 class="font-display text-xl font-bold text-text dark:text-dark-text">随笔</h2> <span class="text-xs text-text-muted dark:text-dark-text-muted font-sans bg-surface-alt dark:bg-dark-surface-alt px-2.5 py-0.5 rounded-full"> 1 篇
+</span> </div> <div class="grid grid-cols-1 md:grid-cols-2 gap-8"> <div class="ink-reveal ink-reveal-delay-1" data-title="你好，世界" data-desc="这是我的第一篇博客文章，记录博客搭建的过程和一些想法。" data-tags="博客,astro,开始"> <div class="card-tilt-wrapper reveal-target blur-reveal"> <article class="card card-tilt group relative overflow-hidden"> <a href="/blog/hello-world/" class="block p-5"> <div class="flex items-center gap-2 text-xs mb-2.5"> <span class="seal">随笔</span> <time datetime="2026-05-21T00:00:00.000Z" class="font-mono text-[11px] text-text-secondary">2026年5月21日</time> <span class="text-text-secondary/40">·</span> <span class="text-text-secondary">1 分钟</span> </div> <h3 class="font-display font-bold text-[1.05rem] leading-snug mb-2 text-text group-hover:text-accent transition-colors duration-200"> 你好，世界 </h3> <p class="text-sm text-text-secondary line-clamp-2 leading-relaxed"> 这是我的第一篇博客文章，记录博客搭建的过程和一些想法。 </p> <div class="flex flex-wrap gap-1.5 mt-3"> <span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#博客 </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#Astro </span><span class="text-[11px] px-2.5 py-1 text-text-secondary bg-surface/30 backdrop-blur-sm border border-white/[0.04] rounded-md font-sans hover:text-accent hover:scale-105 hover:border-white/[0.10] transition-all duration-300 cursor-default">
+#开始 </span> </div>  </a> </article> </div>  </div> </div> </div> </div>  </div> <!-- 侧边栏 --> <div class="w-full md:w-72 shrink-0 ink-reveal ink-reveal-delay-2"> <aside class="space-y-5"> <!-- 个人简介 --> <div class="card p-5"> <p class="font-display font-bold text-text mb-1">墨迹</p> <p class="text-xs text-text-secondary mb-2 font-sans">写作 · 技术 · 生活</p> <p class="text-sm text-text-secondary leading-relaxed font-serif">
+以文会友，用代码改变世界。
+</p> </div> <!-- 分类 --> <div class="card p-5"> <div class="flex items-center gap-2 mb-4"> <h3 class="font-display text-sm font-bold text-text tracking-wide">分类</h3> </div> <div class="space-y-1"> <a href="/category/技术日报/" class="flex items-center justify-between py-2 px-3 text-sm text-text-secondary hover:text-accent hover:bg-white/[0.04] transition-all rounded-lg group"> <span class="font-serif">技术日报</span> <span class="text-xs text-text-muted/60 dark:text-dark-text-muted/60 group-hover:text-accent/60 dark:group-hover:text-dark-accent/60 bg-white/[0.03] px-2 py-0.5 rounded-full">29</span> </a><a href="/category/成长记录/" class="flex items-center justify-between py-2 px-3 text-sm text-text-secondary hover:text-accent hover:bg-white/[0.04] transition-all rounded-lg group"> <span class="font-serif">成长记录</span> <span class="text-xs text-text-muted/60 dark:text-dark-text-muted/60 group-hover:text-accent/60 dark:group-hover:text-dark-accent/60 bg-white/[0.03] px-2 py-0.5 rounded-full">12</span> </a><a href="/category/技术/" class="flex items-center justify-between py-2 px-3 text-sm text-text-secondary hover:text-accent hover:bg-white/[0.04] transition-all rounded-lg group"> <span class="font-serif">技术</span> <span class="text-xs text-text-muted/60 dark:text-dark-text-muted/60 group-hover:text-accent/60 dark:group-hover:text-dark-accent/60 bg-white/[0.03] px-2 py-0.5 rounded-full">11</span> </a><a href="/category/工具/" class="flex items-center justify-between py-2 px-3 text-sm text-text-secondary hover:text-accent hover:bg-white/[0.04] transition-all rounded-lg group"> <span class="font-serif">工具</span> <span class="text-xs text-text-muted/60 dark:text-dark-text-muted/60 group-hover:text-accent/60 dark:group-hover:text-dark-accent/60 bg-white/[0.03] px-2 py-0.5 rounded-full">2</span> </a><a href="/category/随笔/" class="flex items-center justify-between py-2 px-3 text-sm text-text-secondary hover:text-accent hover:bg-white/[0.04] transition-all rounded-lg group"> <span class="font-serif">随笔</span> <span class="text-xs text-text-muted/60 dark:text-dark-text-muted/60 group-hover:text-accent/60 dark:group-hover:text-dark-accent/60 bg-white/[0.03] px-2 py-0.5 rounded-full">1</span> </a> </div> </div> <!-- 最新文章 --> <div class="card p-5"> <div class="flex items-center gap-2 mb-4"> <h3 class="font-display text-sm font-bold text-text tracking-wide">最新文章</h3> </div> <div class="space-y-3"> <a href="/blog/daily-2026-06-27/" class="block group py-2 px-3 hover:bg-white/[0.04] rounded-lg transition-all"> <p class="text-sm text-text group-hover:text-accent dark:group-hover:text-dark-accent transition-colors font-serif leading-snug line-clamp-2">GitHub 每日精选 2026-06-27</p> <time class="text-xs text-text-muted/60 dark:text-dark-text-muted/60 mt-1 block" datetime="2026-06-27T00:00:00.000Z">6月27日</time> </a><a href="/blog/daily-2026-06-26/" class="block group py-2 px-3 hover:bg-white/[0.04] rounded-lg transition-all"> <p class="text-sm text-text group-hover:text-accent dark:group-hover:text-dark-accent transition-colors font-serif leading-snug line-clamp-2">GitHub 每日精选 2026-06-26</p> <time class="text-xs text-text-muted/60 dark:text-dark-text-muted/60 mt-1 block" datetime="2026-06-26T00:00:00.000Z">6月26日</time> </a><a href="/blog/daily-2026-06-25/" class="block group py-2 px-3 hover:bg-white/[0.04] rounded-lg transition-all"> <p class="text-sm text-text group-hover:text-accent dark:group-hover:text-dark-accent transition-colors font-serif leading-snug line-clamp-2">GitHub 每日精选 2026-06-25</p> <time class="text-xs text-text-muted/60 dark:text-dark-text-muted/60 mt-1 block" datetime="2026-06-25T00:00:00.000Z">6月25日</time> </a><a href="/blog/daily-2026-06-24/" class="block group py-2 px-3 hover:bg-white/[0.04] rounded-lg transition-all"> <p class="text-sm text-text group-hover:text-accent dark:group-hover:text-dark-accent transition-colors font-serif leading-snug line-clamp-2">GitHub 每日精选 2026-06-24</p> <time class="text-xs text-text-muted/60 dark:text-dark-text-muted/60 mt-1 block" datetime="2026-06-24T00:00:00.000Z">6月24日</time> </a><a href="/blog/daily-2026-06-23/" class="block group py-2 px-3 hover:bg-white/[0.04] rounded-lg transition-all"> <p class="text-sm text-text group-hover:text-accent dark:group-hover:text-dark-accent transition-colors font-serif leading-snug line-clamp-2">GitHub 每日精选 2026-06-23</p> <time class="text-xs text-text-muted/60 dark:text-dark-text-muted/60 mt-1 block" datetime="2026-06-23T00:00:00.000Z">6月23日</time> </a> </div> </div> </aside> </div> </div> </div> <script>
+    document.addEventListener('astro:page-load', () => {
+      const searchInput = document.getElementById('search-input');
+      const postsGrid = document.getElementById('posts-grid');
+      const searchCount = document.getElementById('search-count');
+      if (!searchInput || !postsGrid) return;
+
+      searchInput.addEventListener('input', () => {
+        const query = searchInput.value.trim().toLowerCase();
+        const sections = postsGrid.querySelectorAll('.category-section');
+        let totalVisible = 0;
+
+        sections.forEach(section => {
+          const cards = section.querySelectorAll('[data-title]');
+          let sectionVisible = 0;
+
+          cards.forEach(card => {
+            if (!query) {
+              card.style.display = '';
+              sectionVisible++;
+              return;
+            }
+            const title = card.dataset.title || '';
+            const desc = card.dataset.desc || '';
+            const tags = card.dataset.tags || '';
+            const match = title.includes(query) || desc.includes(query) || tags.includes(query);
+            card.style.display = match ? '' : 'none';
+            if (match) sectionVisible++;
+          });
+
+          // 隐藏没有匹配文章的分类
+          const header = section.querySelector('[data-category-header]');
+          if (query && sectionVisible === 0) {
+            section.style.display = 'none';
+          } else {
+            section.style.display = '';
+          }
+
+          // 更新分类计数
+          if (header && query) {
+            const countEl = header.querySelector('span:last-child');
+            if (countEl) countEl.textContent = `${sectionVisible} 篇`;
+          }
+
+          totalVisible += sectionVisible;
+        });
+
+        if (query) {
+          searchCount.textContent = `找到 ${totalVisible} 篇文章`;
+          searchCount.classList.remove('hidden');
+        } else {
+          searchCount.classList.add('hidden');
+        }
+      });
+    });
+  </script>  </main> <footer class="mt-auto relative mt-8"> <div class="border-t border-border/40 dark:border-dark-border/40"> <div class="max-w-5xl mx-auto px-6 py-12"> <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-10"> <!-- 关于 --> <div class="reveal-target"> <h3 class="font-display text-sm font-bold text-text dark:text-dark-text mb-4 tracking-wide">墨迹</h3> <p class="text-sm text-text-muted dark:text-dark-text-muted font-serif leading-relaxed">
+一个走非主流路线的大专生，在迷茫中摸索，在试错中成长。
+</p> </div> <!-- 导航 --> <div class="reveal-target"> <h3 class="font-display text-sm font-bold text-text dark:text-dark-text mb-4 tracking-wide">导航</h3> <div class="flex flex-col gap-2.5"> <a href="/" class="text-sm text-text-muted dark:text-dark-text-muted hover:text-accent dark:hover:text-dark-accent transition-colors font-serif">首页</a> <a href="/blog/" class="text-sm text-text-muted dark:text-dark-text-muted hover:text-accent dark:hover:text-dark-accent transition-colors font-serif">文章</a> <a href="/archive/" class="text-sm text-text-muted dark:text-dark-text-muted hover:text-accent dark:hover:text-dark-accent transition-colors font-serif">归档</a> <a href="/tools/" class="text-sm text-text-muted dark:text-dark-text-muted hover:text-accent dark:hover:text-dark-accent transition-colors font-serif">工具</a> <a href="/friends/" class="text-sm text-text-muted dark:text-dark-text-muted hover:text-accent dark:hover:text-dark-accent transition-colors font-serif">友链</a> <a href="/about/" class="text-sm text-text-muted dark:text-dark-text-muted hover:text-accent dark:hover:text-dark-accent transition-colors font-serif">关于</a> </div> </div> <!-- 最近更新 --> <div class="reveal-target"> <h3 class="font-display text-sm font-bold text-text dark:text-dark-text mb-4 tracking-wide">最近更新</h3> <div class="flex flex-col gap-3"> <a href="/blog/daily-2026-06-27/" class="group/post"> <p class="text-sm text-text-muted dark:text-dark-text-muted group-hover/post:text-accent dark:group-hover/post:text-dark-accent transition-colors font-serif line-clamp-1">GitHub 每日精选 2026-06-27</p> <p class="text-[11px] text-text-muted/50 dark:text-dark-text-muted/50 font-serif mt-0.5"> 6月27日 </p> </a><a href="/blog/daily-2026-06-26/" class="group/post"> <p class="text-sm text-text-muted dark:text-dark-text-muted group-hover/post:text-accent dark:group-hover/post:text-dark-accent transition-colors font-serif line-clamp-1">GitHub 每日精选 2026-06-26</p> <p class="text-[11px] text-text-muted/50 dark:text-dark-text-muted/50 font-serif mt-0.5"> 6月26日 </p> </a><a href="/blog/daily-2026-06-25/" class="group/post"> <p class="text-sm text-text-muted dark:text-dark-text-muted group-hover/post:text-accent dark:group-hover/post:text-dark-accent transition-colors font-serif line-clamp-1">GitHub 每日精选 2026-06-25</p> <p class="text-[11px] text-text-muted/50 dark:text-dark-text-muted/50 font-serif mt-0.5"> 6月25日 </p> </a> </div> </div> <!-- 联系 --> <div class="reveal-target"> <h3 class="font-display text-sm font-bold text-text dark:text-dark-text mb-4 tracking-wide">联系</h3> <div class="flex flex-col gap-2.5"> <a href="https://github.com/ekegukeku64-blip" target="_blank" rel="noopener" class="text-sm text-text-muted dark:text-dark-text-muted hover:text-accent dark:hover:text-dark-accent transition-colors font-serif">GitHub</a> <a href="/rss.xml" target="_blank" class="text-sm text-text-muted dark:text-dark-text-muted hover:text-accent dark:hover:text-dark-accent transition-colors font-serif">RSS 订阅</a> <a href="https://ekegukeku64-blip.github.io/tech-daily/" target="_blank" rel="noopener" class="text-sm text-text-muted dark:text-dark-text-muted hover:text-accent dark:hover:text-dark-accent transition-colors font-serif">技术日报</a> </div> </div> </div> <!-- 底部 --> <div class="pt-6 border-t border-border/20 dark:border-dark-border/20 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-text-muted/60 dark:text-dark-text-muted/60 reveal-target"> <p class="font-serif">&copy; 2026 又逢雨季 · 墨迹</p> <div class="flex items-center gap-4 font-serif"> <span>访客 <span id="busuanzi_value_site_uv" class="font-mono text-text-muted dark:text-dark-text-muted">-</span></span> <span>·</span> <span>雨天更适合相遇</span> </div> </div> </div> </div> <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script> </footer> <button id="back-to-top" class="fixed bottom-8 left-8 z-50 w-11 h-11 flex items-center justify-center
+         border-2 border-accent dark:border-dark-accent text-accent dark:text-dark-accent rounded-xl
+         bg-surface/80 dark:bg-dark-surface/80 backdrop-blur-sm
+         opacity-0 translate-y-3 pointer-events-none
+         transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)]
+         hover:bg-accent hover:text-white dark:hover:bg-dark-accent dark:hover:text-dark-surface
+         hover:scale-105 hover:shadow-lg hover:shadow-accent/20 dark:hover:shadow-dark-accent/20
+         active:scale-95 active:transition-transform active:duration-75" aria-label="回到顶部"> <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"></path> </svg> </button> <script>
+  document.addEventListener('astro:page-load', () => {
+    const btn = document.getElementById('back-to-top');
+    if (!btn) return;
+
+    if (window.__bttHandler) {
+      window.removeEventListener('scroll', window.__bttHandler);
+    }
+
+    window.__bttHandler = function () {
+      if (window.scrollY > 300) {
+        btn.classList.remove('opacity-0', 'translate-y-3', 'pointer-events-none');
+        btn.classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto');
+      } else {
+        btn.classList.add('opacity-0', 'translate-y-3', 'pointer-events-none');
+        btn.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
+      }
+    };
+
+    window.addEventListener('scroll', window.__bttHandler, { passive: true });
+    window.__bttHandler();
+
+    btn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script> <div id="music-player" class="music-player" aria-label="音乐播放器" data-astro-cid-nuxxkkcb> <!-- 展开面板 --> <div class="music-panel" id="music-panel" data-astro-cid-nuxxkkcb> <div class="music-panel-inner" data-astro-cid-nuxxkkcb> <span class="music-now-playing" id="music-label" data-astro-cid-nuxxkkcb>雨声</span> <div class="music-controls" data-astro-cid-nuxxkkcb> <button class="music-btn" id="music-prev" aria-label="上一首" data-astro-cid-nuxxkkcb> <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" data-astro-cid-nuxxkkcb> <path stroke-linecap="round" stroke-linejoin="round" d="M19 20L9 12l10-8v16zM5 19V5" data-astro-cid-nuxxkkcb></path> </svg> </button> <button class="music-btn music-btn-play" id="music-toggle" aria-label="播放" data-astro-cid-nuxxkkcb> <svg id="music-icon-play" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" data-astro-cid-nuxxkkcb> <path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" data-astro-cid-nuxxkkcb></path> <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" data-astro-cid-nuxxkkcb></path> </svg> <svg id="music-icon-pause" class="w-5 h-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" data-astro-cid-nuxxkkcb> <path stroke-linecap="round" stroke-linejoin="round" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" data-astro-cid-nuxxkkcb></path> </svg> </button> <button class="music-btn" id="music-next" aria-label="下一首" data-astro-cid-nuxxkkcb> <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" data-astro-cid-nuxxkkcb> <path stroke-linecap="round" stroke-linejoin="round" d="M5 4l10 8-10 8V4zM19 5v14" data-astro-cid-nuxxkkcb></path> </svg> </button> </div> <div class="music-tracks" id="music-tracks" data-astro-cid-nuxxkkcb> <button class="music-track" data-index="0" data-src="/music/rain.wav" data-name="雨声" data-astro-cid-nuxxkkcb> <span data-astro-cid-nuxxkkcb>🌧</span> <span data-astro-cid-nuxxkkcb>雨声</span> </button><button class="music-track" data-index="1" data-src="/music/stream.wav" data-name="溪流" data-astro-cid-nuxxkkcb> <span data-astro-cid-nuxxkkcb>💧</span> <span data-astro-cid-nuxxkkcb>溪流</span> </button><button class="music-track" data-index="2" data-src="/music/forest.wav" data-name="夜林" data-astro-cid-nuxxkkcb> <span data-astro-cid-nuxxkkcb>🌲</span> <span data-astro-cid-nuxxkkcb>夜林</span> </button> <button class="music-track music-track-custom" id="music-custom-btn" data-name="自定义" title="粘贴音频链接" data-astro-cid-nuxxkkcb> <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" data-astro-cid-nuxxkkcb> <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" data-astro-cid-nuxxkkcb></path> </svg> <span data-astro-cid-nuxxkkcb>自定义</span> </button> </div> <!-- 自定义链接输入 --> <div class="music-custom-input" id="music-custom-row" style="display:none" data-astro-cid-nuxxkkcb> <input type="text" id="music-url-input" class="music-url-input" placeholder="粘贴音频链接..." spellcheck="false" data-astro-cid-nuxxkkcb> <button class="music-btn" id="music-url-play" aria-label="播放自定义链接" data-astro-cid-nuxxkkcb> <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" data-astro-cid-nuxxkkcb> <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" data-astro-cid-nuxxkkcb></path> </svg> </button> <label class="music-btn music-file-label" aria-label="选择本地文件" title="选择本地文件" data-astro-cid-nuxxkkcb> <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" data-astro-cid-nuxxkkcb> <path stroke-linecap="round" stroke-linejoin="round" d="M3 15v4c0 1.1.9 2 2 2h14a2 2 0 002-2v-4M17 9l-5 5-5-5M12 4v10" data-astro-cid-nuxxkkcb></path> </svg> <input type="file" id="music-file-input" accept="audio/*" class="music-file-hidden" data-astro-cid-nuxxkkcb> </label> </div> </div> </div> <!-- 浮动按钮 --> <button class="music-trigger" id="music-trigger" aria-label="音乐" data-astro-cid-nuxxkkcb> <svg class="w-5 h-5 music-trigger-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" data-astro-cid-nuxxkkcb> <path stroke-linecap="round" stroke-linejoin="round" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" data-astro-cid-nuxxkkcb></path> </svg> </button> </div> <audio id="music-audio" preload="none" loop data-astro-cid-nuxxkkcb></audio>  <script>
+  function initMusicPlayer() {
+    const audio = document.getElementById('music-audio');
+    const panel = document.getElementById('music-panel');
+    const trigger = document.getElementById('music-trigger');
+    const toggle = document.getElementById('music-toggle');
+    const prev = document.getElementById('music-prev');
+    const next = document.getElementById('music-next');
+    const label = document.getElementById('music-label');
+    const iconPlay = document.getElementById('music-icon-play');
+    const iconPause = document.getElementById('music-icon-pause');
+    const trackBtns = document.querySelectorAll('.music-track');
+    const customBtn = document.getElementById('music-custom-btn');
+    const customRow = document.getElementById('music-custom-row');
+    const urlInput = document.getElementById('music-url-input');
+    const urlPlay = document.getElementById('music-url-play');
+    const fileInput = document.getElementById('music-file-input');
+
+    if (!audio || !panel || !trigger) return;
+
+    // 从 DOM 读取预设曲目
+    const builtin = [];
+    trackBtns.forEach(btn => {
+      const s = btn.getAttribute('data-src');
+      if (s) builtin.push({ name: btn.getAttribute('data-name') || '', src: s });
+    });
+
+    // 曲目池 = 预设 + 动态自定义
+    let tracks = [...builtin];
+    let currentIndex = 0;
+
+    function updateUI() {
+      if (label) label.textContent = tracks[currentIndex]?.name || '未知';
+      // 高亮预设曲目按钮
+      trackBtns.forEach((t, i) => {
+        if (t.getAttribute('data-src')) {
+          t.classList.toggle('is-active', i === currentIndex);
+        } else {
+          // 自定义按钮：当前正在播放自定义曲目时高亮
+          t.classList.toggle('is-active', currentIndex >= builtin.length);
+        }
+      });
+      if (!audio.paused) {
+        iconPlay?.classList.add('hidden');
+        iconPause?.classList.remove('hidden');
+        trigger.classList.add('is-playing');
+      } else {
+        iconPlay?.classList.remove('hidden');
+        iconPause?.classList.add('hidden');
+        trigger.classList.remove('is-playing');
+      }
+    }
+
+    function loadTrack(index) {
+      currentIndex = index;
+      audio.src = tracks[index]?.src || '';
+      audio.load();
+      updateUI();
+    }
+
+    function togglePlay() {
+      if (audio.paused) {
+        audio.play().catch(() => {});
+      } else {
+        audio.pause();
+      }
+      updateUI();
+    }
+
+    function nextTrack() {
+      loadTrack((currentIndex + 1) % tracks.length);
+      audio.play().catch(() => {});
+    }
+
+    function prevTrack() {
+      loadTrack((currentIndex - 1 + tracks.length) % tracks.length);
+      audio.play().catch(() => {});
+    }
+
+    function playCustomUrl() {
+      const url = urlInput?.value.trim();
+      if (!url) return;
+      // 替换或新增自定义曲目
+      const existingIdx = tracks.findIndex((_, i) => i >= builtin.length);
+      if (existingIdx >= 0) {
+        tracks.splice(existingIdx, 1, { name: '自定义', src: url });
+        currentIndex = existingIdx;
+      } else {
+        tracks.push({ name: '自定义', src: url });
+        currentIndex = tracks.length - 1;
+      }
+      loadTrack(currentIndex);
+      audio.play().catch(() => {});
+    }
+
+    function playCustomFile(file) {
+      const url = URL.createObjectURL(file);
+      const name = file.name.replace(/\.[^.]+$/, '');
+      const existingIdx = tracks.findIndex((_, i) => i >= builtin.length);
+      if (existingIdx >= 0) {
+        tracks.splice(existingIdx, 1, { name, src: url });
+        currentIndex = existingIdx;
+      } else {
+        tracks.push({ name, src: url });
+        currentIndex = tracks.length - 1;
+      }
+      loadTrack(currentIndex);
+      audio.play().catch(() => {});
+    }
+
+    trigger.addEventListener('click', () => {
+      panel.classList.toggle('is-open');
+    });
+
+    toggle?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      togglePlay();
+    });
+
+    next?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      nextTrack();
+    });
+
+    prev?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      prevTrack();
+    });
+
+    trackBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const idx = parseInt(btn.getAttribute('data-index') || '0');
+        const src = btn.getAttribute('data-src');
+        if (src && idx !== currentIndex) {
+          // 预设曲目
+          loadTrack(idx);
+          audio.play().catch(() => {});
+        } else if (!src) {
+          // 自定义按钮 — 展开/收起 URL 输入行
+          const row = document.getElementById('music-custom-row');
+          if (row) row.style.display = row.style.display === 'none' ? 'flex' : 'none';
+          urlInput?.focus();
+        }
+      });
+    });
+
+    urlPlay?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      playCustomUrl();
+    });
+
+    urlInput?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        playCustomUrl();
+      }
+      e.stopPropagation();
+    });
+
+    fileInput?.addEventListener('change', () => {
+      const file = fileInput.files?.[0];
+      if (file) playCustomFile(file);
+    });
+
+    document.addEventListener('click', (e) => {
+      const player = document.getElementById('music-player');
+      if (player && !player.contains(e.target)) {
+        panel.classList.remove('is-open');
+      }
+    });
+
+    audio.addEventListener('play', updateUI);
+    audio.addEventListener('pause', updateUI);
+    audio.addEventListener('ended', () => nextTrack());
+
+    // 不自动加载音频 — 等用户首次点击播放再加载
+    updateUI();
+  }
+
+  initMusicPlayer();
+  document.addEventListener('astro:page-load', initMusicPlayer);
+</script> <div id="page-progress" class="fixed top-0 left-0 w-full h-0.5 z-[9999] pointer-events-none"> <div id="page-progress-bar" class="h-full bg-accent dark:bg-dark-accent transition-all duration-200 ease-out" style="width: 0%"></div> </div> <script>
+  document.addEventListener('astro:page-load', () => {
+    const bar = document.getElementById('page-progress-bar');
+    if (!bar) return;
+
+    // 模拟加载进度
+    bar.style.width = '30%';
+    setTimeout(() => { bar.style.width = '70%'; }, 100);
+    setTimeout(() => { bar.style.width = '100%'; }, 300);
+    setTimeout(() => { bar.style.opacity = '0'; }, 500);
+    setTimeout(() => { bar.style.width = '0%'; bar.style.opacity = '1'; }, 700);
+  });
+</script> <script defer data-website-id="ed458c58-fe49-43c5-8c60-4b4bd0c936b6" src="https://cloud.umami.is/script.js"></script> <script>
+      { // block scope for is:inline scripts
+      const gv = document.getElementById('global-bg-video');
+      const poster = document.getElementById('global-bg-poster');
+      if (gv && poster) {
+        const isMobile = window.matchMedia('(max-width: 768px)').matches;
+        if (!isMobile) {
+          let loaded = false;
+          const loadVideo = () => {
+            if (loaded) return;
+            loaded = true;
+            if (!gv.src) {
+              gv.src = '/maple.mp4';
+              gv.load();
+            }
+            gv.play().then(() => {
+              poster.style.display = 'none';
+              gv.style.display = '';
+            }).catch(() => {});
+          };
+          window.addEventListener('load', () => {
+            // 等用户开始滚动或点击后才加载视频
+            const trigger = () => { setTimeout(loadVideo, 2000); };
+            window.addEventListener('scroll', trigger, { once: true, passive: true });
+            document.addEventListener('click', trigger, { once: true });
+            // 兜底：20 秒后还没交互就加载
+            setTimeout(() => loadVideo(), 20000);
+          });
+        }
+      }
+      } // end block scope
+    </script> <script>
+      function initScrollReveal() {
+        let staggerIdx = 0;
+        let staggerTimer = null;
+        const observer = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const delay = staggerIdx * 60;
+              setTimeout(() => {
+                entry.target.classList.add('is-revealed');
+              }, delay);
+              staggerIdx++;
+              clearTimeout(staggerTimer);
+              staggerTimer = setTimeout(() => { staggerIdx = 0; }, 400);
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { root: null, rootMargin: '0px 0px -30px 0px', threshold: 0.08 });
+
+        // Observe elements with .reveal-target class + prose content elements
+        document.querySelectorAll('.reveal-target').forEach(el => {
+          el.classList.remove('is-revealed');
+          observer.observe(el);
+        });
+
+        // Auto-tag prose elements inside post content for scroll reveal
+        document.querySelectorAll('.prose p, .prose h2, .prose h3, .prose pre, .prose blockquote, .prose ul, .prose ol').forEach(el => {
+          el.classList.add('reveal-target');
+          el.classList.remove('is-revealed');
+          observer.observe(el);
+        });
+      }
+
+      initScrollReveal();
+      document.addEventListener('astro:page-load', initScrollReveal);
+    </script> <script>
+      function initMagneticElements() {
+        document.querySelectorAll('nav a, nav button, .magnetic').forEach(magnet => {
+          magnet.addEventListener('mousemove', (e) => {
+            const rect = magnet.getBoundingClientRect();
+            const x = (e.clientX - rect.left) - rect.width / 2;
+            const y = (e.clientY - rect.top) - rect.height / 2;
+            magnet.style.transition = 'none';
+            magnet.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+          });
+          magnet.addEventListener('mouseleave', () => {
+            magnet.style.transition = 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+            magnet.style.transform = 'translate(0px, 0px)';
+          });
+        });
+      }
+      initMagneticElements();
+      document.addEventListener('astro:page-load', initMagneticElements);
+    </script> <script>
+      function initBlurReveal() {
+        let delayCount = 0;
+        let delayTimer = null;
+
+        const observer = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const delay = delayCount * 100;
+              setTimeout(() => {
+                entry.target.classList.add('is-focused');
+              }, 100 + delay);
+              delayCount++;
+              clearTimeout(delayTimer);
+              delayTimer = setTimeout(() => { delayCount = 0; }, 150);
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.05, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('.blur-reveal').forEach(el => {
+          el.classList.remove('is-focused');
+          observer.observe(el);
+        });
+      }
+      initBlurReveal();
+      document.addEventListener('astro:page-load', initBlurReveal);
+    </script> <script>
+      function initPageClickWave() {
+        window.__pageClickWaveLayer = document.getElementById('page-click-wave');
+        if (window.__pageClickWaveReady) return;
+        window.__pageClickWaveReady = true;
+
+        document.addEventListener('pointerdown', (event) => {
+          const layer = window.__pageClickWaveLayer;
+          if (!layer) return;
+          layer.style.setProperty('--page-wave-x', `${event.clientX}px`);
+          layer.style.setProperty('--page-wave-y', `${event.clientY}px`);
+          layer.classList.remove('is-waving');
+          void layer.offsetWidth;
+          layer.classList.add('is-waving');
+        }, { passive: true });
+
+        document.addEventListener('animationend', (event) => {
+          if (event.animationName === 'waterDropRing') {
+            window.__pageClickWaveLayer?.classList.remove('is-waving');
+          }
+        });
+      }
+
+      initPageClickWave();
+      document.addEventListener('astro:page-load', initPageClickWave);
+    </script> <div id="page-click-wave" class="page-click-wave" aria-hidden="true"></div> </body></html>

@@ -1,0 +1,620 @@
+<!DOCTYPE html><html lang="zh-CN" class="dark"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="浏览器端运行的实用工具集合，数据不上传服务器"><meta name="google-site-verification" content="nF43Ycr0M27ASMgp4dtsTYJa9xfQ2mO9lyB1aWs2iYs"><meta name="robots" content="index, follow"><meta name="theme-color" content="#070A13"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.svg"><link rel="canonical" href="https://xxxdkubi.github.io/tools/"><link rel="alternate" type="application/rss+xml" title="墨迹博客 RSS" href="https://xxxdkubi.github.io/rss.xml"><meta property="og:image" content="https://xxxdkubi.github.io/hero/og-default.png"><meta property="og:title" content="在线工具"><meta property="og:description" content="浏览器端运行的实用工具集合，数据不上传服务器"><meta property="og:type" content="website"><meta property="og:url" content="https://xxxdkubi.github.io/tools/"><meta property="og:site_name" content="墨迹博客"><meta property="og:locale" content="zh_CN"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="在线工具"><meta name="twitter:description" content="浏览器端运行的实用工具集合，数据不上传服务器"><meta name="twitter:image" content="https://xxxdkubi.github.io/hero/og-default.png"><meta name="twitter:site" content="@moku_blog"><meta name="author" content="又逢雨季"><title>在线工具 | 墨迹博客</title><script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        "name": "墨迹博客",
+        "description": "一个关于技术、设计与生活的博客",
+        "url": "https://xxxdkubi.github.io/",
+        "author": { "@type": "Person", "name": "又逢雨季" },
+        "inLanguage": "zh-CN"
+      }
+    </script><script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "墨迹博客",
+        "url": "https://xxxdkubi.github.io/",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://xxxdkubi.github.io/?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    </script><script>
+      // 物理锁死深色模式 + ClientRouter 导航后修复 page-entrance class
+      function syncPageEntrance() {
+        if (!document.body) return;
+        const onEntrance = location.pathname === '/blog/' || location.pathname === '/';
+        document.body.classList.toggle('page-entrance', onEntrance);
+        if (!onEntrance) {
+          const gv = document.getElementById('global-bg-video');
+          if (gv) gv.play().catch(() => {});
+        }
+      }
+      document.addEventListener('astro:after-swap', () => {
+        document.documentElement.classList.add('dark');
+        document.documentElement.style.setProperty('background-color', 'transparent', 'important');
+        document.documentElement.style.setProperty('color', '#F5F5F4', 'important');
+        syncPageEntrance();
+      });
+      document.documentElement.classList.add('dark');
+      if (document.body) syncPageEntrance();
+      // 清除旧版 ThemePicker 残留在 localStorage 的暖色
+      try { localStorage.removeItem('accent_color'); } catch (_) {}
+    </script><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.CAqDO0tx.js"></script><link rel="stylesheet" href="/_astro/BaseLayout.DnMAC6HO.css">
+<style>.tool-lab-hero[data-astro-cid-qkptn22r]{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2rem;align-items:end;margin-bottom:4rem;padding:2rem;border:1px solid rgba(255,255,255,.06);border-radius:28px;background:radial-gradient(circle at 12% 0%,rgba(122,149,175,.16),transparent 34%),#070c1275;box-shadow:inset 0 1px #ffffff0a,0 24px 70px #00000047;overflow:hidden}.tool-lab-hero[data-astro-cid-qkptn22r]:after{content:"";position:absolute;right:-8rem;bottom:-9rem;width:22rem;aspect-ratio:1;border-radius:999px;background:radial-gradient(circle,rgba(122,149,175,.14),transparent 68%);pointer-events:none}.tool-lab-panel[data-astro-cid-qkptn22r]{position:relative;z-index:1;min-width:9rem;padding:1.25rem;border-radius:22px;border:1px solid rgba(255,255,255,.08);background:#ffffff09;backdrop-filter:blur(20px);text-align:right}.tool-lab-panel[data-astro-cid-qkptn22r] span[data-astro-cid-qkptn22r]{display:block;font-family:var(--font-display);font-size:3rem;line-height:1;color:var(--color-text)}.tool-lab-panel[data-astro-cid-qkptn22r] p[data-astro-cid-qkptn22r]{margin-top:.5rem;font-size:.75rem;color:var(--color-text-muted)}.tool-category[data-astro-cid-qkptn22r]{margin-bottom:3.5rem}.tool-category-head[data-astro-cid-qkptn22r]{display:flex;align-items:center;gap:1rem;margin-bottom:1.25rem}.tool-category-head[data-astro-cid-qkptn22r]>span[data-astro-cid-qkptn22r]{display:grid;place-items:center;width:2.75rem;height:2.75rem;border-radius:1rem;border:1px solid rgba(122,149,175,.18);color:var(--color-accent);font-family:var(--font-mono);font-size:.75rem;background:#7a95af0f}.tool-category-head[data-astro-cid-qkptn22r] h2[data-astro-cid-qkptn22r]{font-family:var(--font-display);font-size:1.125rem;font-weight:700;color:var(--color-text)}.tool-category-head[data-astro-cid-qkptn22r] p[data-astro-cid-qkptn22r]{margin-top:.15rem;font-family:var(--font-serif);font-size:.75rem;color:var(--color-text-muted)}.tool-card[data-astro-cid-qkptn22r]{position:relative;display:flex;min-height:7rem;gap:1rem;align-items:flex-start;padding:1.25rem;border-radius:1.1rem;border:1px solid rgba(255,255,255,.055);background:linear-gradient(145deg,#ffffff0b,#ffffff05);box-shadow:inset 0 1px #ffffff09;transition:transform .45s var(--interactive-ease),border-color .45s var(--interactive-ease),background .45s var(--interactive-ease);overflow:hidden}.tool-card[data-astro-cid-qkptn22r]:after{content:"";position:absolute;inset:auto 1rem 0;height:1px;background:linear-gradient(90deg,transparent,rgba(122,149,175,.5),transparent);opacity:0;transition:opacity .45s var(--interactive-ease)}.tool-card[data-astro-cid-qkptn22r]:hover{transform:translateY(-4px);border-color:#7a95af3d;background:linear-gradient(145deg,#7a95af17,#ffffff06)}.tool-card[data-astro-cid-qkptn22r]:hover:after{opacity:1}.tool-icon[data-astro-cid-qkptn22r]{display:grid;place-items:center;flex:0 0 auto;width:2.75rem;height:2.75rem;border-radius:.9rem;border:1px solid rgba(122,149,175,.14);background:#070c1285;color:var(--color-accent);font-family:var(--font-mono);font-weight:700;font-size:.86rem;transition:transform .45s var(--interactive-ease)}.tool-card[data-astro-cid-qkptn22r]:hover .tool-icon[data-astro-cid-qkptn22r]{transform:scale(1.08) rotate(-2deg)}.tool-card[data-astro-cid-qkptn22r] h3[data-astro-cid-qkptn22r]{margin-bottom:.3rem;color:var(--color-text);font-size:.92rem;font-weight:700;transition:color .3s var(--interactive-ease)}.tool-card[data-astro-cid-qkptn22r]:hover h3[data-astro-cid-qkptn22r]{color:var(--color-accent)}.tool-card[data-astro-cid-qkptn22r] p[data-astro-cid-qkptn22r]{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;color:var(--color-text-muted);font-family:var(--font-serif);font-size:.78rem;line-height:1.7}@media(max-width:768px){.tool-lab-hero[data-astro-cid-qkptn22r]{grid-template-columns:1fr;padding:1.4rem}.tool-lab-panel[data-astro-cid-qkptn22r]{min-width:0;text-align:left}}
+</style></head> <body class="min-h-screen flex flex-col"> <div class="global-bg-layer" aria-hidden="true"> <img id="global-bg-poster" class="global-bg-video" src="/maple.jpg" alt=""> <video id="global-bg-video" class="global-bg-video" poster="/maple.jpg" preload="metadata" loop muted playsinline style="display:none"></video> </div> <div id="reading-progress" class="fixed top-0 left-0 h-[3px] z-[100] w-0 transition-[width] duration-100 ease-out bg-accent dark:bg-dark-accent" style="display:none"></div> <script>
+  document.addEventListener('astro:page-load', () => {
+    const bar = document.getElementById('reading-progress');
+    if (!bar) return;
+
+    // 清理旧监听器
+    if (window.__rpHandler) {
+      window.removeEventListener('scroll', window.__rpHandler);
+    }
+
+    const prose = document.querySelector('.prose');
+    if (!prose) {
+      bar.style.display = 'none';
+      bar.style.width = '0%';
+      return;
+    }
+
+    bar.style.display = 'block';
+
+    window.__rpHandler = function () {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? Math.min(scrollTop / docHeight * 100, 100) : 0;
+      bar.style.width = progress + '%';
+    };
+
+    window.addEventListener('scroll', window.__rpHandler, { passive: true });
+    window.__rpHandler();
+  });
+</script> <header class="sticky top-0 z-50 w-full px-4 md:px-8"> <div class="header-glass max-w-6xl mx-auto rounded-3xl backdrop-blur-[20px] border border-white/[0.06]"> <nav class="px-4 h-14 flex items-center justify-between md:px-6"> <a href="/" class="logo-text text-xl font-semibold text-text hover:text-[#c8d6e8] transition-all duration-500" style="font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;">墨迹</a> <div class="hidden md:flex items-center gap-1 rounded-full border border-white/[0.06] bg-white/[0.04] p-1"> <a href="/" class="rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors text-text-secondary hover:bg-white/10 hover:text-text"> 首页  </a><a href="/blog/" class="rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors text-text-secondary hover:bg-white/10 hover:text-text"> 文章  </a><a href="/archive/" class="rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors text-text-secondary hover:bg-white/10 hover:text-text"> 归档  </a><a href="/tags/" class="rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors text-text-secondary hover:bg-white/10 hover:text-text"> 标签  </a><a href="/tools/" class="rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors bg-white/10 text-text"> 工具  </a><a href="https://ekegukeku64-blip.github.io/tech-daily/" class="rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors text-text-secondary hover:bg-white/10 hover:text-text" target="_blank" rel="noopener"> 日报 <svg class="inline w-3 h-3 ml-0.5 -mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path> </svg> </a><a href="/friends/" class="rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors text-text-secondary hover:bg-white/10 hover:text-text"> 友链  </a><a href="/guestbook/" class="rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors text-text-secondary hover:bg-white/10 hover:text-text"> 留言  </a><a href="/about/" class="rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors text-text-secondary hover:bg-white/10 hover:text-text"> 关于  </a> </div> <!-- Right side: search + mobile menu --> <div class="flex items-center gap-1"> <div class="relative"> <button id="search-toggle" class="p-2 rounded-lg text-text-muted hover:text-text hover:bg-surface-alt dark:text-dark-text-muted dark:hover:text-dark-text dark:hover:bg-dark-surface-alt transition-colors" aria-label="搜索"> <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path> </svg> </button> </div> <!-- Search Modal --> <div id="search-modal" class="fixed inset-0 z-[100] hidden"> <!-- Backdrop --> <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" id="search-backdrop"></div> <!-- Search Panel --> <div class="relative max-w-2xl mx-auto mt-[15vh] px-4"> <div class="bg-surface dark:bg-dark-surface rounded-xl shadow-2xl border border-border dark:border-dark-border overflow-hidden"> <!-- Search Input --> <div class="flex items-center px-4 border-b border-border dark:border-dark-border"> <svg class="w-5 h-5 text-text-muted dark:text-dark-text-muted flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path> </svg> <input type="text" id="search-input" placeholder="搜索文章..." class="w-full px-3 py-4 bg-transparent text-text dark:text-dark-text placeholder:text-text-muted dark:placeholder:text-dark-text-muted focus:outline-none"> <kbd class="hidden sm:inline-block px-2 py-0.5 text-xs text-text-muted dark:text-dark-text-muted bg-surface-alt dark:bg-dark-surface-alt rounded">ESC</kbd> </div> <!-- Results --> <div id="search-results" class="max-h-[60vh] overflow-y-auto p-2"> <div class="px-4 py-8 text-center text-text-muted dark:text-dark-text-muted">
+输入关键词开始搜索
+</div> </div> <!-- Footer --> <div class="px-4 py-2 border-t border-border dark:border-dark-border text-xs text-text-muted dark:text-dark-text-muted flex items-center justify-between"> <span>由 Pagefind 提供搜索</span> <div class="flex items-center gap-2"> <kbd class="px-1.5 py-0.5 bg-surface-alt dark:bg-dark-surface-alt rounded">↑↓</kbd> <span>导航</span> <kbd class="px-1.5 py-0.5 bg-surface-alt dark:bg-dark-surface-alt rounded">↵</kbd> <span>打开</span> </div> </div> </div> </div> </div> <script>
+  let pagefind;
+
+  async function initSearch() {
+    if (!pagefind) {
+      try {
+        pagefind = await import('/blog/pagefind/pagefind.js');
+        await pagefind.options({ languages: ['zh'] });
+      } catch (e) {
+        console.warn('Pagefind not available in dev mode');
+      }
+    }
+  }
+
+  function openSearch() {
+    const modal = document.getElementById('search-modal');
+    modal.classList.remove('hidden');
+    document.getElementById('search-input').focus();
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeSearch() {
+    const modal = document.getElementById('search-modal');
+    modal.classList.add('hidden');
+    document.getElementById('search-input').value = '';
+    document.getElementById('search-results').innerHTML = '<div class="px-4 py-8 text-center text-text-muted dark:text-dark-text-muted">输入关键词开始搜索</div>';
+    document.body.style.overflow = '';
+  }
+
+  function renderResults(results) {
+    const container = document.getElementById('search-results');
+    if (!results || results.length === 0) {
+      container.innerHTML = '<div class="px-4 py-8 text-center text-text-muted dark:text-dark-text-muted">没有找到相关文章</div>';
+      return;
+    }
+
+    container.innerHTML = results.map((result, i) => `
+      <a href="${result.url}" class="block px-4 py-3 rounded-lg hover:bg-surface-alt dark:hover:bg-dark-surface-alt transition-colors ${i === 0 ? 'bg-surface-alt dark:bg-dark-surface-alt' : ''}">
+        <div class="font-medium text-text dark:text-dark-text">${result.meta?.title || '无标题'}</div>
+        <div class="text-sm text-text-muted dark:text-dark-text-muted mt-1 line-clamp-2">${result.excerpt}</div>
+        ${result.meta?.tags ? `<div class="flex flex-wrap gap-1 mt-2">${result.meta.tags.split(',').map(tag => `<span class="text-xs px-2 py-0.5 rounded-full bg-accent/10 dark:bg-dark-accent/10 text-accent dark:text-dark-accent">${tag.trim()}</span>`).join('')}</div>` : ''}
+      </a>
+    `).join('');
+  }
+
+  // Initialize
+  document.addEventListener('astro:page-load', () => {
+    const toggle = document.getElementById('search-toggle');
+    const backdrop = document.getElementById('search-backdrop');
+    const input = document.getElementById('search-input');
+    let debounceTimer;
+
+    toggle?.addEventListener('click', () => {
+      initSearch();
+      openSearch();
+    });
+
+    backdrop?.addEventListener('click', closeSearch);
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault();
+        initSearch();
+        openSearch();
+      }
+      if (e.key === 'Escape') {
+        closeSearch();
+      }
+    });
+
+    // Search input
+    input?.addEventListener('input', (e) => {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(async () => {
+        const query = e.target.value.trim();
+        if (!pagefind || !query) {
+          document.getElementById('search-results').innerHTML = query
+            ? '<div class="px-4 py-8 text-center text-text-muted dark:text-dark-text-muted">搜索未就绪，请刷新页面</div>'
+            : '<div class="px-4 py-8 text-center text-text-muted dark:text-dark-text-muted">输入关键词开始搜索</div>';
+          return;
+        }
+        const search = await pagefind.debouncedSearch(query);
+        if (search) {
+          const results = await Promise.all(search.results.slice(0, 10).map(r => r.data()));
+          renderResults(results);
+        }
+      }, 200);
+    });
+
+    // Keyboard navigation
+    input?.addEventListener('keydown', (e) => {
+      const container = document.getElementById('search-results');
+      const links = container.querySelectorAll('a');
+      const current = container.querySelector('a.bg-surface-alt, a.dark\\:bg-dark-surface-alt');
+      let index = Array.from(links).indexOf(current);
+
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        index = Math.min(index + 1, links.length - 1);
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        index = Math.max(index - 1, 0);
+      } else if (e.key === 'Enter' && current) {
+        e.preventDefault();
+        current.click();
+        return;
+      } else {
+        return;
+      }
+
+      links.forEach(l => l.classList.remove('bg-surface-alt', 'dark:bg-dark-surface-alt'));
+      if (links[index]) {
+        links[index].classList.add('bg-surface-alt', 'dark:bg-dark-surface-alt');
+        links[index].scrollIntoView({ block: 'nearest' });
+      }
+    });
+  });
+</script> <a href="/rss.xml" class="p-2 rounded-lg text-text-secondary hover:text-accent hover:bg-white/5 transition-colors" aria-label="RSS 订阅" target="_blank"> <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M6 5c7.18 0 13 5.82 13 13M6 11a7 7 0 017 7m-6 0a1 1 0 11-2 0 1 1 0 012 0z"></path> </svg> </a> <!-- Mobile menu button --> <button id="mobile-menu-toggle" class="md:hidden p-2 rounded-lg text-text-secondary hover:text-text hover:bg-white/5 transition-colors" aria-label="菜单"> <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path class="menu-line menu-line-1" stroke-linecap="round" stroke-linejoin="round" d="M4 6h16"></path> <path class="menu-line menu-line-2" stroke-linecap="round" stroke-linejoin="round" d="M4 12h16"></path> <path class="menu-line menu-line-3" stroke-linecap="round" stroke-linejoin="round" d="M4 18h16"></path> </svg> </button> </div> </nav> <!-- Mobile menu --> <div id="mobile-menu" class="md:hidden border-t border-white/5 bg-[rgba(15,23,42,0.92)] backdrop-blur-xl rounded-b-2xl"> <div class="px-6 py-4 flex flex-col gap-1"> <a href="/" class="px-4 py-2.5 rounded-lg text-sm font-medium transition-colors text-text-secondary hover:text-text hover:bg-white/5"> 首页  </a><a href="/blog/" class="px-4 py-2.5 rounded-lg text-sm font-medium transition-colors text-text-secondary hover:text-text hover:bg-white/5"> 文章  </a><a href="/archive/" class="px-4 py-2.5 rounded-lg text-sm font-medium transition-colors text-text-secondary hover:text-text hover:bg-white/5"> 归档  </a><a href="/tags/" class="px-4 py-2.5 rounded-lg text-sm font-medium transition-colors text-text-secondary hover:text-text hover:bg-white/5"> 标签  </a><a href="/tools/" class="px-4 py-2.5 rounded-lg text-sm font-medium transition-colors text-accent"> 工具  </a><a href="https://ekegukeku64-blip.github.io/tech-daily/" class="px-4 py-2.5 rounded-lg text-sm font-medium transition-colors text-text-secondary hover:text-text hover:bg-white/5" target="_blank" rel="noopener"> 日报 <svg class="inline w-3 h-3 ml-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path> </svg> </a><a href="/friends/" class="px-4 py-2.5 rounded-lg text-sm font-medium transition-colors text-text-secondary hover:text-text hover:bg-white/5"> 友链  </a><a href="/guestbook/" class="px-4 py-2.5 rounded-lg text-sm font-medium transition-colors text-text-secondary hover:text-text hover:bg-white/5"> 留言  </a><a href="/about/" class="px-4 py-2.5 rounded-lg text-sm font-medium transition-colors text-text-secondary hover:text-text hover:bg-white/5"> 关于  </a> <a href="/rss.xml" class="px-4 py-2.5 rounded-lg text-sm font-medium transition-colors text-text-secondary hover:text-text hover:bg-white/5 flex items-center gap-2" target="_blank"> <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M6 5c7.18 0 13 5.82 13 13M6 11a7 7 0 017 7m-6 0a1 1 0 11-2 0 1 1 0 012 0z"></path> </svg>
+RSS 订阅
+</a> </div> </div> </div> </header> <script>(function(){const base = "/blog/";
+
+  const ACTIVE = 'rounded-full px-3.5 py-1.5 text-sm font-medium transition-all duration-400 bg-white/10 text-text';
+  const INACTIVE = 'rounded-full px-3.5 py-1.5 text-sm font-medium transition-all duration-400 text-text-secondary hover:bg-white/10 hover:text-text';
+
+  function updateActiveNav() {
+    const p = window.location.pathname;
+    document.querySelectorAll('nav a[href]').forEach(a => {
+      const href = a.getAttribute('href');
+      if (!href || href === base + '_astro/' || !href.startsWith(base)) return;
+      const active = href === base ? p === href : p.startsWith(href);
+      a.className = active ? ACTIVE : INACTIVE;
+    });
+  }
+
+  document.addEventListener('astro:page-load', () => {
+    updateActiveNav();
+
+    const toggle = document.getElementById('mobile-menu-toggle');
+    const menu = document.getElementById('mobile-menu');
+    // Close mobile menu on navigation
+    menu?.classList.remove('mobile-menu-open');
+    toggle?.classList.remove('menu-open');
+    toggle?.addEventListener('click', () => {
+      menu?.classList.toggle('mobile-menu-open');
+      toggle.classList.toggle('menu-open');
+    });
+
+    // Header 滚动隐藏/显示
+    const header = document.querySelector('header');
+    if (header && !window.__headerScroll) {
+      window.__headerScroll = true;
+      let lastY = 0;
+      let ticking = false;
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          requestAnimationFrame(() => {
+            const y = window.scrollY;
+            if (y > 20) {
+              header.classList.add('header-scrolled');
+            } else {
+              header.classList.remove('header-scrolled');
+            }
+            if (y > 80 && y > lastY) {
+              header.classList.add('header-hidden');
+            } else {
+              header.classList.remove('header-hidden');
+            }
+            lastY = y;
+            ticking = false;
+          });
+          ticking = true;
+        }
+      });
+    }
+  });
+})();</script> <main class="flex-1">  <div class="max-w-6xl mx-auto px-6 py-14 md:py-20" data-astro-cid-qkptn22r> <div class="tool-lab-hero ink-reveal" data-astro-cid-qkptn22r> <div data-astro-cid-qkptn22r> <span class="inline-block px-3 py-1 text-[11px] font-sans tracking-[0.28em] text-accent dark:text-dark-accent border border-accent/25 dark:border-dark-accent/25 mb-5 uppercase" data-astro-cid-qkptn22r>Toolbox</span> <h1 class="font-display text-4xl md:text-6xl font-bold text-text dark:text-dark-text mb-4" data-astro-cid-qkptn22r>个人实验室</h1> <p class="text-text-muted dark:text-dark-text-muted font-serif text-sm md:text-base max-w-xl leading-relaxed" data-astro-cid-qkptn22r>
+一些真正能顺手用的小工具：格式转换、文本处理、图片优化和开发辅助。全部在浏览器本地运行，不上传任何数据到服务器。
+</p> </div> <div class="tool-lab-panel" aria-label="工具箱统计" data-astro-cid-qkptn22r> <span data-astro-cid-qkptn22r>15</span> <p data-astro-cid-qkptn22r>个本地工具</p> </div> </div> <!-- Categories --> <section class="tool-category ink-reveal" style="animation-delay: 0.1s" data-astro-cid-qkptn22r> <div class="tool-category-head" data-astro-cid-qkptn22r> <span data-astro-cid-qkptn22r>01</span> <div data-astro-cid-qkptn22r> <h2 data-astro-cid-qkptn22r>编码转换</h2> <p data-astro-cid-qkptn22r>数据格式与编码互转</p> </div> </div> <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" data-astro-cid-qkptn22r> <a href="/tools/json/" class="tool-card group" data-astro-cid-qkptn22r> <div class="tool-icon" data-astro-cid-qkptn22r>{ }</div> <div class="min-w-0" data-astro-cid-qkptn22r> <h3 data-astro-cid-qkptn22r>JSON 格式化</h3> <p data-astro-cid-qkptn22r>格式化、校验、压缩 JSON</p> </div> </a><a href="/tools/base64/" class="tool-card group" data-astro-cid-qkptn22r> <div class="tool-icon" data-astro-cid-qkptn22r>B64</div> <div class="min-w-0" data-astro-cid-qkptn22r> <h3 data-astro-cid-qkptn22r>Base64 编解码</h3> <p data-astro-cid-qkptn22r>文本与 Base64 互转</p> </div> </a><a href="/tools/color/" class="tool-card group" data-astro-cid-qkptn22r> <div class="tool-icon" data-astro-cid-qkptn22r>#</div> <div class="min-w-0" data-astro-cid-qkptn22r> <h3 data-astro-cid-qkptn22r>颜色转换器</h3> <p data-astro-cid-qkptn22r>HEX / RGB / HSL 互转</p> </div> </a><a href="/tools/url/" class="tool-card group" data-astro-cid-qkptn22r> <div class="tool-icon" data-astro-cid-qkptn22r>%</div> <div class="min-w-0" data-astro-cid-qkptn22r> <h3 data-astro-cid-qkptn22r>URL 编解码</h3> <p data-astro-cid-qkptn22r>URL 编码与解码</p> </div> </a><a href="/tools/timestamp/" class="tool-card group" data-astro-cid-qkptn22r> <div class="tool-icon" data-astro-cid-qkptn22r>⏱</div> <div class="min-w-0" data-astro-cid-qkptn22r> <h3 data-astro-cid-qkptn22r>时间戳转换</h3> <p data-astro-cid-qkptn22r>Unix 时间戳与日期互转</p> </div> </a> </div> </section><section class="tool-category ink-reveal" style="animation-delay: 0.2s" data-astro-cid-qkptn22r> <div class="tool-category-head" data-astro-cid-qkptn22r> <span data-astro-cid-qkptn22r>02</span> <div data-astro-cid-qkptn22r> <h2 data-astro-cid-qkptn22r>文本处理</h2> <p data-astro-cid-qkptn22r>文本分析、预览与对比</p> </div> </div> <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" data-astro-cid-qkptn22r> <a href="/tools/markdown/" class="tool-card group" data-astro-cid-qkptn22r> <div class="tool-icon" data-astro-cid-qkptn22r>M↓</div> <div class="min-w-0" data-astro-cid-qkptn22r> <h3 data-astro-cid-qkptn22r>Markdown 预览</h3> <p data-astro-cid-qkptn22r>实时 Markdown 渲染</p> </div> </a><a href="/tools/diff/" class="tool-card group" data-astro-cid-qkptn22r> <div class="tool-icon" data-astro-cid-qkptn22r>≠</div> <div class="min-w-0" data-astro-cid-qkptn22r> <h3 data-astro-cid-qkptn22r>文本对比</h3> <p data-astro-cid-qkptn22r>高亮两段文本的差异</p> </div> </a><a href="/tools/counter/" class="tool-card group" data-astro-cid-qkptn22r> <div class="tool-icon" data-astro-cid-qkptn22r>字</div> <div class="min-w-0" data-astro-cid-qkptn22r> <h3 data-astro-cid-qkptn22r>字数统计</h3> <p data-astro-cid-qkptn22r>字符、单词、行数统计</p> </div> </a><a href="/tools/regex/" class="tool-card group" data-astro-cid-qkptn22r> <div class="tool-icon" data-astro-cid-qkptn22r>.*</div> <div class="min-w-0" data-astro-cid-qkptn22r> <h3 data-astro-cid-qkptn22r>正则测试</h3> <p data-astro-cid-qkptn22r>在线测试正则表达式</p> </div> </a><a href="/tools/password/" class="tool-card group" data-astro-cid-qkptn22r> <div class="tool-icon" data-astro-cid-qkptn22r>🔒</div> <div class="min-w-0" data-astro-cid-qkptn22r> <h3 data-astro-cid-qkptn22r>密码生成器</h3> <p data-astro-cid-qkptn22r>生成安全随机密码</p> </div> </a> </div> </section><section class="tool-category ink-reveal" style="animation-delay: 0.30000000000000004s" data-astro-cid-qkptn22r> <div class="tool-category-head" data-astro-cid-qkptn22r> <span data-astro-cid-qkptn22r>03</span> <div data-astro-cid-qkptn22r> <h2 data-astro-cid-qkptn22r>图片处理</h2> <p data-astro-cid-qkptn22r>图像编辑与优化</p> </div> </div> <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" data-astro-cid-qkptn22r> <a href="/tools/remove-bg/" class="tool-card group" data-astro-cid-qkptn22r> <div class="tool-icon" data-astro-cid-qkptn22r>✂</div> <div class="min-w-0" data-astro-cid-qkptn22r> <h3 data-astro-cid-qkptn22r>智能抠图</h3> <p data-astro-cid-qkptn22r>AI 一键抠图，手动微调</p> </div> </a><a href="/tools/compress/" class="tool-card group" data-astro-cid-qkptn22r> <div class="tool-icon" data-astro-cid-qkptn22r>📦</div> <div class="min-w-0" data-astro-cid-qkptn22r> <h3 data-astro-cid-qkptn22r>图片压缩</h3> <p data-astro-cid-qkptn22r>压缩图片体积，JPG/PNG/WebP</p> </div> </a><a href="/tools/gradient/" class="tool-card group" data-astro-cid-qkptn22r> <div class="tool-icon" data-astro-cid-qkptn22r>🌈</div> <div class="min-w-0" data-astro-cid-qkptn22r> <h3 data-astro-cid-qkptn22r>CSS 渐变</h3> <p data-astro-cid-qkptn22r>可视化生成 CSS 渐变代码</p> </div> </a> </div> </section><section class="tool-category ink-reveal" style="animation-delay: 0.4s" data-astro-cid-qkptn22r> <div class="tool-category-head" data-astro-cid-qkptn22r> <span data-astro-cid-qkptn22r>04</span> <div data-astro-cid-qkptn22r> <h2 data-astro-cid-qkptn22r>开发辅助</h2> <p data-astro-cid-qkptn22r>开发者常用小工具</p> </div> </div> <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" data-astro-cid-qkptn22r> <a href="/tools/qrcode/" class="tool-card group" data-astro-cid-qkptn22r> <div class="tool-icon" data-astro-cid-qkptn22r>▦</div> <div class="min-w-0" data-astro-cid-qkptn22r> <h3 data-astro-cid-qkptn22r>二维码生成</h3> <p data-astro-cid-qkptn22r>文字/链接转二维码</p> </div> </a><a href="/tools/github/" class="tool-card group" data-astro-cid-qkptn22r> <div class="tool-icon" data-astro-cid-qkptn22r>GH</div> <div class="min-w-0" data-astro-cid-qkptn22r> <h3 data-astro-cid-qkptn22r>GitHub 查看</h3> <p data-astro-cid-qkptn22r>不跳转直接看仓库 README</p> </div> </a> </div> </section> <!-- Bottom note --> <div class="mt-16 pt-8 border-t border-border/20 dark:border-dark-border/20 ink-reveal" style="animation-delay:0.6s" data-astro-cid-qkptn22r> <p class="text-xs text-text-muted dark:text-dark-text-muted font-serif text-center leading-relaxed" data-astro-cid-qkptn22r>
+所有工具代码开源在 <a href="https://github.com/ekegukeku64-blip/blog" class="text-accent dark:text-dark-accent hover:underline" data-astro-cid-qkptn22r>GitHub</a>，<br class="sm:hidden" data-astro-cid-qkptn22r>欢迎提建议或贡献新工具。
+</p> </div> </div>  </main> <footer class="mt-auto relative mt-8"> <div class="border-t border-border/40 dark:border-dark-border/40"> <div class="max-w-5xl mx-auto px-6 py-12"> <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-10"> <!-- 关于 --> <div class="reveal-target"> <h3 class="font-display text-sm font-bold text-text dark:text-dark-text mb-4 tracking-wide">墨迹</h3> <p class="text-sm text-text-muted dark:text-dark-text-muted font-serif leading-relaxed">
+一个走非主流路线的大专生，在迷茫中摸索，在试错中成长。
+</p> </div> <!-- 导航 --> <div class="reveal-target"> <h3 class="font-display text-sm font-bold text-text dark:text-dark-text mb-4 tracking-wide">导航</h3> <div class="flex flex-col gap-2.5"> <a href="/" class="text-sm text-text-muted dark:text-dark-text-muted hover:text-accent dark:hover:text-dark-accent transition-colors font-serif">首页</a> <a href="/blog/" class="text-sm text-text-muted dark:text-dark-text-muted hover:text-accent dark:hover:text-dark-accent transition-colors font-serif">文章</a> <a href="/archive/" class="text-sm text-text-muted dark:text-dark-text-muted hover:text-accent dark:hover:text-dark-accent transition-colors font-serif">归档</a> <a href="/tools/" class="text-sm text-text-muted dark:text-dark-text-muted hover:text-accent dark:hover:text-dark-accent transition-colors font-serif">工具</a> <a href="/friends/" class="text-sm text-text-muted dark:text-dark-text-muted hover:text-accent dark:hover:text-dark-accent transition-colors font-serif">友链</a> <a href="/about/" class="text-sm text-text-muted dark:text-dark-text-muted hover:text-accent dark:hover:text-dark-accent transition-colors font-serif">关于</a> </div> </div> <!-- 最近更新 --> <div class="reveal-target"> <h3 class="font-display text-sm font-bold text-text dark:text-dark-text mb-4 tracking-wide">最近更新</h3> <div class="flex flex-col gap-3"> <a href="/blog/daily-2026-06-27/" class="group/post"> <p class="text-sm text-text-muted dark:text-dark-text-muted group-hover/post:text-accent dark:group-hover/post:text-dark-accent transition-colors font-serif line-clamp-1">GitHub 每日精选 2026-06-27</p> <p class="text-[11px] text-text-muted/50 dark:text-dark-text-muted/50 font-serif mt-0.5"> 6月27日 </p> </a><a href="/blog/daily-2026-06-26/" class="group/post"> <p class="text-sm text-text-muted dark:text-dark-text-muted group-hover/post:text-accent dark:group-hover/post:text-dark-accent transition-colors font-serif line-clamp-1">GitHub 每日精选 2026-06-26</p> <p class="text-[11px] text-text-muted/50 dark:text-dark-text-muted/50 font-serif mt-0.5"> 6月26日 </p> </a><a href="/blog/daily-2026-06-25/" class="group/post"> <p class="text-sm text-text-muted dark:text-dark-text-muted group-hover/post:text-accent dark:group-hover/post:text-dark-accent transition-colors font-serif line-clamp-1">GitHub 每日精选 2026-06-25</p> <p class="text-[11px] text-text-muted/50 dark:text-dark-text-muted/50 font-serif mt-0.5"> 6月25日 </p> </a> </div> </div> <!-- 联系 --> <div class="reveal-target"> <h3 class="font-display text-sm font-bold text-text dark:text-dark-text mb-4 tracking-wide">联系</h3> <div class="flex flex-col gap-2.5"> <a href="https://github.com/ekegukeku64-blip" target="_blank" rel="noopener" class="text-sm text-text-muted dark:text-dark-text-muted hover:text-accent dark:hover:text-dark-accent transition-colors font-serif">GitHub</a> <a href="/rss.xml" target="_blank" class="text-sm text-text-muted dark:text-dark-text-muted hover:text-accent dark:hover:text-dark-accent transition-colors font-serif">RSS 订阅</a> <a href="https://ekegukeku64-blip.github.io/tech-daily/" target="_blank" rel="noopener" class="text-sm text-text-muted dark:text-dark-text-muted hover:text-accent dark:hover:text-dark-accent transition-colors font-serif">技术日报</a> </div> </div> </div> <!-- 底部 --> <div class="pt-6 border-t border-border/20 dark:border-dark-border/20 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-text-muted/60 dark:text-dark-text-muted/60 reveal-target"> <p class="font-serif">&copy; 2026 又逢雨季 · 墨迹</p> <div class="flex items-center gap-4 font-serif"> <span>访客 <span id="busuanzi_value_site_uv" class="font-mono text-text-muted dark:text-dark-text-muted">-</span></span> <span>·</span> <span>雨天更适合相遇</span> </div> </div> </div> </div> <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script> </footer> <button id="back-to-top" class="fixed bottom-8 left-8 z-50 w-11 h-11 flex items-center justify-center
+         border-2 border-accent dark:border-dark-accent text-accent dark:text-dark-accent rounded-xl
+         bg-surface/80 dark:bg-dark-surface/80 backdrop-blur-sm
+         opacity-0 translate-y-3 pointer-events-none
+         transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)]
+         hover:bg-accent hover:text-white dark:hover:bg-dark-accent dark:hover:text-dark-surface
+         hover:scale-105 hover:shadow-lg hover:shadow-accent/20 dark:hover:shadow-dark-accent/20
+         active:scale-95 active:transition-transform active:duration-75" aria-label="回到顶部"> <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"></path> </svg> </button> <script>
+  document.addEventListener('astro:page-load', () => {
+    const btn = document.getElementById('back-to-top');
+    if (!btn) return;
+
+    if (window.__bttHandler) {
+      window.removeEventListener('scroll', window.__bttHandler);
+    }
+
+    window.__bttHandler = function () {
+      if (window.scrollY > 300) {
+        btn.classList.remove('opacity-0', 'translate-y-3', 'pointer-events-none');
+        btn.classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto');
+      } else {
+        btn.classList.add('opacity-0', 'translate-y-3', 'pointer-events-none');
+        btn.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
+      }
+    };
+
+    window.addEventListener('scroll', window.__bttHandler, { passive: true });
+    window.__bttHandler();
+
+    btn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script> <div id="music-player" class="music-player" aria-label="音乐播放器" data-astro-cid-nuxxkkcb> <!-- 展开面板 --> <div class="music-panel" id="music-panel" data-astro-cid-nuxxkkcb> <div class="music-panel-inner" data-astro-cid-nuxxkkcb> <span class="music-now-playing" id="music-label" data-astro-cid-nuxxkkcb>雨声</span> <div class="music-controls" data-astro-cid-nuxxkkcb> <button class="music-btn" id="music-prev" aria-label="上一首" data-astro-cid-nuxxkkcb> <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" data-astro-cid-nuxxkkcb> <path stroke-linecap="round" stroke-linejoin="round" d="M19 20L9 12l10-8v16zM5 19V5" data-astro-cid-nuxxkkcb></path> </svg> </button> <button class="music-btn music-btn-play" id="music-toggle" aria-label="播放" data-astro-cid-nuxxkkcb> <svg id="music-icon-play" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" data-astro-cid-nuxxkkcb> <path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" data-astro-cid-nuxxkkcb></path> <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" data-astro-cid-nuxxkkcb></path> </svg> <svg id="music-icon-pause" class="w-5 h-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" data-astro-cid-nuxxkkcb> <path stroke-linecap="round" stroke-linejoin="round" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" data-astro-cid-nuxxkkcb></path> </svg> </button> <button class="music-btn" id="music-next" aria-label="下一首" data-astro-cid-nuxxkkcb> <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" data-astro-cid-nuxxkkcb> <path stroke-linecap="round" stroke-linejoin="round" d="M5 4l10 8-10 8V4zM19 5v14" data-astro-cid-nuxxkkcb></path> </svg> </button> </div> <div class="music-tracks" id="music-tracks" data-astro-cid-nuxxkkcb> <button class="music-track" data-index="0" data-src="/music/rain.wav" data-name="雨声" data-astro-cid-nuxxkkcb> <span data-astro-cid-nuxxkkcb>🌧</span> <span data-astro-cid-nuxxkkcb>雨声</span> </button><button class="music-track" data-index="1" data-src="/music/stream.wav" data-name="溪流" data-astro-cid-nuxxkkcb> <span data-astro-cid-nuxxkkcb>💧</span> <span data-astro-cid-nuxxkkcb>溪流</span> </button><button class="music-track" data-index="2" data-src="/music/forest.wav" data-name="夜林" data-astro-cid-nuxxkkcb> <span data-astro-cid-nuxxkkcb>🌲</span> <span data-astro-cid-nuxxkkcb>夜林</span> </button> <button class="music-track music-track-custom" id="music-custom-btn" data-name="自定义" title="粘贴音频链接" data-astro-cid-nuxxkkcb> <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" data-astro-cid-nuxxkkcb> <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" data-astro-cid-nuxxkkcb></path> </svg> <span data-astro-cid-nuxxkkcb>自定义</span> </button> </div> <!-- 自定义链接输入 --> <div class="music-custom-input" id="music-custom-row" style="display:none" data-astro-cid-nuxxkkcb> <input type="text" id="music-url-input" class="music-url-input" placeholder="粘贴音频链接..." spellcheck="false" data-astro-cid-nuxxkkcb> <button class="music-btn" id="music-url-play" aria-label="播放自定义链接" data-astro-cid-nuxxkkcb> <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" data-astro-cid-nuxxkkcb> <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" data-astro-cid-nuxxkkcb></path> </svg> </button> <label class="music-btn music-file-label" aria-label="选择本地文件" title="选择本地文件" data-astro-cid-nuxxkkcb> <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" data-astro-cid-nuxxkkcb> <path stroke-linecap="round" stroke-linejoin="round" d="M3 15v4c0 1.1.9 2 2 2h14a2 2 0 002-2v-4M17 9l-5 5-5-5M12 4v10" data-astro-cid-nuxxkkcb></path> </svg> <input type="file" id="music-file-input" accept="audio/*" class="music-file-hidden" data-astro-cid-nuxxkkcb> </label> </div> </div> </div> <!-- 浮动按钮 --> <button class="music-trigger" id="music-trigger" aria-label="音乐" data-astro-cid-nuxxkkcb> <svg class="w-5 h-5 music-trigger-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" data-astro-cid-nuxxkkcb> <path stroke-linecap="round" stroke-linejoin="round" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" data-astro-cid-nuxxkkcb></path> </svg> </button> </div> <audio id="music-audio" preload="none" loop data-astro-cid-nuxxkkcb></audio>  <script>
+  function initMusicPlayer() {
+    const audio = document.getElementById('music-audio');
+    const panel = document.getElementById('music-panel');
+    const trigger = document.getElementById('music-trigger');
+    const toggle = document.getElementById('music-toggle');
+    const prev = document.getElementById('music-prev');
+    const next = document.getElementById('music-next');
+    const label = document.getElementById('music-label');
+    const iconPlay = document.getElementById('music-icon-play');
+    const iconPause = document.getElementById('music-icon-pause');
+    const trackBtns = document.querySelectorAll('.music-track');
+    const customBtn = document.getElementById('music-custom-btn');
+    const customRow = document.getElementById('music-custom-row');
+    const urlInput = document.getElementById('music-url-input');
+    const urlPlay = document.getElementById('music-url-play');
+    const fileInput = document.getElementById('music-file-input');
+
+    if (!audio || !panel || !trigger) return;
+
+    // 从 DOM 读取预设曲目
+    const builtin = [];
+    trackBtns.forEach(btn => {
+      const s = btn.getAttribute('data-src');
+      if (s) builtin.push({ name: btn.getAttribute('data-name') || '', src: s });
+    });
+
+    // 曲目池 = 预设 + 动态自定义
+    let tracks = [...builtin];
+    let currentIndex = 0;
+
+    function updateUI() {
+      if (label) label.textContent = tracks[currentIndex]?.name || '未知';
+      // 高亮预设曲目按钮
+      trackBtns.forEach((t, i) => {
+        if (t.getAttribute('data-src')) {
+          t.classList.toggle('is-active', i === currentIndex);
+        } else {
+          // 自定义按钮：当前正在播放自定义曲目时高亮
+          t.classList.toggle('is-active', currentIndex >= builtin.length);
+        }
+      });
+      if (!audio.paused) {
+        iconPlay?.classList.add('hidden');
+        iconPause?.classList.remove('hidden');
+        trigger.classList.add('is-playing');
+      } else {
+        iconPlay?.classList.remove('hidden');
+        iconPause?.classList.add('hidden');
+        trigger.classList.remove('is-playing');
+      }
+    }
+
+    function loadTrack(index) {
+      currentIndex = index;
+      audio.src = tracks[index]?.src || '';
+      audio.load();
+      updateUI();
+    }
+
+    function togglePlay() {
+      if (audio.paused) {
+        audio.play().catch(() => {});
+      } else {
+        audio.pause();
+      }
+      updateUI();
+    }
+
+    function nextTrack() {
+      loadTrack((currentIndex + 1) % tracks.length);
+      audio.play().catch(() => {});
+    }
+
+    function prevTrack() {
+      loadTrack((currentIndex - 1 + tracks.length) % tracks.length);
+      audio.play().catch(() => {});
+    }
+
+    function playCustomUrl() {
+      const url = urlInput?.value.trim();
+      if (!url) return;
+      // 替换或新增自定义曲目
+      const existingIdx = tracks.findIndex((_, i) => i >= builtin.length);
+      if (existingIdx >= 0) {
+        tracks.splice(existingIdx, 1, { name: '自定义', src: url });
+        currentIndex = existingIdx;
+      } else {
+        tracks.push({ name: '自定义', src: url });
+        currentIndex = tracks.length - 1;
+      }
+      loadTrack(currentIndex);
+      audio.play().catch(() => {});
+    }
+
+    function playCustomFile(file) {
+      const url = URL.createObjectURL(file);
+      const name = file.name.replace(/\.[^.]+$/, '');
+      const existingIdx = tracks.findIndex((_, i) => i >= builtin.length);
+      if (existingIdx >= 0) {
+        tracks.splice(existingIdx, 1, { name, src: url });
+        currentIndex = existingIdx;
+      } else {
+        tracks.push({ name, src: url });
+        currentIndex = tracks.length - 1;
+      }
+      loadTrack(currentIndex);
+      audio.play().catch(() => {});
+    }
+
+    trigger.addEventListener('click', () => {
+      panel.classList.toggle('is-open');
+    });
+
+    toggle?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      togglePlay();
+    });
+
+    next?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      nextTrack();
+    });
+
+    prev?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      prevTrack();
+    });
+
+    trackBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const idx = parseInt(btn.getAttribute('data-index') || '0');
+        const src = btn.getAttribute('data-src');
+        if (src && idx !== currentIndex) {
+          // 预设曲目
+          loadTrack(idx);
+          audio.play().catch(() => {});
+        } else if (!src) {
+          // 自定义按钮 — 展开/收起 URL 输入行
+          const row = document.getElementById('music-custom-row');
+          if (row) row.style.display = row.style.display === 'none' ? 'flex' : 'none';
+          urlInput?.focus();
+        }
+      });
+    });
+
+    urlPlay?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      playCustomUrl();
+    });
+
+    urlInput?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        playCustomUrl();
+      }
+      e.stopPropagation();
+    });
+
+    fileInput?.addEventListener('change', () => {
+      const file = fileInput.files?.[0];
+      if (file) playCustomFile(file);
+    });
+
+    document.addEventListener('click', (e) => {
+      const player = document.getElementById('music-player');
+      if (player && !player.contains(e.target)) {
+        panel.classList.remove('is-open');
+      }
+    });
+
+    audio.addEventListener('play', updateUI);
+    audio.addEventListener('pause', updateUI);
+    audio.addEventListener('ended', () => nextTrack());
+
+    // 不自动加载音频 — 等用户首次点击播放再加载
+    updateUI();
+  }
+
+  initMusicPlayer();
+  document.addEventListener('astro:page-load', initMusicPlayer);
+</script> <div id="page-progress" class="fixed top-0 left-0 w-full h-0.5 z-[9999] pointer-events-none"> <div id="page-progress-bar" class="h-full bg-accent dark:bg-dark-accent transition-all duration-200 ease-out" style="width: 0%"></div> </div> <script>
+  document.addEventListener('astro:page-load', () => {
+    const bar = document.getElementById('page-progress-bar');
+    if (!bar) return;
+
+    // 模拟加载进度
+    bar.style.width = '30%';
+    setTimeout(() => { bar.style.width = '70%'; }, 100);
+    setTimeout(() => { bar.style.width = '100%'; }, 300);
+    setTimeout(() => { bar.style.opacity = '0'; }, 500);
+    setTimeout(() => { bar.style.width = '0%'; bar.style.opacity = '1'; }, 700);
+  });
+</script> <script defer data-website-id="ed458c58-fe49-43c5-8c60-4b4bd0c936b6" src="https://cloud.umami.is/script.js"></script> <script>
+      { // block scope for is:inline scripts
+      const gv = document.getElementById('global-bg-video');
+      const poster = document.getElementById('global-bg-poster');
+      if (gv && poster) {
+        const isMobile = window.matchMedia('(max-width: 768px)').matches;
+        if (!isMobile) {
+          let loaded = false;
+          const loadVideo = () => {
+            if (loaded) return;
+            loaded = true;
+            if (!gv.src) {
+              gv.src = '/maple.mp4';
+              gv.load();
+            }
+            gv.play().then(() => {
+              poster.style.display = 'none';
+              gv.style.display = '';
+            }).catch(() => {});
+          };
+          window.addEventListener('load', () => {
+            // 等用户开始滚动或点击后才加载视频
+            const trigger = () => { setTimeout(loadVideo, 2000); };
+            window.addEventListener('scroll', trigger, { once: true, passive: true });
+            document.addEventListener('click', trigger, { once: true });
+            // 兜底：20 秒后还没交互就加载
+            setTimeout(() => loadVideo(), 20000);
+          });
+        }
+      }
+      } // end block scope
+    </script> <script>
+      function initScrollReveal() {
+        let staggerIdx = 0;
+        let staggerTimer = null;
+        const observer = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const delay = staggerIdx * 60;
+              setTimeout(() => {
+                entry.target.classList.add('is-revealed');
+              }, delay);
+              staggerIdx++;
+              clearTimeout(staggerTimer);
+              staggerTimer = setTimeout(() => { staggerIdx = 0; }, 400);
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { root: null, rootMargin: '0px 0px -30px 0px', threshold: 0.08 });
+
+        // Observe elements with .reveal-target class + prose content elements
+        document.querySelectorAll('.reveal-target').forEach(el => {
+          el.classList.remove('is-revealed');
+          observer.observe(el);
+        });
+
+        // Auto-tag prose elements inside post content for scroll reveal
+        document.querySelectorAll('.prose p, .prose h2, .prose h3, .prose pre, .prose blockquote, .prose ul, .prose ol').forEach(el => {
+          el.classList.add('reveal-target');
+          el.classList.remove('is-revealed');
+          observer.observe(el);
+        });
+      }
+
+      initScrollReveal();
+      document.addEventListener('astro:page-load', initScrollReveal);
+    </script> <script>
+      function initMagneticElements() {
+        document.querySelectorAll('nav a, nav button, .magnetic').forEach(magnet => {
+          magnet.addEventListener('mousemove', (e) => {
+            const rect = magnet.getBoundingClientRect();
+            const x = (e.clientX - rect.left) - rect.width / 2;
+            const y = (e.clientY - rect.top) - rect.height / 2;
+            magnet.style.transition = 'none';
+            magnet.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+          });
+          magnet.addEventListener('mouseleave', () => {
+            magnet.style.transition = 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+            magnet.style.transform = 'translate(0px, 0px)';
+          });
+        });
+      }
+      initMagneticElements();
+      document.addEventListener('astro:page-load', initMagneticElements);
+    </script> <script>
+      function initBlurReveal() {
+        let delayCount = 0;
+        let delayTimer = null;
+
+        const observer = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const delay = delayCount * 100;
+              setTimeout(() => {
+                entry.target.classList.add('is-focused');
+              }, 100 + delay);
+              delayCount++;
+              clearTimeout(delayTimer);
+              delayTimer = setTimeout(() => { delayCount = 0; }, 150);
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.05, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('.blur-reveal').forEach(el => {
+          el.classList.remove('is-focused');
+          observer.observe(el);
+        });
+      }
+      initBlurReveal();
+      document.addEventListener('astro:page-load', initBlurReveal);
+    </script> <script>
+      function initPageClickWave() {
+        window.__pageClickWaveLayer = document.getElementById('page-click-wave');
+        if (window.__pageClickWaveReady) return;
+        window.__pageClickWaveReady = true;
+
+        document.addEventListener('pointerdown', (event) => {
+          const layer = window.__pageClickWaveLayer;
+          if (!layer) return;
+          layer.style.setProperty('--page-wave-x', `${event.clientX}px`);
+          layer.style.setProperty('--page-wave-y', `${event.clientY}px`);
+          layer.classList.remove('is-waving');
+          void layer.offsetWidth;
+          layer.classList.add('is-waving');
+        }, { passive: true });
+
+        document.addEventListener('animationend', (event) => {
+          if (event.animationName === 'waterDropRing') {
+            window.__pageClickWaveLayer?.classList.remove('is-waving');
+          }
+        });
+      }
+
+      initPageClickWave();
+      document.addEventListener('astro:page-load', initPageClickWave);
+    </script> <div id="page-click-wave" class="page-click-wave" aria-hidden="true"></div> </body></html>
