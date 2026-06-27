@@ -1,6 +1,7 @@
 ---
 // src/pages/index.astro
 import { siteConfig } from '../utils/siteConfig';
+import VideoBackground from '../components/VideoBackground.astro';
 import '../styles/global.css';
 ---
 
@@ -17,21 +18,9 @@ import '../styles/global.css';
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-    <style>
-      .entrance-bg {
-        position: fixed;
-        inset: 0;
-        background:
-          radial-gradient(ellipse at 50% 0%, rgba(226, 168, 76, 0.06), transparent 70%),
-          radial-gradient(ellipse at 80% 50%, rgba(226, 168, 76, 0.04), transparent 50%),
-          var(--bg, #f7f5f0);
-        transition: 0.5s;
-      }
-      .dark .entrance-bg { opacity: 1; }
-    </style>
   </head>
   <body class="min-h-screen flex items-center justify-center overflow-hidden">
-    <div class="entrance-bg"></div>
+    <VideoBackground />
 
     <div class="relative z-10 text-center px-6 max-w-lg mx-auto">
       <!-- Title -->

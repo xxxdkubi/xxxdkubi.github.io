@@ -1,0 +1,159 @@
+---
+// src/components/VideoBackground.astro — 视频壁纸背景：播放 2 秒后渐隐为静态底图
+---
+<div id="video-bg-container" class="video-bg-container">
+  <!-- 静态底图始终在底部 -->
+  <div class="video-bg-wallpaper"></div>
+  <!-- 视频层：2 秒后 fadeOut -->
+  <video
+    id="bg-video"
+    src="/bg-video.mp4"
+    muted
+    playsinline
+    class="video-bg-video"
+  ></video>
+  <!-- 深色遮罩保证文字可读 -->
+  <div class="video-bg-overlay"></div>
+</div>
+
+<style is:global>
+  .video-bg-container {
+    position: fixed;
+    inset: 0;
+    z-index: -100;
+    pointer-events: none;
+  }
+
+  .video-bg-wallpaper {
+    position: absolute;
+    inset: 0;
+    background: url('/bg-wallpaper.jpg') center / cover no-repeat;
+    opacity: 1;
+  }
+
+  .video-bg-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 1;
+    transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .video-bg-video.is-fading {
+    opacity: 0;
+  }
+
+  /* 暗色遮罩：保持设计一致性 */
+  .video-bg-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(20, 25, 16, 0.52);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+  }
+
+  /* light mode overlay */
+  :root:not(.dark) .video-bg-overlay {
+    background: rgba(247, 245, 240, 0.55);
+  }
+
+  /* ===== 毛玻璃卡片效果 ===== */
+  .glass-card {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px) saturate(120%);
+    -webkit-backdrop-filter: blur(12px) saturate(120%);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 0.875rem;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .dark .glass-card {
+    background: rgba(30, 34, 24, 0.45);
+    border-color: rgba(255, 255, 255, 0.06);
+  }
+
+  /* 鼠标跟随光晕 */
+  .glass-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    pointer-events: none;
+    border-radius: inherit;
+    background: radial-gradient(
+      500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      rgba(175, 200, 235, 0.10) 0%,
+      rgba(140, 170, 210, 0.04) 30%,
+      transparent 70%
+    );
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+
+  .glass-card:hover::before {
+    opacity: 1;
+  }
+
+  .glass-card:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(175, 200, 235, 0.20);
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.25),
+      inset 0 0 0 1px rgba(175, 200, 235, 0.05);
+  }
+
+  .dark .glass-card:hover {
+    background: rgba(30, 34, 24, 0.55);
+    border-color: rgba(175, 200, 235, 0.18);
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.35),
+      inset 0 0 0 1px rgba(175, 200, 235, 0.04);
+  }
+
+  /* ===== 鼠标跟踪 JS（全局注入一次） ===== */
+  .glass-tracker-ready .glass-card {
+    /* JS 会设置 --mouse-x/--mouse-y */;
+  }
+</style>
+
+<script>
+  // 视频自动播放 + 2 秒渐隐
+  const video = document.getElementById('bg-video') as HTMLVideoElement | null;
+  if (video) {
+    video.play().catch(() => {});
+    setTimeout(() => {
+      video.classList.add('is-fading');
+    }, 2000);
+  }
+
+  // 毛玻璃鼠标跟踪
+  function initGlassTracking() {
+    document.addEventListener('mousemove', (e: MouseEvent) => {
+      const cards = document.querySelectorAll('.glass-card');
+      cards.forEach((card) => {
+        const rect = (card as HTMLElement).getBoundingClientRect();
+        // 鼠标在卡片附近 100px 范围内才更新
+        const cx = e.clientX;
+        const cy = e.clientY;
+        const isNear =
+          cx >= rect.left - 100 &&
+          cx <= rect.right + 100 &&
+          cy >= rect.top - 100 &&
+          cy <= rect.bottom + 100;
+        if (isNear) {
+          const x = ((cx - rect.left) / rect.width) * 100;
+          const y = ((cy - rect.top) / rect.height) * 100;
+          (card as HTMLElement).style.setProperty('--mouse-x', `${x}%`);
+          (card as HTMLElement).style.setProperty('--mouse-y', `${y}%`);
+        }
+      });
+    });
+  }
+
+  document.addEventListener('astro:page-load', initGlassTracking);
+  initGlassTracking();
+</script>
