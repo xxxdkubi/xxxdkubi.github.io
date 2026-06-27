@@ -1,17 +1,17 @@
 ---
-title: "Git 实用技巧：日常开发中的救命操作"
-description: "整理一些日常开发中最常用的 Git 技巧，从撤销操作到分支管理，帮你少走弯路。"
-date: 2026-05-20
+title: "Astro 博客搭建 #2：项目结构与内容配置"
+description: "手把手搭建 Astro 博客 — 目录结构、内容集合、Markdown 配置、路由规则。"
+date: 2026-05-26
 category: "技术"
-tags: [git, 工具, 效率, 教程]
+tags: [astro, 博客, 前端, 教程]
 ---
 
-# Git 实用技巧：日常开发中的救命操作
+# Astro 博客搭建 #2：项目结构与内容配置
 
 技术
-Git 实用技巧：日常开发中的救命操作
-整理一些日常开发中最常用的 Git 技巧，从撤销操作到分支管理，帮你少走弯路。
-2026年5月20日 · 697 字 · 约 3 分钟阅读 · 0 次阅读
+Astro 博客搭建 #2：项目结构与内容配置
+手把手搭建 Astro 博客 — 目录结构、内容集合、Markdown 配置、路由规则。
+2026年5月26日 · 594 字 · 约 3 分钟阅读 · 0 次阅读
 复制链接
 document.addEventListener('astro:page-load', () => {
 const btn = document.getElementById('copy-link-btn');
@@ -111,72 +111,141 @@ if (size > 12) { size -= 1; applySize(size); }
 });
 increase.addEventListener('click', () => {
 if (size
-Git 用久了，总会遇到一些”完了”的时刻。这篇文章整理一些日常开发中最实用的 Git 操作，帮你化险为夷。
-撤销：最常见的”救命”操作
-撤销最后一次提交（保留修改）
-git reset --soft HEAD~1
-提交信息写错了？代码还没改完不小心提交了？这个命令撤销提交但保留所有修改，让你重新来过。
-撤销工作区的修改
-# 撤销单个文件
-git checkout -- filename.js
-# 撤销所有修改
-git checkout -- .
-警告：这个操作不可逆。修改会永久丢失，确保你真的不需要这些改动。
-暂存当前工作（切换分支时救命）
-# 暂存
-git stash
-# 恢复
-git stash pop
-# 查看暂存列表
-git stash list
-正在写功能 A，突然要修 bug B？git stash 把当前工作藏起来，切回来再 pop 恢复。
-分支：清晰的工作流
-创建并切换到新分支
-git checkout -b feature/new-login
-# 或者用更新的语法
-git switch -c feature/new-login
-删除已合并的本地分支
-# 删除已合并的分支
-git branch --merged | grep -v "\*\|main" | xargs git branch -d
-项目做久了，本地会堆积一堆已合并的分支。这条命令批量清理。
-查看分支的最近提交
-git log --oneline --graph --all -20
-用图形化的方式看最近 20 条提交，分支关系一目了然。
-日志：找到你想要的
-搜索提交内容
-# 搜索提交信息
-git log --grep="fix login"
-# 搜索代码变更
-git log -S "functionName"
-git log -S 是代码考古利器 — 找某个函数是什么时候被加进来的。
-查看某个文件的历史
-git log --follow -p -- filename.js
---follow 会追踪文件重命名，-p 显示每次的 diff。
-高级但实用
-交互式暂存（精确提交）
-git add -p
-一个文件改了多处，只想提交其中一部分？-p 让你逐块选择要暂存的修改。
-修改最后一次提交
-git commit --amend
-提交后发现漏了文件，或者提交信息有 typo？--amend 直接修改最后一次提交。
-找回误删的分支
-# 查看所有操作记录
-git reflog
-# 恢复到某个提交
-git checkout -b recovered-branch HEAD@{2}
-git reflog 是最后的安全网。几乎所有”误删”都能通过它找回。
-别名：少打字
-git config --global alias.st status
-git config --global alias.co checkout
-git config --global alias.br branch
-git config --global alias.last 'log -1 HEAD --stat'
-git config --global alias.unstage 'reset HEAD --'
-在 ~/.gitconfig 里加这些，以后 git st 就够了。
-写在最后
-Git 的命令很多，但日常用到的其实就那几个。把上面这些练熟，90% 的场景都能从容应对。
-遇到 Git 问题不要慌，先 git status 看看当前状态，再决定下一步。
+Astro 博客搭建 2 / 3
+#1 为什么选 Astro
+#2 项目结构与内容配置
+#3 样式系统与组件设计
+上一篇聊了为什么选 Astro。这篇开始动手。
+创建项目
+npm create astro@latest my-blog
+cd my-blog
+npm install
+选模板的时候选 “Blog”，它会给你一个基础的博客结构。但我建议从空项目开始，这样每一块你都清楚。
+目录结构
+我的博客最终长这样：
+blog/
+├── src/
+│ ├── content/
+│ │ └── posts/ # Markdown 文章
+│ ├── layouts/
+│ │ ├── BaseLayout.astro # 全局布局
+│ │ └── PostLayout.astro # 文章布局
+│ ├── components/ # 组件
+│ ├── pages/ # 路由页面
+│ ├── styles/ # 全局样式
+│ └── utils/ # 工具函数
+├── public/ # 静态资源（不经过构建处理）
+│ ├── hero/ # 文章封面图
+│ └── favicon.png
+├── astro.config.mjs # 配置文件
+└── package.json
+重点说几个：
+src/content/posts/
+这是放文章的地方。每篇文章是一个 Markdown 文件，前面有 frontmatter：
+---
+title: "文章标题"
+description: "文章描述"
+pubDate: 2026-05-26
+category: "技术"
+tags: ["Astro", "教程"]
+---
+正文内容...
+src/content.config.ts
+定义文章的类型约束。这样写错字段名时构建会报错，不会静默失败：
+import { defineCollection, z } from 'astro:content';
+import { glob } from 'astro/loaders';
+const posts = defineCollection({
+loader: glob({ pattern: "**/*.md", base: "./src/content/posts" }),
+schema: z.object({
+title: z.string(),
+description: z.string(),
+pubDate: z.coerce.date(),
+category: z.string().default("随笔"),
+tags: z.array(z.string()).default([]),
+heroImage: z.string().optional(),
+featured: z.boolean().default(false),
+}),
+});
+export const collections = { posts };
+src/pages/blog/[...slug].astro
+路由文件，把 content 里的文章映射到 URL：
+---
+import { getCollection } from 'astro:content';
+import PostLayout from '../../layouts/PostLayout.astro';
+export async function getStaticPaths() {
+const posts = await getCollection('posts');
+return posts.map(post => ({
+params: { slug: post.id },
+props: { post },
+}));
+}
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+ 
+ 
+ 
+关键配置
+astro.config.mjs 里我踩过坑的几个配置：
+import { defineConfig } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
+import mdx from '@astrojs/mdx';
+import tailwind from '@astrojs/tailwind';
+export default defineConfig({
+site: 'https://ekegukeku64-blip.github.io',
+base: '/blog', // 子路径部署
+trailingSlash: 'always', // 统一尾部斜杠
+integrations: [
+sitemap(),
+mdx(),
+tailwind(),
+],
+markdown: {
+shikiConfig: {
+theme: 'one-dark-pro', // 代码高亮主题
+},
+},
+});
+site：必须填，用于生成 sitemap 和 canonical URL
+base：GitHub Pages 子路径部署时必须
+trailingSlash：设成 'always' 避免 404
+部署到 GitHub Pages
+用 GitHub Actions 自动部署。在 .github/workflows/deploy.yml 里配置：
+name: Deploy
+on:
+push:
+branches: [main]
+permissions:
+contents: read
+pages: write
+id-token: write
+jobs:
+build:
+runs-on: ubuntu-latest
+steps:
+- uses: actions/checkout@v4
+- uses: actions/setup-node@v4
+with:
+node-version: 20
+- run: npm ci
+- run: npm run build
+- uses: actions/upload-pages-artifact@v3
+with:
+path: dist
+deploy:
+needs: build
+runs-on: ubuntu-latest
+environment:
+name: github-pages
+url: ${{ steps.deployment.outputs.page_url }}
+steps:
+- id: deployment
+uses: actions/deploy-pages@v4
+在仓库 Settings → Pages 里选 “GitHub Actions” 作为 Source 就行。
+下一篇会讲怎么让博客好看起来：布局设计、样式系统、组件拆分。
+这是「Astro 博客搭建系列」的第二篇。
 目录
-Git 工具 效率 教程
+Astro 博客 前端 教程
 又逢雨季
 一个走非主流路线的大专生，在迷茫中摸索，在试错中成长。喜欢技术，喜欢记录，喜欢真实的东西。
 GitHub
@@ -185,11 +254,11 @@ GitHub
 复制链接
 Twitter
 微信
-扫码分享「Git 实用技巧：日常开发中的救命操作」
-https://ekegukeku64-blip.github.io/blog/git-tips/
-(function(){const slug = "git-tips";
-const currentUrl = "https://ekegukeku64-blip.github.io/blog/git-tips/";
-const title = "Git 实用技巧：日常开发中的救命操作";
+扫码分享「Astro 博客搭建 #2：项目结构与内容配置」
+https://ekegukeku64-blip.github.io/blog/astro-blog-02/
+(function(){const slug = "astro-blog-02";
+const currentUrl = "https://ekegukeku64-blip.github.io/blog/astro-blog-02/";
+const title = "Astro 博客搭建 #2：项目结构与内容配置";
 document.addEventListener('astro:page-load', () => {
 const likeBtn = document.getElementById('like-btn');
 const likeCount = document.getElementById('like-count');
@@ -224,50 +293,4 @@ likeIcon.style.stroke = 'currentColor';
 likeBtn.classList.remove('border-accent', 'dark:border-dark-accent');
 } else {
 // 点赞
-likedNow.push(slug);
-likesNow[slug] = (likesNow[slug] || 0) + 1;
-likeIcon.style.fill = 'var(--color-accent)';
-likeIcon.style.stroke = 'var(--color-accent)';
-likeBtn.classList.add('border-accent', 'dark:border-dark-accent');
-// 墨花绽放动画
-spawnBloom(likeBtn);
-}
-likeCount.textContent = likesNow[slug] || 0;
-localStorage.setItem('blog_liked', JSON.stringify(likedNow));
-localStorage.setItem('blog_likes', JSON.stringify(likesNow));
-});
-// ===== 墨花绽放 =====
-function spawnBloom(anchor) {
-const container = document.getElementById('bloom-container');
-if (!container) return;
-const rect = anchor.getBoundingClientRect();
-const cx = rect.left + rect.width / 2;
-const cy = rect.top + rect.height / 2;
-for (let i = 0; i petal.remove(), 700);
-}
-}
-// ===== 复制链接 =====
-copyBtn?.addEventListener('click', async () => {
-try {
-await navigator.clipboard.writeText(currentUrl);
-const span = copyBtn.querySelector('span');
-span.textContent = '已复制';
-setTimeout(() => { span.textContent = '复制链接'; }, 2000);
-} catch {
-// fallback
-const ta = document.createElement('textarea');
-ta.value = currentUrl;
-document.body.appendChild(ta);
-ta.select();
-document.execCommand('copy');
-document.body.removeChild(ta);
-const span = copyBtn.querySelector('span');
-span.textContent = '已复制';
-setTimeout(() => { span.textContent = '复制链接'; }, 2000);
-}
-});
-// ===== 二维码 =====
-function drawQR(canvas, text) {
-const ctx = canvas.getContext('2d');
-const size = canvas.width;
-ctx.fill
+

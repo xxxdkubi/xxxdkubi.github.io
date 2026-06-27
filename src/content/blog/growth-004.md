@@ -1,17 +1,17 @@
 ---
-title: "VS Code 效率指南：让你的开发速度翻倍"
-description: "从快捷键到插件配置，一份面向日常开发的 VS Code 实用技巧合集。"
-date: 2026-05-23
-category: "工具"
-tags: [vs code, 效率, 工具, 前端]
+title: "成长记录 #4：一次社死的面试"
+description: "人生第一次面试，紧张到脑子空白，但也没那么可怕。"
+date: 2026-05-27
+category: "成长记录"
+tags: [成长, 面试, 自白]
 ---
 
-# VS Code 效率指南：让你的开发速度翻倍
+# 成长记录 #4：一次社死的面试
 
-工具
-VS Code 效率指南：让你的开发速度翻倍
-从快捷键到插件配置，一份面向日常开发的 VS Code 实用技巧合集。
-2026年5月23日 · 941 字 · 约 3 分钟阅读 · 0 次阅读
+成长记录
+成长记录 #4：一次社死的面试
+人生第一次面试，紧张到脑子空白，但也没那么可怕。
+2026年5月27日 · 649 字 · 约 2 分钟阅读 · 0 次阅读
 复制链接
 document.addEventListener('astro:page-load', () => {
 const btn = document.getElementById('copy-link-btn');
@@ -111,87 +111,46 @@ if (size > 12) { size -= 1; applySize(size); }
 });
 increase.addEventListener('click', () => {
 if (size
-工欲善其事，必先利其器。VS Code 作为目前最流行的代码编辑器，藏着大量被忽视的高效功能。这篇文章不讲基础，只聊真正能提速的实战技巧。
-光标操作：多光标是核心生产力
-多光标是 VS Code 最被低估的功能之一。
-Ctrl+D：选中当前单词，继续按会选中下一个相同单词。比全局替换精准得多。
-Alt+Click：在任意位置添加光标，适合不规则的多行编辑。
-Ctrl+Shift+L：选中所有匹配项并添加光标。比 Ctrl+D 更暴力。
-Ctrl+Alt+↑/↓：向上/下方添加光标，适合处理列对齐的数据。
-// 场景：批量把 const 改成 let
-const a = 1; // 光标在这
-const b = 2; // Ctrl+Alt+↓ 自动添加
-const c = 3; // 三行同时编辑
-快速操作：减少鼠标依赖
-操作快捷键说明
-命令面板Ctrl+Shift+PVS Code 的一切入口
-快速打开文件Ctrl+P输入文件名片段即可模糊匹配
-跳转到行Ctrl+G输入行号直达
-跳转到符号Ctrl+Shift+O在当前文件的函数/类之间跳转
-工作区符号Ctrl+T全项目搜索函数名
-侧边栏切换Ctrl+B快速隐藏/显示侧边栏
-终端切换Ctrl+`内置终端，不用切窗口
-向上/下复制行Shift+Alt+↑/↓比复制粘贴快
-智能重构：让编辑器替你干活
-重命名符号（F2）
-不是简单的查找替换，而是语义级的重命名。它知道变量的作用域，不会误改同名但无关的代码。
-快速修复（Ctrl+.）
-光标放在报错位置，按 Ctrl+. 弹出修复建议。常见场景：
-自动导入缺失的模块
-创建未定义的函数
-转换箭头函数和普通函数
-提取重构（Ctrl+Shift+R）
-选中一段代码，按 Ctrl+Shift+R 可以：
-提取为函数
-提取为常量
-提取为变量
-终端集成：不离开编辑器
-# 在当前文件目录打开终端
-Ctrl+`
-# 运行选中的代码块
-选中代码 → Ctrl+Shift+P → "Run Selected Text"
-# 终端中快速打开文件
-Ctrl+P 输入文件名
-终端支持多实例：点 + 号新建，下拉切换。前端项目可以一个跑 dev server，一个跑 git。
-推荐插件：只装真正有用的
-必备
-GitLens：行内显示 git blame 信息，追溯代码历史一键搞定
-Error Lens：错误信息直接显示在代码行内，不用看底部状态栏
-indent-rainbow：缩进层级彩色标记，Python/JS 写起来不迷路
-前端
-Tailwind CSS IntelliSense：Tailwind 类名自动补全和预览
-Auto Rename Tag：修改 HTML 标签时自动同步闭合标签
-CSS Peek：Ctrl+Click 跳转到 CSS 定义
-通用
-Bookmarks：在代码中打书签，大文件跳转神器
-TODO Highlight：高亮 TODO/FIXME 注释
-Better Comments：按类型给注释上色（警告、信息、待办）
-设置技巧
-// settings.json 中值得改的默认值
-{
-// 自动保存，不用手动 Ctrl+S
-"files.autoSave": "afterDelay",
-"files.autoSaveDelay": 1000,
-// 关闭小地图，省空间
-"editor.minimap.enabled": false,
-// 字体连字（需要字体支持，如 JetBrains Mono）
-"editor.fontLigatures": true,
-// 滚动超出最后一行，留白更舒服
-"editor.scrollBeyondLastLine": false,
-// Tab 大小
-"editor.tabSize": 2,
-"editor.insertSpaces": true,
-// 终端字体大小
-"terminal.integrated.fontSize": 14
-}
-真正提效的习惯
-少用鼠标：强迫自己用快捷键，两周后速度会质变
-善用命令面板：记不住快捷键没关系，Ctrl+Shift+P 搜索就行
-配置同步：用 Settings Sync 插件，换电脑不丢配置
-工作区设置：项目级 .vscode/settings.json 统一团队规范
-效率不是一蹴而就的，而是每天少按几次鼠标、少切几次窗口积累出来的。
+成长记录 4 / 12
+#1 我为什么开始写博客
+#2 AI 不会替你成长
+#3 关于「半途而废」这件事
+#4 一次社死的面试
+#5 闲鱼上架第一天
+#6 被朋友问住了
+#7 凌晨三点的代码
+#8 第一次收到反馈
+#9 学不动的时候怎么办
+#10 一个月了
+#11 代码改了一行，心情好了一天
+#12 技术人的周二
+面试前一晚，我把简历改到了第五版。
+“熟悉 Vue”——删了。“了解 Vue”——也删了。最后写的是”正在学习前端开发”。投出去之后躺在床上，脑子里全是明天要穿什么、要说什么、答不上来怎么办。
+第二天到了那家公司，前台让我填表。我手心全是汗，字写得歪歪扭扭的。
+坐下来之后
+面试官是个中年人，穿格子衫，桌上放着一杯凉了的茶。
+没问什么刁钻的问题。就让我介绍做过的东西。
+我讲了博客。讲着讲着就不紧张了——因为这是我真实做过的东西。怎么配的环境，怎么踩的坑，部署的时候 GitHub Actions 报了什么错，我怎么一个一个解决的。这些不用背，张嘴就来。
+讲完之后他点了点头，问了几个技术问题。
+有一个我答得上来。有一个答不上来。
+答不上来的时候我盯着桌上的茶杯看了两秒，说：“这个我还不太了解，但我可以学。”
+他笑了一下。“行。大部分人答不上来都会硬编，你这样挺好的。”
+就这一句话，我整个人松了。手心的汗好像也干了一点。
+结果没过
+技术基础不够，他们需要能直接上手的人。
+说实话，失落是有的。走出那栋楼的时候，太阳特别大，我眯着眼睛站了一会儿。
+但没有我想象中那么难受。
+因为我发现了一件事——我之前怕的不是面试，是”被评判”。真坐下来之后，对面也是个普通人，也在正常聊天。不是审判你，是在了解你。
+而且我发现了一个规律：简历上写的东西，一定要能讲清楚来龙去脉。不是背定义，是讲你为什么这么写、遇到了什么、怎么解决的。
+面试官想听的不是”你会什么”，而是”你做过什么”。
+回来的路上
+我坐在公交车上，戴着耳机，看着窗外发呆。
+基础确实不扎实。HTML 和 CSS 还行，但 JavaScript 基础不够，框架也没系统学过。
+不是为了下次面试。是因为我发现基础不牢的话，做什么都飘。就像盖房子，地基没打好，上面盖得再好看也会晃。
+失败不可怕。可怕的是你连试都不敢试。
+至少现在我知道了——我能坐到那个位置上，能开口说话。手心出汗也没关系。
 目录
-VS Code 效率 工具 前端
+成长 面试 自白
 又逢雨季
 一个走非主流路线的大专生，在迷茫中摸索，在试错中成长。喜欢技术，喜欢记录，喜欢真实的东西。
 GitHub
@@ -200,11 +159,11 @@ GitHub
 复制链接
 Twitter
 微信
-扫码分享「VS Code 效率指南：让你的开发速度翻倍」
-https://ekegukeku64-blip.github.io/blog/vscode-productivity/
-(function(){const slug = "vscode-productivity";
-const currentUrl = "https://ekegukeku64-blip.github.io/blog/vscode-productivity/";
-const title = "VS Code 效率指南：让你的开发速度翻倍";
+扫码分享「成长记录 #4：一次社死的面试」
+https://ekegukeku64-blip.github.io/blog/growth-004/
+(function(){const slug = "growth-004";
+const currentUrl = "https://ekegukeku64-blip.github.io/blog/growth-004/";
+const title = "成长记录 #4：一次社死的面试";
 document.addEventListener('astro:page-load', () => {
 const likeBtn = document.getElementById('like-btn');
 const likeCount = document.getElementById('like-count');
@@ -270,4 +229,40 @@ span.textContent = '已复制';
 setTimeout(() => { span.textContent = '复制链接'; }, 2000);
 } catch {
 // fallback
-const ta = document.createEle
+const ta = document.createElement('textarea');
+ta.value = currentUrl;
+document.body.appendChild(ta);
+ta.select();
+document.execCommand('copy');
+document.body.removeChild(ta);
+const span = copyBtn.querySelector('span');
+span.textContent = '已复制';
+setTimeout(() => { span.textContent = '复制链接'; }, 2000);
+}
+});
+// ===== 二维码 =====
+function drawQR(canvas, text) {
+const ctx = canvas.getContext('2d');
+const size = canvas.width;
+ctx.fillStyle = '#ffffff';
+ctx.fillRect(0, 0, size, size);
+// 简易 QR 编码（版本1，容错L，编码URL）
+// 使用黑白方块矩阵模拟 QR 码外观
+const modules = 21;
+const cellSize = size / (modules + 8); // 留白
+const offset = cellSize * 4;
+// 生成确定性图案（基于文本哈希）
+let hash = 0;
+for (let i = 0; i = modules - 8) || (r >= modules - 8 && c {
+qrModal.classList.remove('hidden');
+if (qrCanvas) drawQR(qrCanvas, currentUrl);
+});
+qrBackdrop?.addEventListener('click', () => {
+qrModal.classList.add('hidden');
+});
+});
+})();
+相关文章
+成长记录 #1：我为什么开始写博客
+一个大专生的自白 — 迷茫、后悔、和一点点不甘心。
+成长自白

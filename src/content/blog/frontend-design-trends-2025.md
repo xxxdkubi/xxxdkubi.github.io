@@ -1,17 +1,17 @@
 ---
-title: "VS Code 效率指南：让你的开发速度翻倍"
-description: "从快捷键到插件配置，一份面向日常开发的 VS Code 实用技巧合集。"
-date: 2026-05-23
-category: "工具"
-tags: [vs code, 效率, 工具, 前端]
+title: "2025 前端设计趋势：开发者值得关注的方向"
+description: "从玻璃拟态到滚动驱动动画，梳理 2025 年最值得关注的前端设计趋势和 CSS 新特性。"
+date: 2026-05-22
+category: "技术"
+tags: [前端, css, 设计, 趋势]
 ---
 
-# VS Code 效率指南：让你的开发速度翻倍
+# 2025 前端设计趋势：开发者值得关注的方向
 
-工具
-VS Code 效率指南：让你的开发速度翻倍
-从快捷键到插件配置，一份面向日常开发的 VS Code 实用技巧合集。
-2026年5月23日 · 941 字 · 约 3 分钟阅读 · 0 次阅读
+技术
+2025 前端设计趋势：开发者值得关注的方向
+从玻璃拟态到滚动驱动动画，梳理 2025 年最值得关注的前端设计趋势和 CSS 新特性。
+2026年5月22日 · 548 字 · 约 2 分钟阅读 · 0 次阅读
 复制链接
 document.addEventListener('astro:page-load', () => {
 const btn = document.getElementById('copy-link-btn');
@@ -111,87 +111,69 @@ if (size > 12) { size -= 1; applySize(size); }
 });
 increase.addEventListener('click', () => {
 if (size
-工欲善其事，必先利其器。VS Code 作为目前最流行的代码编辑器，藏着大量被忽视的高效功能。这篇文章不讲基础，只聊真正能提速的实战技巧。
-光标操作：多光标是核心生产力
-多光标是 VS Code 最被低估的功能之一。
-Ctrl+D：选中当前单词，继续按会选中下一个相同单词。比全局替换精准得多。
-Alt+Click：在任意位置添加光标，适合不规则的多行编辑。
-Ctrl+Shift+L：选中所有匹配项并添加光标。比 Ctrl+D 更暴力。
-Ctrl+Alt+↑/↓：向上/下方添加光标，适合处理列对齐的数据。
-// 场景：批量把 const 改成 let
-const a = 1; // 光标在这
-const b = 2; // Ctrl+Alt+↓ 自动添加
-const c = 3; // 三行同时编辑
-快速操作：减少鼠标依赖
-操作快捷键说明
-命令面板Ctrl+Shift+PVS Code 的一切入口
-快速打开文件Ctrl+P输入文件名片段即可模糊匹配
-跳转到行Ctrl+G输入行号直达
-跳转到符号Ctrl+Shift+O在当前文件的函数/类之间跳转
-工作区符号Ctrl+T全项目搜索函数名
-侧边栏切换Ctrl+B快速隐藏/显示侧边栏
-终端切换Ctrl+`内置终端，不用切窗口
-向上/下复制行Shift+Alt+↑/↓比复制粘贴快
-智能重构：让编辑器替你干活
-重命名符号（F2）
-不是简单的查找替换，而是语义级的重命名。它知道变量的作用域，不会误改同名但无关的代码。
-快速修复（Ctrl+.）
-光标放在报错位置，按 Ctrl+. 弹出修复建议。常见场景：
-自动导入缺失的模块
-创建未定义的函数
-转换箭头函数和普通函数
-提取重构（Ctrl+Shift+R）
-选中一段代码，按 Ctrl+Shift+R 可以：
-提取为函数
-提取为常量
-提取为变量
-终端集成：不离开编辑器
-# 在当前文件目录打开终端
-Ctrl+`
-# 运行选中的代码块
-选中代码 → Ctrl+Shift+P → "Run Selected Text"
-# 终端中快速打开文件
-Ctrl+P 输入文件名
-终端支持多实例：点 + 号新建，下拉切换。前端项目可以一个跑 dev server，一个跑 git。
-推荐插件：只装真正有用的
-必备
-GitLens：行内显示 git blame 信息，追溯代码历史一键搞定
-Error Lens：错误信息直接显示在代码行内，不用看底部状态栏
-indent-rainbow：缩进层级彩色标记，Python/JS 写起来不迷路
-前端
-Tailwind CSS IntelliSense：Tailwind 类名自动补全和预览
-Auto Rename Tag：修改 HTML 标签时自动同步闭合标签
-CSS Peek：Ctrl+Click 跳转到 CSS 定义
-通用
-Bookmarks：在代码中打书签，大文件跳转神器
-TODO Highlight：高亮 TODO/FIXME 注释
-Better Comments：按类型给注释上色（警告、信息、待办）
-设置技巧
-// settings.json 中值得改的默认值
-{
-// 自动保存，不用手动 Ctrl+S
-"files.autoSave": "afterDelay",
-"files.autoSaveDelay": 1000,
-// 关闭小地图，省空间
-"editor.minimap.enabled": false,
-// 字体连字（需要字体支持，如 JetBrains Mono）
-"editor.fontLigatures": true,
-// 滚动超出最后一行，留白更舒服
-"editor.scrollBeyondLastLine": false,
-// Tab 大小
-"editor.tabSize": 2,
-"editor.insertSpaces": true,
-// 终端字体大小
-"terminal.integrated.fontSize": 14
+前端开发不只是写逻辑 — 好的视觉体验同样重要。2025 年，设计趋势和 CSS 新能力的结合，让开发者有了更多施展空间。
+主流设计风格
+玻璃拟态（Glassmorphism）
+通过 backdrop-filter: blur() 实现磨砂玻璃效果，搭配动态渐变和极光色背景，适合卡片、导航栏等浮层元素。
+.glass-card {
+background: rgba(255, 255, 255, 0.15);
+backdrop-filter: blur(12px);
+border: 1px solid rgba(255, 255, 255, 0.2);
+border-radius: 12px;
 }
-真正提效的习惯
-少用鼠标：强迫自己用快捷键，两周后速度会质变
-善用命令面板：记不住快捷键没关系，Ctrl+Shift+P 搜索就行
-配置同步：用 Settings Sync 插件，换电脑不丢配置
-工作区设置：项目级 .vscode/settings.json 统一团队规范
-效率不是一蹴而就的，而是每天少按几次鼠标、少切几次窗口积累出来的。
+这种风格的关键是层次感 — 半透明背景 + 模糊滤镜 + 细边框，三层叠加才有质感。
+新粗野主义（Neobrutalism）
+粗边框、硬阴影、高对比配色，风格大胆直白。深受初创公司和创意类项目青睐，实现简单且辨识度高。
+.brutal-card {
+border: 3px solid #000;
+box-shadow: 6px 6px 0 #000;
+background: #ffde59;
+padding: 1.5rem;
+}
+便当网格（Bento Grid）
+受 Apple 启发的模块化卡片布局，大小不一的网格组合，适用于仪表盘、作品集和落地页。
+.bento-grid {
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+grid-template-rows: auto;
+gap: 1rem;
+}
+.bento-item.large { grid-column: span 2; grid-row: span 2; }
+CSS 新特性
+滚动驱动动画（Scroll-Driven Animations）
+animation-timeline: scroll() 让动画绑定滚动位置而非时间线，可实现视差、进度条等效果，无需 JavaScript。
+.progress-bar {
+animation: grow-width linear;
+animation-timeline: scroll();
+}
+@keyframes grow-width {
+from { width: 0%; }
+to { width: 100%; }
+}
+容器查询（Container Queries）
+@container 让组件根据父容器尺寸而非视口适配，真正实现组件级响应式设计。
+.card-container { container-type: inline-size; }
+@container (min-width: 400px) {
+.card { display: flex; gap: 1rem; }
+}
+CSS 嵌套与级联层
+@layer 管理样式优先级，减少 !important 滥用。原生嵌套语法已全面可用，不再需要预处理器。
+@layer base, components, utilities;
+@layer components {
+.btn {
+padding: 0.5rem 1rem;
+&:hover { opacity: 0.9; }
+}
+}
+字体与色彩趋势
+可变字体（Variable Fonts）：单文件支持多字重、字宽，配合 font-variation-settings 实现动态排版动画
+衬线字体回归：编辑风格的衬线体重新流行，常与无衬线体混搭形成对比
+色彩方向：暖色调和大地色系兴起，暗色模式持续流行搭配高饱和强调色
+写在最后
+趋势是指南，不是教条。选择适合自己项目的风格，比追逐每一个热点更重要。
+好的设计是尽可能少的设计。— Dieter Rams
 目录
-VS Code 效率 工具 前端
+前端 CSS 设计 趋势
 又逢雨季
 一个走非主流路线的大专生，在迷茫中摸索，在试错中成长。喜欢技术，喜欢记录，喜欢真实的东西。
 GitHub
@@ -200,11 +182,11 @@ GitHub
 复制链接
 Twitter
 微信
-扫码分享「VS Code 效率指南：让你的开发速度翻倍」
-https://ekegukeku64-blip.github.io/blog/vscode-productivity/
-(function(){const slug = "vscode-productivity";
-const currentUrl = "https://ekegukeku64-blip.github.io/blog/vscode-productivity/";
-const title = "VS Code 效率指南：让你的开发速度翻倍";
+扫码分享「2025 前端设计趋势：开发者值得关注的方向」
+https://ekegukeku64-blip.github.io/blog/frontend-design-trends-2025/
+(function(){const slug = "frontend-design-trends-2025";
+const currentUrl = "https://ekegukeku64-blip.github.io/blog/frontend-design-trends-2025/";
+const title = "2025 前端设计趋势：开发者值得关注的方向";
 document.addEventListener('astro:page-load', () => {
 const likeBtn = document.getElementById('like-btn');
 const likeCount = document.getElementById('like-count');
@@ -270,4 +252,12 @@ span.textContent = '已复制';
 setTimeout(() => { span.textContent = '复制链接'; }, 2000);
 } catch {
 // fallback
-const ta = document.createEle
+const ta = document.createElement('textarea');
+ta.value = currentUrl;
+document.body.appendChild(ta);
+ta.select();
+document.execCommand('copy');
+document.body.removeChild(ta);
+const span = copyBtn.querySelector('span');
+span.textContent = '已复制';
+setTim

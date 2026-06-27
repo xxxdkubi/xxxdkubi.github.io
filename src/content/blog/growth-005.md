@@ -1,17 +1,17 @@
 ---
-title: "VS Code 效率指南：让你的开发速度翻倍"
-description: "从快捷键到插件配置，一份面向日常开发的 VS Code 实用技巧合集。"
-date: 2026-05-23
-category: "工具"
-tags: [vs code, 效率, 工具, 前端]
+title: "成长记录 #5：闲鱼上架第一天"
+description: "在闲鱼上卖 AI 服务，从零开始，一天下来学到的东西比一个月都多。"
+date: 2026-05-28
+category: "成长记录"
+tags: [成长, 闲鱼, ai, 实践]
 ---
 
-# VS Code 效率指南：让你的开发速度翻倍
+# 成长记录 #5：闲鱼上架第一天
 
-工具
-VS Code 效率指南：让你的开发速度翻倍
-从快捷键到插件配置，一份面向日常开发的 VS Code 实用技巧合集。
-2026年5月23日 · 941 字 · 约 3 分钟阅读 · 0 次阅读
+成长记录
+成长记录 #5：闲鱼上架第一天
+在闲鱼上卖 AI 服务，从零开始，一天下来学到的东西比一个月都多。
+2026年5月28日 · 604 字 · 约 2 分钟阅读 · 0 次阅读
 复制链接
 document.addEventListener('astro:page-load', () => {
 const btn = document.getElementById('copy-link-btn');
@@ -111,87 +111,52 @@ if (size > 12) { size -= 1; applySize(size); }
 });
 increase.addEventListener('click', () => {
 if (size
-工欲善其事，必先利其器。VS Code 作为目前最流行的代码编辑器，藏着大量被忽视的高效功能。这篇文章不讲基础，只聊真正能提速的实战技巧。
-光标操作：多光标是核心生产力
-多光标是 VS Code 最被低估的功能之一。
-Ctrl+D：选中当前单词，继续按会选中下一个相同单词。比全局替换精准得多。
-Alt+Click：在任意位置添加光标，适合不规则的多行编辑。
-Ctrl+Shift+L：选中所有匹配项并添加光标。比 Ctrl+D 更暴力。
-Ctrl+Alt+↑/↓：向上/下方添加光标，适合处理列对齐的数据。
-// 场景：批量把 const 改成 let
-const a = 1; // 光标在这
-const b = 2; // Ctrl+Alt+↓ 自动添加
-const c = 3; // 三行同时编辑
-快速操作：减少鼠标依赖
-操作快捷键说明
-命令面板Ctrl+Shift+PVS Code 的一切入口
-快速打开文件Ctrl+P输入文件名片段即可模糊匹配
-跳转到行Ctrl+G输入行号直达
-跳转到符号Ctrl+Shift+O在当前文件的函数/类之间跳转
-工作区符号Ctrl+T全项目搜索函数名
-侧边栏切换Ctrl+B快速隐藏/显示侧边栏
-终端切换Ctrl+`内置终端，不用切窗口
-向上/下复制行Shift+Alt+↑/↓比复制粘贴快
-智能重构：让编辑器替你干活
-重命名符号（F2）
-不是简单的查找替换，而是语义级的重命名。它知道变量的作用域，不会误改同名但无关的代码。
-快速修复（Ctrl+.）
-光标放在报错位置，按 Ctrl+. 弹出修复建议。常见场景：
-自动导入缺失的模块
-创建未定义的函数
-转换箭头函数和普通函数
-提取重构（Ctrl+Shift+R）
-选中一段代码，按 Ctrl+Shift+R 可以：
-提取为函数
-提取为常量
-提取为变量
-终端集成：不离开编辑器
-# 在当前文件目录打开终端
-Ctrl+`
-# 运行选中的代码块
-选中代码 → Ctrl+Shift+P → "Run Selected Text"
-# 终端中快速打开文件
-Ctrl+P 输入文件名
-终端支持多实例：点 + 号新建，下拉切换。前端项目可以一个跑 dev server，一个跑 git。
-推荐插件：只装真正有用的
-必备
-GitLens：行内显示 git blame 信息，追溯代码历史一键搞定
-Error Lens：错误信息直接显示在代码行内，不用看底部状态栏
-indent-rainbow：缩进层级彩色标记，Python/JS 写起来不迷路
-前端
-Tailwind CSS IntelliSense：Tailwind 类名自动补全和预览
-Auto Rename Tag：修改 HTML 标签时自动同步闭合标签
-CSS Peek：Ctrl+Click 跳转到 CSS 定义
-通用
-Bookmarks：在代码中打书签，大文件跳转神器
-TODO Highlight：高亮 TODO/FIXME 注释
-Better Comments：按类型给注释上色（警告、信息、待办）
-设置技巧
-// settings.json 中值得改的默认值
-{
-// 自动保存，不用手动 Ctrl+S
-"files.autoSave": "afterDelay",
-"files.autoSaveDelay": 1000,
-// 关闭小地图，省空间
-"editor.minimap.enabled": false,
-// 字体连字（需要字体支持，如 JetBrains Mono）
-"editor.fontLigatures": true,
-// 滚动超出最后一行，留白更舒服
-"editor.scrollBeyondLastLine": false,
-// Tab 大小
-"editor.tabSize": 2,
-"editor.insertSpaces": true,
-// 终端字体大小
-"terminal.integrated.fontSize": 14
-}
-真正提效的习惯
-少用鼠标：强迫自己用快捷键，两周后速度会质变
-善用命令面板：记不住快捷键没关系，Ctrl+Shift+P 搜索就行
-配置同步：用 Settings Sync 插件，换电脑不丢配置
-工作区设置：项目级 .vscode/settings.json 统一团队规范
-效率不是一蹴而就的，而是每天少按几次鼠标、少切几次窗口积累出来的。
+成长记录 5 / 12
+#1 我为什么开始写博客
+#2 AI 不会替你成长
+#3 关于「半途而废」这件事
+#4 一次社死的面试
+#5 闲鱼上架第一天
+#6 被朋友问住了
+#7 凌晨三点的代码
+#8 第一次收到反馈
+#9 学不动的时候怎么办
+#10 一个月了
+#11 代码改了一行，心情好了一天
+#12 技术人的周二
+老板跟我说过一句话：“学的东西不用，等于没学。”
+我盯着这句话想了好几天。然后打开了闲鱼。
+写文案
+我做了三个服务：老照片修复、证件照处理、AI 头像生成。
+技术上不难。难的是写文案。
+第一版我写的是：“专业团队，品质保证，用心服务每一位客户。”
+写完自己读了一遍——假得我起鸡皮疙瘩。我一个人哪来的团队？
+删掉重写。第二版：“老照片修复，AI 处理，效果好。”
+又读了一遍——干得像产品说明书。
+最后我写的是：“我用 AI 帮你修照片。修完你看看，不满意不收钱。”
+就这么简单。因为这就是事实。
+等
+上架之后，盯着手机等。
+一天。没有。
+两天。还是没有。
+第三天，有人来问了一句：“这个真的能用吗？”
+我心跳加速了一下，赶紧回复。打了一大段话，又删掉一半，重新组织语言，发出去。
+然后——没下文了。
+盯着聊天界面看了半小时。对方的头像再也没亮过。
+那一刻我突然理解了一件事：做生意和写代码不一样。代码你敲完就知道对不对。但你发出去了，然后就是等。不知道等多久，不知道等来的是什么。
+第六天
+终于有人真的买了。
+一张老照片，黑白的，模糊得快看不清人脸了。他说这是他爷爷年轻时候的照片，想修复一下。
+我用 AI 处理了二十分钟，试了好几个参数，调了三次。效果不是完美的，有些地方还是模糊。但比原图好太多了——至少能看清脸了。
+发给他之后，他回了一句：“可以，比我想象中好。”
+付了八块钱。
+我盯着那八块钱看了很久。不是因为钱多。是因为——有人用我做的东西解决了问题。
+这种感觉和写代码不一样。代码跑通了你会开心，但那只是”我做到了”。而有人因为你修好了一张照片，能看清爷爷年轻时的样子——那是另一种东西。
+晚上我又接了两单。一张毕业照，一张全家福。
+修完之后客户说”谢谢”。
+我突然觉得，我好像在做一件挺有意思的事。
 目录
-VS Code 效率 工具 前端
+成长 闲鱼 AI 实践
 又逢雨季
 一个走非主流路线的大专生，在迷茫中摸索，在试错中成长。喜欢技术，喜欢记录，喜欢真实的东西。
 GitHub
@@ -200,11 +165,11 @@ GitHub
 复制链接
 Twitter
 微信
-扫码分享「VS Code 效率指南：让你的开发速度翻倍」
-https://ekegukeku64-blip.github.io/blog/vscode-productivity/
-(function(){const slug = "vscode-productivity";
-const currentUrl = "https://ekegukeku64-blip.github.io/blog/vscode-productivity/";
-const title = "VS Code 效率指南：让你的开发速度翻倍";
+扫码分享「成长记录 #5：闲鱼上架第一天」
+https://ekegukeku64-blip.github.io/blog/growth-005/
+(function(){const slug = "growth-005";
+const currentUrl = "https://ekegukeku64-blip.github.io/blog/growth-005/";
+const title = "成长记录 #5：闲鱼上架第一天";
 document.addEventListener('astro:page-load', () => {
 const likeBtn = document.getElementById('like-btn');
 const likeCount = document.getElementById('like-count');
@@ -270,4 +235,43 @@ span.textContent = '已复制';
 setTimeout(() => { span.textContent = '复制链接'; }, 2000);
 } catch {
 // fallback
-const ta = document.createEle
+const ta = document.createElement('textarea');
+ta.value = currentUrl;
+document.body.appendChild(ta);
+ta.select();
+document.execCommand('copy');
+document.body.removeChild(ta);
+const span = copyBtn.querySelector('span');
+span.textContent = '已复制';
+setTimeout(() => { span.textContent = '复制链接'; }, 2000);
+}
+});
+// ===== 二维码 =====
+function drawQR(canvas, text) {
+const ctx = canvas.getContext('2d');
+const size = canvas.width;
+ctx.fillStyle = '#ffffff';
+ctx.fillRect(0, 0, size, size);
+// 简易 QR 编码（版本1，容错L，编码URL）
+// 使用黑白方块矩阵模拟 QR 码外观
+const modules = 21;
+const cellSize = size / (modules + 8); // 留白
+const offset = cellSize * 4;
+// 生成确定性图案（基于文本哈希）
+let hash = 0;
+for (let i = 0; i = modules - 8) || (r >= modules - 8 && c {
+qrModal.classList.remove('hidden');
+if (qrCanvas) drawQR(qrCanvas, currentUrl);
+});
+qrBackdrop?.addEventListener('click', () => {
+qrModal.classList.add('hidden');
+});
+});
+})();
+相关文章
+成长记录 #2：AI 不会替你成长
+用 AI 写代码半年的体感 — 它是工具，不是拐杖。
+成长AI
+成长记录 #8：第一次收到反馈
+有人在闲鱼上问我"这个真的能用吗"，我突然觉得事情在起变化。
+成长闲

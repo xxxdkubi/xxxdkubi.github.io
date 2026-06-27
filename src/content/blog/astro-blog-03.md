@@ -1,17 +1,17 @@
 ---
-title: "VS Code 效率指南：让你的开发速度翻倍"
-description: "从快捷键到插件配置，一份面向日常开发的 VS Code 实用技巧合集。"
-date: 2026-05-23
-category: "工具"
-tags: [vs code, 效率, 工具, 前端]
+title: "Astro 博客搭建 #3：样式系统与组件设计"
+description: "用 Tailwind CSS 打造个人博客的视觉风格 — 设计系统、主题切换、组件拆分实战。"
+date: 2026-05-26
+category: "技术"
+tags: [astro, css, 前端, 设计]
 ---
 
-# VS Code 效率指南：让你的开发速度翻倍
+# Astro 博客搭建 #3：样式系统与组件设计
 
-工具
-VS Code 效率指南：让你的开发速度翻倍
-从快捷键到插件配置，一份面向日常开发的 VS Code 实用技巧合集。
-2026年5月23日 · 941 字 · 约 3 分钟阅读 · 0 次阅读
+技术
+Astro 博客搭建 #3：样式系统与组件设计
+用 Tailwind CSS 打造个人博客的视觉风格 — 设计系统、主题切换、组件拆分实战。
+2026年5月26日 · 531 字 · 约 2 分钟阅读 · 0 次阅读
 复制链接
 document.addEventListener('astro:page-load', () => {
 const btn = document.getElementById('copy-link-btn');
@@ -111,87 +111,117 @@ if (size > 12) { size -= 1; applySize(size); }
 });
 increase.addEventListener('click', () => {
 if (size
-工欲善其事，必先利其器。VS Code 作为目前最流行的代码编辑器，藏着大量被忽视的高效功能。这篇文章不讲基础，只聊真正能提速的实战技巧。
-光标操作：多光标是核心生产力
-多光标是 VS Code 最被低估的功能之一。
-Ctrl+D：选中当前单词，继续按会选中下一个相同单词。比全局替换精准得多。
-Alt+Click：在任意位置添加光标，适合不规则的多行编辑。
-Ctrl+Shift+L：选中所有匹配项并添加光标。比 Ctrl+D 更暴力。
-Ctrl+Alt+↑/↓：向上/下方添加光标，适合处理列对齐的数据。
-// 场景：批量把 const 改成 let
-const a = 1; // 光标在这
-const b = 2; // Ctrl+Alt+↓ 自动添加
-const c = 3; // 三行同时编辑
-快速操作：减少鼠标依赖
-操作快捷键说明
-命令面板Ctrl+Shift+PVS Code 的一切入口
-快速打开文件Ctrl+P输入文件名片段即可模糊匹配
-跳转到行Ctrl+G输入行号直达
-跳转到符号Ctrl+Shift+O在当前文件的函数/类之间跳转
-工作区符号Ctrl+T全项目搜索函数名
-侧边栏切换Ctrl+B快速隐藏/显示侧边栏
-终端切换Ctrl+`内置终端，不用切窗口
-向上/下复制行Shift+Alt+↑/↓比复制粘贴快
-智能重构：让编辑器替你干活
-重命名符号（F2）
-不是简单的查找替换，而是语义级的重命名。它知道变量的作用域，不会误改同名但无关的代码。
-快速修复（Ctrl+.）
-光标放在报错位置，按 Ctrl+. 弹出修复建议。常见场景：
-自动导入缺失的模块
-创建未定义的函数
-转换箭头函数和普通函数
-提取重构（Ctrl+Shift+R）
-选中一段代码，按 Ctrl+Shift+R 可以：
-提取为函数
-提取为常量
-提取为变量
-终端集成：不离开编辑器
-# 在当前文件目录打开终端
-Ctrl+`
-# 运行选中的代码块
-选中代码 → Ctrl+Shift+P → "Run Selected Text"
-# 终端中快速打开文件
-Ctrl+P 输入文件名
-终端支持多实例：点 + 号新建，下拉切换。前端项目可以一个跑 dev server，一个跑 git。
-推荐插件：只装真正有用的
-必备
-GitLens：行内显示 git blame 信息，追溯代码历史一键搞定
-Error Lens：错误信息直接显示在代码行内，不用看底部状态栏
-indent-rainbow：缩进层级彩色标记，Python/JS 写起来不迷路
-前端
-Tailwind CSS IntelliSense：Tailwind 类名自动补全和预览
-Auto Rename Tag：修改 HTML 标签时自动同步闭合标签
-CSS Peek：Ctrl+Click 跳转到 CSS 定义
-通用
-Bookmarks：在代码中打书签，大文件跳转神器
-TODO Highlight：高亮 TODO/FIXME 注释
-Better Comments：按类型给注释上色（警告、信息、待办）
-设置技巧
-// settings.json 中值得改的默认值
-{
-// 自动保存，不用手动 Ctrl+S
-"files.autoSave": "afterDelay",
-"files.autoSaveDelay": 1000,
-// 关闭小地图，省空间
-"editor.minimap.enabled": false,
-// 字体连字（需要字体支持，如 JetBrains Mono）
-"editor.fontLigatures": true,
-// 滚动超出最后一行，留白更舒服
-"editor.scrollBeyondLastLine": false,
-// Tab 大小
-"editor.tabSize": 2,
-"editor.insertSpaces": true,
-// 终端字体大小
-"terminal.integrated.fontSize": 14
+Astro 博客搭建 3 / 3
+#1 为什么选 Astro
+#2 项目结构与内容配置
+#3 样式系统与组件设计
+框架选好了，项目搭好了，现在让它好看起来。
+为什么用 Tailwind
+写 CSS 有很多种方式。我选 Tailwind 的原因很简单：不用起名字。
+给 class 起名是前端最痛苦的事情之一。card-wrapper、card-container、card-box…… 用 Tailwind 直接写 class="rounded-xl border p-6" 就完事了。
+而且 Tailwind 的 utility class 是原子化的，不会出现样式覆盖的噩梦。
+设计系统
+先定义设计 token，不要到处写魔法值：
+/* src/styles/tokens.css */
+:root {
+/* 颜色 */
+--color-surface: oklch(97% 0.01 80);
+--color-text: oklch(20% 0.02 260);
+--color-text-muted: oklch(45% 0.02 260);
+--color-accent: oklch(55% 0.2 25);
+--color-border: oklch(85% 0.01 80);
+/* 暗色主题 */
+--color-dark-surface: oklch(15% 0.01 260);
+--color-dark-text: oklch(90% 0.01 80);
+--color-dark-accent: oklch(65% 0.2 25);
+/* 排版 */
+--text-base: clamp(1rem, 0.92rem + 0.4vw, 1.125rem);
+--text-lg: clamp(1.125rem, 1rem + 0.6vw, 1.35rem);
+--text-2xl: clamp(1.5rem, 1.2rem + 1.5vw, 2.25rem);
+--text-4xl: clamp(2rem, 1.5rem + 2.5vw, 3.5rem);
+/* 间距 */
+--space-section: clamp(3rem, 2rem + 5vw, 8rem);
+/* 动画 */
+--duration-normal: 300ms;
+--ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
-真正提效的习惯
-少用鼠标：强迫自己用快捷键，两周后速度会质变
-善用命令面板：记不住快捷键没关系，Ctrl+Shift+P 搜索就行
-配置同步：用 Settings Sync 插件，换电脑不丢配置
-工作区设置：项目级 .vscode/settings.json 统一团队规范
-效率不是一蹴而就的，而是每天少按几次鼠标、少切几次窗口积累出来的。
+在 tailwind.config.mjs 里引用这些 token：
+export default {
+darkMode: 'class',
+theme: {
+extend: {
+colors: {
+surface: 'var(--color-surface)',
+text: 'var(--color-text)',
+accent: 'var(--color-accent)',
+},
+},
+},
+};
+主题切换
+用 CSS 变量 + class="dark" 实现：
+// 切换主题
+function toggleTheme() {
+const isDark = document.documentElement.classList.toggle('dark');
+localStorage.setItem('theme', isDark ? 'dark' : 'light');
+}
+// 初始化（放在 里，避免闪烁）
+(function() {
+const theme = localStorage.getItem('theme') ?? 'dark';
+document.documentElement.classList.toggle('dark', theme === 'dark');
+})();
+关键：初始化脚本要放在 里，用 避免 Astro 的模块处理。这样页面加载时不会闪一下白色再变暗。
+组件拆分
+Astro 组件是 .astro 文件，分两部分：--- 里是逻辑（JS/TS），下面是模板（HTML）。
+我把博客拆成这些组件：
+components/
+├── Header.astro # 顶部导航
+├── Footer.astro # 页脚
+├── PostCard.astro # 文章卡片（列表页用）
+├── TagCloud.astro # 标签云
+├── Comment.astro # 评论组件
+├── BackToTop.astro # 回到顶部按钮
+├── ReadingProgress.astro # 阅读进度条
+└── TOC.astro # 目录导航
+原则：一个组件只做一件事。超过 100 行就该考虑拆分。
+PostCard 示例
+---
+interface Props {
+title: string;
+description: string;
+pubDate: Date;
+slug: string;
+tags: string[];
+}
+const { title, description, pubDate, slug, tags } = Astro.props;
+---
+ 
+ {pubDate.toLocaleDateString('zh-CN')} 
+
+{title}
+
+{description}
+
+{tags.map(tag => {tag} )}
+
+ 
+文章排版
+Tailwind 有个 @tailwindcss/typography 插件，用 prose class 给 Markdown 内容自动排版：
+npm install @tailwindcss/typography
+
+ 
+
+然后可以覆盖默认样式：
+.prose h2 {
+@apply mt-12 mb-4 text-2xl font-bold;
+}
+.prose code {
+@apply px-1.5 py-0.5 rounded bg-accent/10 text-accent text-sm;
+}
+下一篇会讲进阶功能：搜索、评论、RSS、SEO 优化。
+这是「Astro 博客搭建系列」的第三篇。
 目录
-VS Code 效率 工具 前端
+Astro CSS 前端 设计
 又逢雨季
 一个走非主流路线的大专生，在迷茫中摸索，在试错中成长。喜欢技术，喜欢记录，喜欢真实的东西。
 GitHub
@@ -200,11 +230,11 @@ GitHub
 复制链接
 Twitter
 微信
-扫码分享「VS Code 效率指南：让你的开发速度翻倍」
-https://ekegukeku64-blip.github.io/blog/vscode-productivity/
-(function(){const slug = "vscode-productivity";
-const currentUrl = "https://ekegukeku64-blip.github.io/blog/vscode-productivity/";
-const title = "VS Code 效率指南：让你的开发速度翻倍";
+扫码分享「Astro 博客搭建 #3：样式系统与组件设计」
+https://ekegukeku64-blip.github.io/blog/astro-blog-03/
+(function(){const slug = "astro-blog-03";
+const currentUrl = "https://ekegukeku64-blip.github.io/blog/astro-blog-03/";
+const title = "Astro 博客搭建 #3：样式系统与组件设计";
 document.addEventListener('astro:page-load', () => {
 const likeBtn = document.getElementById('like-btn');
 const likeCount = document.getElementById('like-count');
@@ -248,26 +278,4 @@ likeBtn.classList.add('border-accent', 'dark:border-dark-accent');
 spawnBloom(likeBtn);
 }
 likeCount.textContent = likesNow[slug] || 0;
-localStorage.setItem('blog_liked', JSON.stringify(likedNow));
-localStorage.setItem('blog_likes', JSON.stringify(likesNow));
-});
-// ===== 墨花绽放 =====
-function spawnBloom(anchor) {
-const container = document.getElementById('bloom-container');
-if (!container) return;
-const rect = anchor.getBoundingClientRect();
-const cx = rect.left + rect.width / 2;
-const cy = rect.top + rect.height / 2;
-for (let i = 0; i petal.remove(), 700);
-}
-}
-// ===== 复制链接 =====
-copyBtn?.addEventListener('click', async () => {
-try {
-await navigator.clipboard.writeText(currentUrl);
-const span = copyBtn.querySelector('span');
-span.textContent = '已复制';
-setTimeout(() => { span.textContent = '复制链接'; }, 2000);
-} catch {
-// fallback
-const ta = document.createEle
+localStorag

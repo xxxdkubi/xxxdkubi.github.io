@@ -1,17 +1,17 @@
 ---
-title: "VS Code 效率指南：让你的开发速度翻倍"
-description: "从快捷键到插件配置，一份面向日常开发的 VS Code 实用技巧合集。"
-date: 2026-05-23
-category: "工具"
-tags: [vs code, 效率, 工具, 前端]
+title: "成长记录 #3：关于「半途而废」这件事"
+description: "放弃过很多东西，但这次我想聊聊为什么有些放弃不全是坏事。"
+date: 2026-05-26
+category: "成长记录"
+tags: [成长, 坚持, 自白]
 ---
 
-# VS Code 效率指南：让你的开发速度翻倍
+# 成长记录 #3：关于「半途而废」这件事
 
-工具
-VS Code 效率指南：让你的开发速度翻倍
-从快捷键到插件配置，一份面向日常开发的 VS Code 实用技巧合集。
-2026年5月23日 · 941 字 · 约 3 分钟阅读 · 0 次阅读
+成长记录
+成长记录 #3：关于「半途而废」这件事
+放弃过很多东西，但这次我想聊聊为什么有些放弃不全是坏事。
+2026年5月26日 · 937 字 · 约 3 分钟阅读 · 0 次阅读
 复制链接
 document.addEventListener('astro:page-load', () => {
 const btn = document.getElementById('copy-link-btn');
@@ -111,87 +111,52 @@ if (size > 12) { size -= 1; applySize(size); }
 });
 increase.addEventListener('click', () => {
 if (size
-工欲善其事，必先利其器。VS Code 作为目前最流行的代码编辑器，藏着大量被忽视的高效功能。这篇文章不讲基础，只聊真正能提速的实战技巧。
-光标操作：多光标是核心生产力
-多光标是 VS Code 最被低估的功能之一。
-Ctrl+D：选中当前单词，继续按会选中下一个相同单词。比全局替换精准得多。
-Alt+Click：在任意位置添加光标，适合不规则的多行编辑。
-Ctrl+Shift+L：选中所有匹配项并添加光标。比 Ctrl+D 更暴力。
-Ctrl+Alt+↑/↓：向上/下方添加光标，适合处理列对齐的数据。
-// 场景：批量把 const 改成 let
-const a = 1; // 光标在这
-const b = 2; // Ctrl+Alt+↓ 自动添加
-const c = 3; // 三行同时编辑
-快速操作：减少鼠标依赖
-操作快捷键说明
-命令面板Ctrl+Shift+PVS Code 的一切入口
-快速打开文件Ctrl+P输入文件名片段即可模糊匹配
-跳转到行Ctrl+G输入行号直达
-跳转到符号Ctrl+Shift+O在当前文件的函数/类之间跳转
-工作区符号Ctrl+T全项目搜索函数名
-侧边栏切换Ctrl+B快速隐藏/显示侧边栏
-终端切换Ctrl+`内置终端，不用切窗口
-向上/下复制行Shift+Alt+↑/↓比复制粘贴快
-智能重构：让编辑器替你干活
-重命名符号（F2）
-不是简单的查找替换，而是语义级的重命名。它知道变量的作用域，不会误改同名但无关的代码。
-快速修复（Ctrl+.）
-光标放在报错位置，按 Ctrl+. 弹出修复建议。常见场景：
-自动导入缺失的模块
-创建未定义的函数
-转换箭头函数和普通函数
-提取重构（Ctrl+Shift+R）
-选中一段代码，按 Ctrl+Shift+R 可以：
-提取为函数
-提取为常量
-提取为变量
-终端集成：不离开编辑器
-# 在当前文件目录打开终端
-Ctrl+`
-# 运行选中的代码块
-选中代码 → Ctrl+Shift+P → "Run Selected Text"
-# 终端中快速打开文件
-Ctrl+P 输入文件名
-终端支持多实例：点 + 号新建，下拉切换。前端项目可以一个跑 dev server，一个跑 git。
-推荐插件：只装真正有用的
-必备
-GitLens：行内显示 git blame 信息，追溯代码历史一键搞定
-Error Lens：错误信息直接显示在代码行内，不用看底部状态栏
-indent-rainbow：缩进层级彩色标记，Python/JS 写起来不迷路
-前端
-Tailwind CSS IntelliSense：Tailwind 类名自动补全和预览
-Auto Rename Tag：修改 HTML 标签时自动同步闭合标签
-CSS Peek：Ctrl+Click 跳转到 CSS 定义
-通用
-Bookmarks：在代码中打书签，大文件跳转神器
-TODO Highlight：高亮 TODO/FIXME 注释
-Better Comments：按类型给注释上色（警告、信息、待办）
-设置技巧
-// settings.json 中值得改的默认值
-{
-// 自动保存，不用手动 Ctrl+S
-"files.autoSave": "afterDelay",
-"files.autoSaveDelay": 1000,
-// 关闭小地图，省空间
-"editor.minimap.enabled": false,
-// 字体连字（需要字体支持，如 JetBrains Mono）
-"editor.fontLigatures": true,
-// 滚动超出最后一行，留白更舒服
-"editor.scrollBeyondLastLine": false,
-// Tab 大小
-"editor.tabSize": 2,
-"editor.insertSpaces": true,
-// 终端字体大小
-"terminal.integrated.fontSize": 14
-}
-真正提效的习惯
-少用鼠标：强迫自己用快捷键，两周后速度会质变
-善用命令面板：记不住快捷键没关系，Ctrl+Shift+P 搜索就行
-配置同步：用 Settings Sync 插件，换电脑不丢配置
-工作区设置：项目级 .vscode/settings.json 统一团队规范
-效率不是一蹴而就的，而是每天少按几次鼠标、少切几次窗口积累出来的。
+成长记录 3 / 12
+#1 我为什么开始写博客
+#2 AI 不会替你成长
+#3 关于「半途而废」这件事
+#4 一次社死的面试
+#5 闲鱼上架第一天
+#6 被朋友问住了
+#7 凌晨三点的代码
+#8 第一次收到反馈
+#9 学不动的时候怎么办
+#10 一个月了
+#11 代码改了一行，心情好了一天
+#12 技术人的周二
+我放弃过很多东西。
+游戏做了一半不做了。前端学到一半停了。有段时间想学设计，买了课，看了两节就没打开过。想健身，办了卡，去了三次。
+每次放弃的时候，我都告诉自己”以后再说”。但后来发现，“以后再说”基本等于”算了”。
+放弃的时候在想什么
+说实话，放弃的那一刻是很轻松的。
+做游戏的时候，前两周特别兴奋，天天熬夜。第三周开始遇到bug，改了三天没改好，心态崩了。关掉电脑的那一刻，我觉得世界都安静了。
+但那种轻松是假的。过几天空虚感就回来了，而且比之前更强 — 因为你又多了一件”没做成的事”。
+为什么总是坚持不下来
+我观察过自己，发现放弃通常有几个规律：
+新鲜感消退的时候。 一开始什么都觉得有意思，一旦进入枯燥的部分 — 比如调bug、写重复的代码 — 就开始想找下一个”有意思的事”。
+看不到反馈的时候。 做游戏两个月，没人玩过。写前端一个月，没人看过我的页面。人是需要反馈的动物，没有反馈就像在黑暗里走路，走着走着就不想走了。
+比较的时候。 看到别人做了很酷的东西，再看看自己的，觉得”算了，我做不出来”。其实别人也是从零开始的，但这个道理在情绪上头的时候根本听不进去。
+这次为什么没放弃
+这个博客，说真的，有好几次我都想算了。
+刚开始搭建的时候，遇到一堆配置问题，Astro 的文档有些地方看不懂，部署到 GitHub Pages 折腾了两天。以前的我肯定就”以后再说”了。
+但这次不一样。这次我做了一件以前没做过的事 — 把目标说出来了。
+我在关于页写了”这个博客是我的自留地”。我在成长记录 #1 写了”我想记录”。当你说出来的时候，放弃就变得没那么容易了。因为你要面对的不只是自己，还有那个”说好了要写”的自己。
+还有一点：这次我没有追求完美。以前做游戏，总想做一个很厉害的东西。结果越想越厉害，越厉害越不敢动手。这次我就想：写点东西就行，好不好再说。
+降低预期，反而坚持下来了。
+放弃不全是坏事
+我现在觉得，有些放弃其实是在帮你看清自己。
+游戏不做之后，我发现自己可能没那么喜欢做游戏。前端学到一半停了，但后来又捡起来了 — 说明我是真的喜欢这个东西，只是当时时机不对。
+放弃设计课，是因为我发现我只是觉得”会设计很酷”，并不是真的想做设计。
+每一次放弃都在告诉我：什么是我真正在乎的，什么只是凑热闹。
+现在怎么看”坚持”
+我不再追求”永不放弃”了。那太假了，也不现实。
+我现在追求的是：放弃之前，至少搞清楚自己为什么放弃。
+是因为真的不感兴趣？还是因为遇到了瓶颈？前者可以放弃，后者再扛一扛。
+如果你也经常半途而废，别太责怪自己。重要的不是从来没放弃过，而是放弃之后，你有没有弄清楚自己到底想要什么。
+这个博客还在写。我也不知道能写多久。
+但至少现在，我还没想放弃。
 目录
-VS Code 效率 工具 前端
+成长 坚持 自白
 又逢雨季
 一个走非主流路线的大专生，在迷茫中摸索，在试错中成长。喜欢技术，喜欢记录，喜欢真实的东西。
 GitHub
@@ -200,11 +165,11 @@ GitHub
 复制链接
 Twitter
 微信
-扫码分享「VS Code 效率指南：让你的开发速度翻倍」
-https://ekegukeku64-blip.github.io/blog/vscode-productivity/
-(function(){const slug = "vscode-productivity";
-const currentUrl = "https://ekegukeku64-blip.github.io/blog/vscode-productivity/";
-const title = "VS Code 效率指南：让你的开发速度翻倍";
+扫码分享「成长记录 #3：关于「半途而废」这件事」
+https://ekegukeku64-blip.github.io/blog/growth-003/
+(function(){const slug = "growth-003";
+const currentUrl = "https://ekegukeku64-blip.github.io/blog/growth-003/";
+const title = "成长记录 #3：关于「半途而废」这件事";
 document.addEventListener('astro:page-load', () => {
 const likeBtn = document.getElementById('like-btn');
 const likeCount = document.getElementById('like-count');
@@ -270,4 +235,25 @@ span.textContent = '已复制';
 setTimeout(() => { span.textContent = '复制链接'; }, 2000);
 } catch {
 // fallback
-const ta = document.createEle
+const ta = document.createElement('textarea');
+ta.value = currentUrl;
+document.body.appendChild(ta);
+ta.select();
+document.execCommand('copy');
+document.body.removeChild(ta);
+const span = copyBtn.querySelector('span');
+span.textContent = '已复制';
+setTimeout(() => { span.textContent = '复制链接'; }, 2000);
+}
+});
+// ===== 二维码 =====
+function drawQR(canvas, text) {
+const ctx = canvas.getContext('2d');
+const size = canvas.width;
+ctx.fillStyle = '#ffffff';
+ctx.fillRect(0, 0, size, size);
+// 简易 QR 编码（版本1，容错L，编码URL）
+// 使用黑白方块矩阵模拟 QR 码外观
+const modules = 21;
+const cellSize = size / (modules + 8); // 留白
+const offset = c
